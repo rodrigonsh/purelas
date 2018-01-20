@@ -1,0 +1,44 @@
+p
+{
+  margin-top: 0px;
+  font-size: 11.25pt;
+  letter-spacing: 0.63px;
+}
+
+.disclaimer
+{
+  margin-top: $space;
+  text-align: center;
+  font-size: 9pt;
+  color: #858585;
+  letter-spacing: 0.21px;
+}
+
+small
+{
+  font-size: 9pt;
+}
+
+h5
+{
+  margin-top: 0px;
+  margin-bottom: 14px;
+  font-size: 10.5pt;
+  letter-spacing: 0.60px;
+  color: #7c7c7c;
+}
+
+@font-face {
+  font-family: "Roboto-Black";
+  src: url("Roboto/Roboto-Black.ttf");
+}
+
+@font-face {
+  font-family: "Roboto-Medium";
+  src: url("Roboto/Roboto-Medium.ttf");
+}
+
+@font-face {
+  font-family: "Roboto-Regular";
+  src: url("Roboto/Roboto-Regular.ttf");
+}

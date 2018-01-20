@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+  <head>
+    <!--
+    Customize this policy to fit your own app's needs. For more guidance, see:
+        https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+    Some notes:
+        * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+        * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+        * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+            * Enable inline JS: add 'unsafe-inline' to default-src
+    -->
+    <!--meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;"-->
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <link rel="stylesheet" type="text/css" href="app.css">
+    <title>purelas</title>
+
+  </head>
+  <body>
+
+    <div id="shell">
+
+      <div id="splash" class='deco'>
+        <img src="img/logo-big.svg" />
+      </div>
+
+      <div id="app">
+
+        <div id='menu' class='deco'>
+
+          <header>
+            <p>Adriana Flores Benviatti</p>
+            <small>adriflores@gmail.com</small>
+          </header>
+
+          <nav>
+            <ul>
+              <li data-page='map'>
+                <span class='i'><img src='img/home.svg' /></span>
+                Início
+              </li>
+              <li data-page='user'>
+                <span class='i'><img src='img/user.svg' /></span>
+                Meus Dados
+              </li>
+              <li data-page='phones'>
+                <span class='i'><img src='img/phones.svg' /></span>
+                Telefones úteis
+              </li>
+              <li data-page='partners'>
+                <span class='i'><img src='img/partners.svg' /></span>
+                Apoio e Patrocínio
+              </li>
+              <li data-page='opinion'>
+                <span class='i'><img src='img/messages.svg' /></span>
+                Dê sua opinião
+              </li>
+              <li data-page='rate'>
+                <span class='i'><img src='img/rate.svg' /></span>
+                Avalie o app
+              </li>
+              <li data-page='preferences'>
+                <span class='i'><img src='img/preferences.svg' /></span>
+                Configurações
+              </li>
+              <li data-page='logout'>
+                <span class='i'><img src='img/logout.svg' /></span>
+                Sair
+              </li>
+            </ul>
+          </nav>
+
+          <footer>
+            Versão 1.0.0
+          </footer>
+
+        </div>
+
+        <div id='navigator' data-page="welcome">
+
+
+          <div id="welcomePage" class="page show deco" data-page='welcome'>
+
+            <img class='breathes' src="img/logo-medium.svg" />
+
+            <span class='grows'></span>
+
+            <div class='special left'>
+
+              <div class='cont scrolls'>
+
+                <p><strong>
+                  Bem Vind@!
+                </strong></p>
+
+                <p>
+                  Lorem ipsum dolor sit amet consecteur
+                </p>
+
+                <span class='space'></span>
+
+                <button data-page='onboarding'>
+                  <span>Iniciar</span>
+                  <img src="img/next.svg" />
+                </button>
+
+
+              </div>
+
+              <div class='menina'>
+                <img src="img/menina-direita-2.svg" />
+              </div>
+
+
+            </div>
+
+          </div>
+
+
+          <div id="onboardingPage" class="page deco" data-page='onboarding'>
+
+            <img class='breathes' src="img/logo-medium.svg" />
+
+            <span class='grows'></span>
+
+
+            <div class='special right'>
+
+              <div class='menina'>
+                <img src="img/menina-esquerda.svg" />
+              </div>
+
+              <div class='cont'>
+
+                <p><strong>
+                  Lorem ipsum dolor
+                </strong></p>
+
+                <p>
+                  Ut wisi enim ad minimveniam, quis nostrudexerci
+                  tation ullamcorper
+                </p>
+
+                <span class='space'></span>
+
+                <button data-page='map'>
+                  <span>OK</span>
+                  <img src="img/next.svg" />
+                </button>
+
+
+              </div>
+
+
+
+
+            </div>
+
+          </div>
+
+
+          <div id='mapPage' class='page' data-page='map'>
+
+            <header>
+              <button data-action='menu'><img src="img/menu.svg" /></button>
+              <h1>PURELAS</h1>
+              <button data-page='notifications'><img src="img/notification.svg" /></button>
+            </header>
+
+            <div class='tabs'>
+              <button data-page='map' active><img src="img/map.svg" /></button>
+              <button data-page='route'><img src="img/route.svg" /></button>
+              <button data-page='reports'><img src="img/messages.svg" /></button>
+            </div>
+
+            <div class='tab-title'>Mapa dos Relatos</div>
+
+            <div id='map' class='grows'></div>
+
+            <button data-page="new-report" class='fab'>+</button>
+
+          </div>
+
+
+          <div id='routePage' class='page' data-page='route'>
+
+            <header>
+              <button data-action='menu'><img src="img/menu.svg" /></button>
+              <h1>PURELAS</h1>
+              <button data-page='notifications'><img src="img/notification.svg" /></button>
+            </header>
+
+            <div class='tabs'>
+              <button data-page='map'><img src="img/map.svg" /></button>
+              <button data-page='route' active><img src="img/route.svg" /></button>
+              <button data-page='reports'><img src="img/messages.svg" /></button>
+            </div>
+
+            <div class='tab-title'>Minha Rota</div>
+
+            <form class='inset' id="routeEndPoints">
+
+              <label class='input'>
+                <img src="img/origin.svg" />
+                <input name="origem" placeholder="Endereço de Partida" />
+              </label>
+
+              <label class='input'>
+                <img src="img/destination.svg" />
+                <input name="destino" placeholder="Destino" />
+              </label>
+
+            </form>
+
+            <div id='route' class='grows'></div>
+
+          </div>
+
+
+          <div id='reportsPage' class='page' data-page='reports'>
+
+            <header>
+              <button data-action='menu'><img src="img/menu.svg" /></button>
+              <h1>PURELAS</h1>
+              <button data-page='notifications'><img src="img/notification.svg" /></button>
+            </header>
+
+            <div class='tabs'>
+              <button data-page='map' ><img src="img/map.svg" /></button>
+              <button data-page='route'><img src="img/route.svg" /></button>
+              <button data-page='reports' active><img src="img/messages.svg" /></button>
+            </div>
+
+            <div class="grows scrolls">
+
+              <div class='tab-title'>Relatos</div>
+
+              <p id="area">
+                Centro, Campo Grande, MS
+                <span class='down-arrow'></span>
+              </p>
+
+              <div class='inset'>
+
+                <card id="a246754de" chevron data-page="view-report">
+                  <address>Rua da Majestade, centro</address>
+                  <p>Ut wisi enim ad minim veniam, quis nostrudexerci tation
+                    ullamcorper suscipit lobortis….</p>
+                  <date></date>
+                </card>
+
+                <card id="ewunqwe" chevron data-page="view-report">
+                  <address>Rua da Majestade, centro</address>
+                  <p>Ut wisi enim ad minim veniam, quis nostrudexerci tation
+                    ullamcorper suscipit lobortis….</p>
+                  <date></date>
+                </card>
+
+                <card id="ewunqwe" chevron data-page="view-report">
+                  <address>Rua da Majestade, centro</address>
+                  <p>Ut wisi enim ad minim veniam, quis nostrudexerci tation
+                    ullamcorper suscipit lobortis….</p>
+                  <date></date>
+                </card>
+
+              </div>
+
+            </div>
+
+            <button data-page="new-report" class='fab'>+</button>
+
+          </div>
+
+
+          <div id='notificationsPage' data-page='notifications' class='page'>
+
+            <header>
+              <button data-action='back'><img src="img/back.svg" /></button>
+              <h2>Notificações</h2>
+            </header>
+
+            <div class='scrolls'>
+
+              <card>
+
+                <p>
+                  Lorem ipsumdolor sit amet, consectetueradipiscing elit, sed diam
+                  nonummy nibh euismod
+                </p>
+
+                <small>
+                  <img src='img/clock.svg' />
+                  Há 3 dias
+                </small>
+
+              </card>
+
+              <card>
+
+                <p>
+                  Lorem ipsumdolor sit amet, consectetueradipiscing elit, sed diam
+                  nonummy nibh euismod
+                </p>
+
+                <small>
+                  <img src='img/clock.svg' />
+                  Há 3 dias
+                </small>
+
+              </card>
+
+              <card>
+
+                <p>
+                  Lorem ipsumdolor sit amet, consectetueradipiscing elit, sed diam
+                  nonummy nibh euismod
+                </p>
+
+                <small>
+                  <img src='img/clock.svg' />
+                  Há 3 dias
+                </small>
+
+              </card>
+
+              <card>
+
+                <p>
+                  Lorem ipsumdolor sit amet, consectetueradipiscing elit, sed diam
+                  nonummy nibh euismod
+                </p>
+
+                <small>
+                  <img src='img/clock.svg' />
+                  Há 3 dias
+                </small>
+
+              </card>
+
+            </div>
+
+          </div>
+
+
+          <div id='userPage' data-page='user' class='page'>
+
+            <header>
+              <button data-action='back'><img src="img/back.svg" /></button>
+              <h2>Meus Dados</h2>
+              <button data-action='save'><img src="img/tick.svg" /></button>
+            </header>
+
+            <div class='scrolls'>
+
+              <form action="#">
+
+                <div class='inset'>
+
+                  <label>Nome</label>
+                  <input name="nome" value='Adriana Flores Benviatti' />
+
+                  <label>Email</label>
+                  <input name="email" value='adriflores@gmail.com' />
+
+                  <label>Senha</label>
+                  <input name="senha1" value='******' />
+
+                  <label>Nova Senha</label>
+                  <input name="senha2" value='******' />
+
+                </div>
+
+                <hr />
+
+                <div class="inset">
+
+                  <label>Escolaridade</label>
+                  <select>
+                    <option>Escolha uma opção</option>
+                  </select>
+
+                  <label>Sexo</label>
+                  <select>
+                    <option>Escolha uma opção</option>
+                  </select>
+
+                  <label>Composição Familiar</label>
+                  <select>
+                    <option>Escolha uma opção</option>
+                  </select>
+
+                  <label>Renda Familiar</label>
+                  <select>
+                    <option>Escolha uma opção</option>
+                  </select>
+
+                  <button type='button' class='block'>
+                    Enviar
+                  </button>
+
+                  <p class='disclaimer'>
+                    Seus dados não serão públicos para sua segurança e
+                    agradecemos sua colaboração
+                  </p>
+
+                </div>
+
+              </form>
+
+            </div>
+
+          </div>
+
+
+          <div id='phonesPage' data-page='phones' class='page'>
+
+            <header>
+              <button data-action='back'><img src="img/back.svg" /></button>
+              <h2>Telefones úteis</h2>
+            </header>
+
+            <div class='scrolls'>
+
+              <card hero>
+                <p>Casa da Mulher Brasileira</p>
+                <h3>(67) 3314-7550</h3>
+                <address>
+                  R. Brasília, Lote A, Quadra 2, s/n - Jardim Ima,Campo Grande - MS
+                </address>
+              </card>
+
+              <card hero>
+                <p>Delegacia da Mulher</p>
+                <h3>(67) 3314-7547</h3>
+                <address>
+                  R. Brasília, s/n - Jardim Ima, Campo Grande - MS
+                </address>
+              </card>
+
+              <card hero>
+                <p>Conselho Tutelar</p>
+                <h3>(67) 3314-6371</h3>
+                <address>
+                  R. São João Bôsco, 49
+                </address>
+              </card>
+
+            </div>
+
+          </div>
+
+
+          <div id='partnersPage' data-page='partners' class='page'>
+
+            <header>
+              <button data-action='back'><img src="img/back.svg" /></button>
+              <h2>Apoio e Patrocínio</h2>
+            </header>
+
+            <div class='scrolls'>
+
+              <card hero>
+                <img src='img/partner-avon.png' />
+              </card>
+
+              <card hero>
+                <img src='img/partner-marykay.png' />
+              </card>
+
+              <card hero>
+                <img src='img/partner-boticario.png' />
+              </card>
+
+            </div>
+
+          </div>
+
+
+          <div id='opinionPage' data-page='opinion' class='page'>
+
+            <header>
+              <button data-action='back'><img src="img/back.svg" /></button>
+              <h2>Dê sua opinião</h2>
+            </header>
+
+            <div class='scrolls inset'>
+
+              <form action="#">
+
+                <label>Escreva com suas palavras</label>
+                <textarea rows="10"></textarea>
+
+                <button type="button">Enviar</button>
+
+                <p class='disclaimer'>
+                  Seus dados e sua opinião não serão públicospara sua
+                  segurança e agradecemos sua opinião
+                </p>
+
+              </form>
+
+            </div>
+
+          </div>
+
+
+          <div id='ratePage' data-page='rate' class='page'>
+
+            <header>
+              <button data-action='back'><img src="img/back.svg" /></button>
+              <h2>Avalie o app</h2>
+            </header>
+
+            <div class='scrolls inset'>
+
+              Contacta playstore para iniciar avaliação
+
+            </div>
+
+          </div>
+
+
+          <div id='preferencesPage' data-page='preferences' class='page'>
+
+            <header>
+              <button data-action='back'><img src="img/back.svg" /></button>
+              <h2>Configurações</h2>
+            </header>
+
+            <div class='scrolls'>
+
+              <card>
+
+                <preference>
+                  <label>Sinal de alerta</label>
+                  <switch on></switch>
+                </preference>
+
+                <small>
+                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit,sed diam
+                  ut laoreet dolore magna aliquam erat volutpat.
+                </small>
+
+              </card>
+
+              <card>
+
+                <preference>
+                  <label>Ativar localização GPS</label>
+                  <switch on></switch>
+                </preference>
+
+              </card>
+
+              <card>
+
+                <preference>
+                  <label>Receber notificações</label>
+                  <switch></switch>
+                </preference>
+
+              </card>
+
+              <card>
+
+                <preference>
+                  <label>Ativar alto contraste</label>
+                  <switch></switch>
+                </preference>
+
+              </card>
+
+            </div>
+
+          </div>
+
+
+          <div id='newReportPage' data-page='new-report' class='page'>
+
+            <header>
+              <button data-action='back'><img src="img/back.svg" /></button>
+              <h2>Novo Relato</h2>
+              <button data-action='new-report'><img src="img/tick.svg" /></button>
+            </header>
+
+            <div class='inset scrolls'>
+
+              <form>
+
+                <label>Onde aconteceu o abuso?</label>
+                <input name='geocode' placeholder="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pesquise pelo endereço" />
+                <div id="new-report-map"></div>
+
+                <label>Como aconteceu o abuso?</label>
+                <textarea rows='10'></textarea>
+
+                <label>Quem é o agressor?</label>
+                <textarea rows='10'></textarea>
+
+                <button data-page='thanks' type="button">Enviar</button>
+
+                <p class='disclaimer'>
+                  Seu relato será publicado anônimamente parasua segurança e
+                  agradecemos sua colaboração
+                </p>
+
+              </form>
+
+            </div>
+
+          </div>
+
+
+          <div id="thanksPage" class="page deco" data-page='thanks'>
+
+            <img class='breathes' src="img/logo-medium.svg" />
+
+            <span class='grows'></span>
+
+            <div class='special left'>
+
+              <div class='cont'>
+
+                <p><strong>
+                  Somos gratas por você
+                  compartilhar sua história
+                </strong></p>
+
+                <p>
+                  Ut wisi enim ad minimveniam, quis nostrudexerci
+                  tation ullamcorper
+                </p>
+
+                <span class='space'></span>
+
+                <button data-page='map'>
+                  <span>Início</span>
+                  <img src="img/next.svg" />
+                </button>
+
+              </div>
+
+              <div class='menina'>
+                <img src="img/menina-direita.svg" />
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div id='viewReportPage' data-page='view-report' class='page'>
+
+            <header>
+              <button data-action='back'><img src="img/back.svg" /></button>
+              <h2>Relato</h2>
+            </header>
+
+            <div class='scrolls'>
+
+            <div id="view-report-map"></div>
+
+              <div class='inset'>
+
+                <h5>Como aconteceu?</h5>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetueradipiscing elit, sed diam
+                  nonummy nibheuismod tincidunt ut laoreet dolore magnaaliquam erat
+                  volutpat. Ut wisi enim ad minimveniam, quis nostrud exerci tation
+                  ullamcorpersuscipit lobortis nisl ut aliquip ex ea commodoconsequat.
+                </p>
+                <p>
+                  Duis autem vel eum iriure dolor in hendrerit invulputate velit esse
+                  molestie consequat, velillum dolore eu feugiat nulla facilisis at
+                  veroeros et accumsan et iusto odio dignissim quiblandit praesent
+                  luptatum zzril delenit augueduis dolore te feugait nulla facilisi.
+                </p>
+
+                <h5>Que foi o agressor?</h5>
+
+                <p>
+                  Lorem ipsum dolor sit amet, consectetueradipiscing elit, sed
+                  diam nonummy nibheuismod tincidunt ut laoreet dolore magnaaliquam
+                  erat volutpat. Ut wisi enim ad minimveniam, quis nostrud exerci
+                  tation ullamcorpersuscipit lobortis nisl ut aliquip ex ea
+                  commodoconsequat.
+                </p>
+
+                <small>Relato publicado dia 22/07/2017</small>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+      </div>
+
+      </div>
+
+
+      <script type="text/javascript" src="cordova.js"></script>
+      <script type="text/javascript" src="app.js"></script>
+
+    </body>
+  </html>

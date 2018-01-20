@@ -1,0 +1,100 @@
+.special
+{
+
+  background-image: url( img/special.svg );
+  background-position: top center;
+  background-repeat: no-repeat;
+  padding: 64px 32px;
+  color: white;
+
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+
+  .cont
+  {
+
+    flex: 1;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .space
+    {
+      display: block;
+      height: 510px;
+      display: block;
+    }
+
+    button
+    {
+
+      flex-shrink: 0;
+
+      width: 100%;
+
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+
+      padding: 5px 10px 5px 20px;
+
+      background: $app_primary_color;
+      border: 0;
+      color: white;
+
+
+
+
+      font-family: "Roboto-Regular";
+      font-size: 9.75pt;
+      flex-grow: 1;
+      letter-spacing: 3.20px;
+      text-align: center;
+      text-transform: uppercase;
+
+    }
+
+  }
+
+
+
+  .menina
+  {
+    flex: 1;
+    position: relative;
+  }
+
+  .menina img
+  {
+    position: absolute;
+    bottom: -77px;
+  }
+
+
+
+}
+
+.special.left .menina img
+{
+  right: -58px;
+}
+
+.special.left .cont
+{
+  text-align: left;
+  align-items: left;
+}
+
+.special.right .cont
+{
+  text-align: right;
+  align-items: right;
+}
+
+.special.right .menina img
+{
+  left: -58px;
+}

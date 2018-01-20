@@ -1,0 +1,74 @@
+card
+{
+  padding: 22px;
+  border-bottom: 1px solid #dddddd;
+  display: block;
+}
+
+card[hero]
+{
+
+  padding: 50px;
+  text-align: center;
+
+  p
+  {
+    font-family: "Roboto-Black";
+    font-size: 9pt;
+    letter-spacing: 0.60px;
+    color: #7c7c7c;
+    margin-bottom: 12px;
+  }
+
+  h3
+  {
+    font-family: "Roboto-Regular";
+    font-size: 18.75pt;
+    letter-spacing: 0.28px;
+    color: #7c7c7c;
+    font-weight: normal;
+    margin: 0px 0px 8px;
+  }
+
+  address
+  {
+    font-size: 9pt;
+    letter-spacing: 0.21px;
+    color: #b4b4b4;
+    font-family: "Roboto-Regular";
+    font-weight: normal;
+    margin-bottom: 0px;
+  }
+
+}
+
+.inset card
+{
+  margin-bottom: $space;
+  background: white;
+  padding: $space;
+  border-bottom: 0px;
+  box-shadow: 0px 5px 18px rgba(0,0,0,0.02);
+}
+
+card address
+{
+  font-family: "Roboto-Black";
+  font-style: normal;
+  color: #969696;
+  margin-bottom: 10px;
+}
+
+card p
+{
+  color: #7c7c7c;
+  margin-bottom: 0px;
+}
+
+card[chevron]
+{
+  padding-right: 60px;
+  background-image: url(img/chevron.png);
+  background-repeat: no-repeat;
+  background-position: right;
+}

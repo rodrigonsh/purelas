@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="360px" height="640px" viewBox="0 0 360 640" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch -->
+    <title>Login</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="360" height="640"></rect>
+        <linearGradient x1="0%" y1="0%" x2="100%" y2="100%" id="linearGradient-2">
+            <stop stop-color="#FAD295" offset="0%"></stop>
+            <stop stop-color="#F145A9" offset="33.8208008%"></stop>
+            <stop stop-color="#115B84" offset="100%"></stop>
+        </linearGradient>
+        <rect id="path-3" x="0" y="0" width="360" height="640"></rect>
+    </defs>
+    <g id="App" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Login">
+            <g id="BG">
+                <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-1"></use>
+                <rect stroke="#979797" stroke-width="1" x="0.5" y="0.5" width="359" height="639"></rect>
+            </g>
+            <g id="BG">
+                <use fill="url(#linearGradient-2)" fill-rule="evenodd" xlink:href="#path-3"></use>
+                <rect stroke="#979797" stroke-width="1" x="0.5" y="0.5" width="359" height="639"></rect>
+            </g>
+            <rect id="BG" fill="#944F96" x="30" y="551" width="300" height="59"></rect>
+            <text id="PURELAS" font-family="Roboto-Black, Roboto" font-size="20" font-weight="700" letter-spacing="10.21" fill="#FFFFFF">
+                <tspan x="105.512578" y="133">PURELA</tspan>
+                <tspan x="241.967891" y="133">S</tspan>
+            </text>
+            <text id="ENTRAR" font-family="Roboto-Black, Roboto" font-size="13" font-weight="700" letter-spacing="3.20000005" fill="#FFFFFF">
+                <tspan x="146.885498" y="587">ENTRA</tspan>
+                <tspan x="204.634033" y="587">R</tspan>
+            </text>
+            <text id="LOGIN" font-family="Roboto-Black, Roboto" font-size="13" font-weight="700" letter-spacing="3.20000005" fill="#FFFFFF">
+                <tspan x="153.236328" y="389">LOGIN</tspan>
+            </text>
+            <g id="Group-3" transform="translate(30.000000, 407.000000)" fill="#FFFFFF">
+                <rect id="BG" opacity="0.42651721" x="0" y="0" width="300" height="40"></rect>
+                <text id="Nome" font-family="Roboto-Medium, Roboto" font-size="13" font-weight="400">
+                    <tspan x="13" y="24">Nome</tspan>
+                </text>
+            </g>
+            <g id="Group-2" transform="translate(30.000000, 455.000000)" fill="#FFFFFF">
+                <rect id="BG" opacity="0.42651721" x="0" y="0" width="300" height="40"></rect>
+                <text id="Email" font-family="Roboto-Medium, Roboto" font-size="13" font-weight="400">
+                    <tspan x="15" y="25">Email</tspan>
+                </text>
+            </g>
+            <g id="Group" transform="translate(30.000000, 503.000000)" fill="#FFFFFF">
+                <rect id="BG" opacity="0.42651721" x="0" y="0" width="300" height="40"></rect>
+                <text id="Senha" font-family="Roboto-Medium, Roboto" font-size="13" font-weight="400">
+                    <tspan x="15" y="24">Senha</tspan>
+                </text>
+            </g>
+            <path d="M168.02166,49 C169.753183,52.9514263 171.351513,54.7273482 168.998417,60.2327061 C166.512126,66.0488504 164.025835,67.0256075 165.668563,68.5795392 C167.311291,70.1334708 170.552348,70.7994416 170.552348,70.7994416 C170.552348,70.7994416 170.463552,71.8205967 169.797581,72.7973537 C169.087213,73.7741108 169.220407,75.1948483 170.596746,76.0384112 C171.617901,76.6599839 171.795494,76.74878 171.839892,76.74878 C171.839892,76.74878 171.307115,77.2371585 170.996329,78.3027117 C170.641144,79.4570609 171.395911,80.5670121 172.639057,80.9221965 C173.882202,81.2773809 174.414978,81.410575 174.681367,81.8101574 C174.992153,82.2541379 174.770163,82.342934 174.681367,84.207652 C174.592571,86.0723701 174.237386,87.848292 176.679279,89.2246315 C179.121172,90.6009709 183.383384,89.4022237 186.89083,87.2267193 C189.909897,85.3620013 197.368769,82.9645067 203.140515,86.0723701 C199.100293,91.2669417 193.062159,94.9075816 186.047267,95.7955426 C171.928688,97.5714645 159.008856,87.5819037 157.232934,73.4633244 C155.900992,63.5625597 160.385195,54.2833677 168.02166,49 Z" id="Shape" fill="#FFFFFF" fill-rule="nonzero"></path>
+        </g>
+    </g>
+</svg>

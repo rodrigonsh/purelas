@@ -1,0 +1,38 @@
+{
+  "name": "purelas",
+  "displayName": "Purelas",
+  "version": "1.0.0",
+  "description": "Assistente feminino",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "voti",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "browser-sync": "^2.23.5",
+    "browserify": "^14.5.0",
+    "cordova-android": "^6.3.0",
+    "cordova-plugin-geolocation": "^4.0.1",
+    "cordova-plugin-whitelist": "^1.3.3",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^4.0.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-jshint": "^2.0.4",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^3.1.0",
+    "gulp-tap": "^1.0.1",
+    "jshint": "^2.9.5",
+    "turf": "^3.0.14",
+    "vue": "^2.5.13"
+  },
+  "cordova": {
+    "plugins": {
+      "cordova-plugin-whitelist": {},
+      "cordova-plugin-geolocation": {}
+    },
+    "platforms": [
+      "android"
+    ]
+  }
+}

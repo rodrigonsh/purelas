@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" height="90" width="150" version="1.1" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" viewBox="0 0 39.687499 23.812501">
+ <metadata>
+  <rdf:RDF>
+   <cc:Work rdf:about="">
+    <dc:format>image/svg+xml</dc:format>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:title/>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <g stroke-width=".2646" transform="translate(0 -273.2)">
+  <text id="PURELAS" style="letter-spacing:2.701" font-family="Roboto-Black, Roboto" font-size="5.292px" letter-spacing="10.21" y="260.99081" x="-27.825178" font-weight="700" fill="#ffffff">
+   <tspan y="296.18039" x="0.091693163">PURELA</tspan>
+   <tspan y="296.18039" x="36.195499">S</tspan>
+  </text>
+  <path d="m16.63 274c0.4581 1.045 0.881 1.515 0.2584 2.972-0.6578 1.539-1.316 1.797-0.881 2.208 0.4346 0.4111 1.292 0.5874 1.292 0.5874s-0.0235 0.2702-0.1997 0.5286c-0.188 0.2584-0.1527 0.6343 0.2114 0.8575 0.2702 0.1645 0.3172 0.188 0.3289 0.188 0 0-0.141 0.1292-0.2232 0.4112-0.09398 0.3054 0.1057 0.5991 0.4346 0.6931s0.4699 0.1292 0.5404 0.2349c0.08223 0.1175 0.02349 0.141 0 0.6343-0.0235 0.4934-0.1175 0.9633 0.5286 1.327 0.6461 0.3642 1.774 0.047 2.702-0.5286 0.7988-0.4934 2.772-1.128 4.299-0.3054-1.069 1.374-2.667 2.338-4.523 2.573-3.736 0.4699-7.154-2.173-7.624-5.909-0.3524-2.62 0.834-5.075 2.855-6.473z" fill="#fff"/>
+ </g>
+</svg>
