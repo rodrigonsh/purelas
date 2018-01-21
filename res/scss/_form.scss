@@ -116,3 +116,17 @@ switch[on]
 {
   background: url(img/switch-on.png);
 }
+
+check
+{
+  display: block;
+  width: 19px;
+  height: 19px;
+  background-image: url( img/check.svg );
+  background-position: top left;
+}
+
+check[on]
+{
+  background-position: top right;
+}

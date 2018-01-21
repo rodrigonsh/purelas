@@ -20,7 +20,7 @@ shell.addEventListener('touchmove', function(ev)
 
   if ( Math.abs(touchDiffY) > Math.abs(touchDiffX) )
   {
-    console.log('vertical scroll')
+    //console.log('vertical scroll')
     return;
   }
 
@@ -28,24 +28,13 @@ shell.addEventListener('touchmove', function(ev)
 
   shell.classList.add('drag')
 
-  console.log(touchDiffX, touchDiffY)
+  //console.log(touchDiffX, touchDiffY)
 
   var currTranslate = parseInt(
     $app[0].style.transform
       .replace('translateX(', '')
       .substr( 0, $app[0].style.transform.length-1 )
     )
-
-  //console.log( 'currTranslate',  currTranslate )
-
-  /*if ( currTranslate <= -244 & touchDiffX < 0)
-  {
-
-  }*/
-
-
-
-
 
   offset = -244
   if ( $app[0].classList.contains('menu-open') )

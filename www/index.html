@@ -255,7 +255,7 @@
 
               <div class='tab-title'>Relatos</div>
 
-              <p id="area">
+              <p id="area" data-page="area-select">
                 Centro, Campo Grande, MS
                 <span class='down-arrow'></span>
               </p>
@@ -288,6 +288,99 @@
             </div>
 
             <button data-page="new-report" class='fab'>+</button>
+
+          </div>
+
+
+          <div id='areaSelectPage' class='page' data-page='area-select'>
+
+            <header>
+              <button data-action='back'><img src="img/back.svg" /></button>
+              <h2>Filtro por região</h2>
+            </header>
+
+            <div class="grows scrolls">
+
+              <card>
+              <preference>
+                <label>Centro, Campo Grande, MS</label>
+                <check on />
+              </preference>
+              </card>
+
+              <card>
+              <preference>
+                <label>Guanandi, Campo Grande, MS</label>
+                <check />
+              </preference>
+              </card>
+
+              <card>
+              <preference>
+                <label>Vila Tiradentes, Campo Grande, MS</label>
+                <check />
+              </preference>
+              </card>
+
+              <card>
+              <preference>
+                <label>Coronel Antônio, Campo Grande, MS</label>
+                <check />
+              </preference>
+              </card>
+
+              <card>
+              <preference>
+                <label>Bairro Santo Antônio, Campo Grande, MS</label>
+                <check />
+              </preference>
+              </card>
+
+              <card>
+              <preference>
+                <label>Mata do Jacinto, Campo Grande, MS</label>
+                <check />
+              </preference>
+              </card>
+
+              <card>
+              <preference>
+                <label>Cidade Jardim, Campo Grande, MS</label>
+                <check />
+              </preference>
+              </card>
+
+              <card>
+              <preference>
+                <label>Centro, Dourados, MS</label>
+                <check />
+              </preference>
+              </card>
+
+              <card>
+              <preference>
+                <label>Vila Santa Olinda, Dourados, MS</label>
+                <check />
+              </preference>
+              </card>
+
+              <card>
+              <preference>
+                <label>Guanandi, Campo Grande, MS</label>
+                <check />
+              </preference>
+              </card>
+
+              <card>
+              <preference>
+                <label>Tatuapé, Nioaque, MS</label>
+                <check />
+              </preference>
+              </card>
+
+            </div>
+
+            <!--button data-page="area-new" class='fab'>+</button-->
 
           </div>
 
@@ -722,6 +815,8 @@
 
       <script type="text/javascript" src="cordova.js"></script>
       <script type="text/javascript" src="app.js"></script>
+
+      <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAgQ3Td8h6homy1Hf2MIT9DUR9882g-42Q&callback=initMap"></script>
 
     </body>
   </html>

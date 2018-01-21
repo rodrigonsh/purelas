@@ -216,6 +216,18 @@ switch[on] {
   background: url(img/switch-on.png);
 }
 
+check {
+  display: block;
+  width: 19px;
+  height: 19px;
+  background-image: url(img/check.svg);
+  background-position: top left;
+}
+
+check[on] {
+  background-position: top right;
+}
+
 .special {
   background-image: url(img/special.svg);
   background-position: top center;
@@ -706,6 +718,10 @@ header h2 {
 }
 
 #navigator[data-page='view-report'] #viewReportPage {
+  z-index: 1000;
+}
+
+#navigator[data-page='area-select'] #areaSelectPage {
   z-index: 1000;
 }
 

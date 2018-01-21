@@ -18,7 +18,7 @@ $("[data-action='menu']").click(function(ev){
 });
 
 var pages = []
-var currentPage = $($("#"+$navigator.dataset.page+"Page")[0]);
+var currentPage = q("#"+$navigator.dataset.page+"Page");
 var nextPage = null;
 
 function setPage( pageName )
@@ -29,34 +29,27 @@ function setPage( pageName )
   if ( $navigator.dataset.page != pageName )
   {
 
-    currentPage.removeClass('showing')
-    currentPage.addClass('hiding')
+    currentPage.classList.add('hiding')
 
     $navigator.dataset.page = pageName;
 
-    nextPage = $($(".page[data-page='"+pageName+"']")[0])
-    console.log("nextPage.addClass('showing')")
-    nextPage.addClass('showing')
-    nextPage.addClass('show')
-    nextPage.removeClass('showing')
+    nextPage = q(".page[data-page='"+pageName+"']")
+
+    nextPage.classList.add('showing')
+    nextPage.classList.add('show')
+    nextPage.classList.remove('showing')
 
     setTimeout(function()
     {
-      currentPage.removeClass('show')
+      currentPage.classList.remove('show')
     }, 300)
 
     setTimeout( function() {
 
-      currentPage.removeClass('hiding')
+      currentPage.classList.remove('hiding')
       currentPage = nextPage
 
     } , 500 )
-
-    /*setTimeout( function(){
-
-
-
-    }, 3000 )*/
 
     pages.push( $navigator.dataset.page )
 
@@ -68,11 +61,11 @@ $("[data-page]").click(function(ev)
 
   ev.stopPropagation()
 
-  var target = ev.currentTarget;
+  var currentTarget = ev.currentTarget;
 
-  console.log(target.tagName, target.dataset.page)
+  //console.log('click', currentTarget.tagName, currentTarget.dataset.page)
 
-  setPage( target.dataset.page )
+  setPage( currentTarget.dataset.page )
 
   $app.removeClass('menu-open')
 
@@ -103,3 +96,6 @@ document.addEventListener('backbutton', function(){
 
 
 });
+
+
+setPage('map')

@@ -63,7 +63,7 @@ gulp.task('serve', function(done) {
 });
 
 
-gulp.task('watch', ['styles', 'js', 'serve'], function() {
+gulp.task('default', ['styles', 'js', 'serve'], function() {
 
   gulp.watch('./www/index.html', browserSync.reload);
 
