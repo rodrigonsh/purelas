@@ -1,0 +1,76 @@
+
+.wait
+{
+  display: none;
+}
+
+.processing .wait
+{
+  display: block;
+  text-align: center;
+}
+
+.processing .interaction
+{
+  display: none;
+}
+
+.error{ display: none; }
+.failed .error{ display: block; }
+
+.justify-center
+{
+  justify-content: center;
+}
+
+.grows
+{
+  flex-grow: 1;
+}
+
+.scrolls
+{
+  flex-shrink: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.breathes
+{
+  padding: 42px;
+}
+
+.inset
+{
+  padding: 0px $space;
+}
+
+
+button:focus
+{
+  outline: none;
+}
+
+button:hover
+{
+  cursor: pointer;
+  opacity: 0.95;
+}
+
+
+
+
+.fab
+{
+  width: 51px;
+  height: 51px;
+  background: $app_primary_color;
+  border-radius: 50%;
+  box-shadow: 0px 5px 20px rgba(0,0,0,0.3);
+  position: fixed;
+  bottom: $space;
+  right: $space;
+  color: white;
+  font-size: 28px;
+  border: none;
+}

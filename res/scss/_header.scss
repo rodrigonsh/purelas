@@ -1,0 +1,46 @@
+
+header
+{
+  height: 56px;
+  background: $app_primary_color;
+  color: white;
+  flex-shrink: 0;
+  flex-grow: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  button
+  {
+    height: 56px;
+    width: 56px;
+    background: transparent;
+    border: none;
+  }
+
+  button:focus
+  {
+    background: rgba(255,255,255,0.1);
+  }
+
+  h1
+  {
+    font-family: "Roboto-Black";
+    font-size: 9.75pt;
+    flex-grow: 1;
+    letter-spacing: 6.90px;
+    text-align: center;
+  }
+
+  h2
+  {
+    font-family: "Roboto";
+    font-size: 12pt;
+    flex-grow: 1;
+    letter-spacing: 0.60px;
+    text-align: left;
+    font-weight: 400;
+  }
+
+}

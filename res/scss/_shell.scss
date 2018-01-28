@@ -1,0 +1,21 @@
+
+#shell
+{
+  padding: 0px;
+  margin: 0px;
+  overflow: hidden;
+  width: 100vw;
+
+  position: relative;
+
+  touch-action: pan-y;
+
+  @media (min-width: 600px)
+  {
+    width: $desktopShellWidth;
+    height: $desktopShellHeight;
+    margin: auto;
+    box-shadow: 0px 0px 30px;
+  }
+
+}

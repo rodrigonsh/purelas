@@ -1,0 +1,46 @@
+#navigator
+{
+  width: 100vw;
+  height: 100vh;
+
+  position: relative;
+
+  @media (min-width: 600px)
+  {
+    width: $desktopShellWidth;
+    height: $desktopShellHeight;
+  }
+}
+
+.page
+{
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+
+  z-index: 999;
+  opacity: 0;
+  transition: opacity 0.1s;
+
+  background-color: #f5f5f5;
+
+}
+
+.page.showing{
+  z-index: 1001;
+}
+
+.page.show
+{
+  opacity: 1;
+}
+
+.page.hiding{
+  z-index: 1000;
+}

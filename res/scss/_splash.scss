@@ -1,0 +1,38 @@
+
+#splash
+{
+
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  height: 100vh;
+  z-index: 1000;
+
+  opacity: 1;
+  transition: opacity 0.5s;
+
+  img
+  {
+    display: block;
+  }
+
+}
+
+#splash.hiding
+{
+  opacity: 0;
+}
+
+#splash.hidden
+{
+  display: none;
+  z-index: -1000;
+}

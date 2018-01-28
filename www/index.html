@@ -49,8 +49,8 @@
         <div id='menu' class='deco'>
 
           <header>
-            <p>Adriana Flores Benviatti</p>
-            <small>adriflores@gmail.com</small>
+            <p>Visitante</p>
+            <small>Usuário Anônimo</small>
           </header>
 
           <nav>
@@ -83,7 +83,7 @@
                 <span class='i'><img src='img/preferences.svg' /></span>
                 Configurações
               </li>
-              <li data-page='logout'>
+              <li data-action='logout'>
                 <span class='i'><img src='img/logout.svg' /></span>
                 Sair
               </li>
@@ -175,6 +175,61 @@
 
 
             </div>
+
+          </div>
+
+
+          <div id='loginPage' class='page deco justify-center' data-page='login'>
+
+            <img class='breathes' src="img/logo-medium.svg" />
+
+            <form action="#" class='inset'>
+
+              <div class='wait'>
+                Aguarde...
+              </div>
+
+              <div class='error'>
+                Erro ao autenticar usuário
+              </div>
+
+              <div class='interaction'>
+                <input required type='email' placeholder="Email" />
+                <input required type='password' placeholder='Senha' />
+                <button type="submit">Entrar</button>
+                <button data-page='register' type="button">Nova Conta</button>
+              </div>
+
+            </form>
+
+          </div>
+
+
+          <div id='registerPage' class='page deco justify-center' data-page='register'>
+
+            <form action="#" class='inset'>
+
+              <div class='wait'>
+                Aguarde...
+              </div>
+
+              <div class='interaction'>
+                <h1>Nova Conta</h1>
+                <input required type='email' placeholder="Email" />
+                <input required type='password' placeholder='Senha' />
+                <input required type='password' placeholder='Confirme a senha' />
+                <button type="submit">Registrar</button>
+                <button data-page='login' type="button">Voltar</button>
+                <small class='txt-center'>
+                  <a href="#" data-modal='terms'>
+                    Ao registrar uma nova conta você aceita os
+                    <strong>Termos de uso do serviço</strong> e nossa
+                    <strong>política de privacidade</strong>
+                  </a>
+                </small>
+              </div>
+
+            </form>
 
           </div>
 
@@ -455,7 +510,7 @@
           </div>
 
 
-          <div id='userPage' data-page='user' class='page'>
+          <div id='userPage' data-page='user' auth class='page'>
 
             <header>
               <button data-action='back'><img src="img/back.svg" /></button>
@@ -465,21 +520,21 @@
 
             <div class='scrolls'>
 
-              <form action="#">
+              <form method="post">
 
                 <div class='inset'>
 
-                  <label>Nome</label>
-                  <input name="nome" value='Adriana Flores Benviatti' />
+                  <label for='userName'>Nome</label>
+                  <input id="userName" required />
 
-                  <label>Email</label>
-                  <input name="email" value='adriflores@gmail.com' />
+                  <label for='userEmail'>Email</label>
+                  <input id="userEmail" type='email' required />
 
                   <label>Senha</label>
-                  <input name="senha1" value='******' />
+                  <input type="password" name="senha1" value='ignore' />
 
                   <label>Nova Senha</label>
-                  <input name="senha2" value='******' />
+                  <input type="password" name="senha2" value='ignore' />
 
                 </div>
 
@@ -487,27 +542,44 @@
 
                 <div class="inset">
 
-                  <label>Escolaridade</label>
-                  <select>
-                    <option>Escolha uma opção</option>
+                  <!-- https://www.tcm.go.gov.br/site/wp-content/uploads/2017/07/Tabela_de_Escolaridade.pdf-->
+                  <label for='userEd'>Escolaridade</label>
+                  <select id='userEd'>
+                    <option value="">Escolha uma opção</option>
+                    <option value='1'>Fundamental - Incompleto</option>
+                    <option value='2'>Fundamental - Completo</option>
+                    <option value='3'>Médio - Incompleto</option>
+                    <option value='4'>Médio - Completo</option>
+                    <option value='5'>Superior - Incompleto</option>
+                    <option value='6'>Superior - Completo</option>
                   </select>
 
-                  <label>Sexo</label>
-                  <select>
-                    <option>Escolha uma opção</option>
+                  <label for='userSex'>Sexo</label>
+                  <select id='userSex'>
+                    <option value="">Escolha uma opção</option>
+                    <option value="m">Mulher</option>
+                    <option value="h">Homem</option>
                   </select>
 
-                  <label>Composição Familiar</label>
-                  <select>
-                    <option>Escolha uma opção</option>
+                  <label for='userFmlCmp'>Composição Familiar</label>
+                  <select id='userFmlCmp'>
+                    <option value=''>Escolha uma opção</option>
+                    <option value='unipessoal'>Moro só</option>
+                    <option value='nao-parentes'>2+ sem parentesco</option>
+                    <option value='parentes'>2+ com parentesco</option>
                   </select>
 
-                  <label>Renda Familiar</label>
-                  <select>
-                    <option>Escolha uma opção</option>
+                  <label for='userFmlRnd'>Renda Familiar</label>
+                  <select id='userFmlRnd'>
+                    <option value=''>Escolha uma opção</option>
+                    <option value="E">Até 2 salários mínimos</option>
+                    <option value="D">2 a 4 salários mínimos</option>
+                    <option value="C">4 a 10 salários mínimos</option>
+                    <option value="B">10 a 20 salários mínimos</option>
+                    <option value="A">Acima de 20 salários mínimos</option>
                   </select>
 
-                  <button type='button' class='block'>
+                  <button class='block'>
                     Enviar
                   </button>
 
@@ -688,7 +760,7 @@
           </div>
 
 
-          <div id='newReportPage' data-page='new-report' class='page'>
+          <div id='newReportPage' data-page='new-report' auth class='page'>
 
             <header>
               <button data-action='back'><img src="img/back.svg" /></button>
@@ -808,15 +880,35 @@
           </div>
 
 
-      </div>
 
       </div>
 
+
+
+
+      </div>
+
+
+      <div id='termsModal' data-modal='terms' class='modal'>
+
+        <h2>Termos de Serviço e Política de Privacidade</h2>
+
+        <div class="scrolls grows">
+
+          <p>Lorem ipsum..</p>
+
+        </div>
+
+        <button data-action='closeModal'>Concordar</button>
+
+      </div>
+
+    </div>
 
       <script type="text/javascript" src="cordova.js"></script>
       <script type="text/javascript" src="app.js"></script>
 
-      <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAgQ3Td8h6homy1Hf2MIT9DUR9882g-42Q&callback=initMap"></script>
+      <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAgQ3Td8h6homy1Hf2MIT9DUR9882g-42Q&libraries=visualization&callback=initMap"></script>
 
     </body>
   </html>

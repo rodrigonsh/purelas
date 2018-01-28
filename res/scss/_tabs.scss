@@ -1,0 +1,36 @@
+
+.tabs
+{
+  height: 62px;
+  background: $app_primary_color;
+  color: white;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+
+  button
+  {
+    flex: 1;
+    background: transparent;
+    border: none;
+    opacity: 0.6;
+    border-top: 1px solid rgba(255, 255, 255, 0.25);
+  }
+
+  button[active]
+  {
+    opacity: 1;
+    border-top: 1px solid #ffffff;
+  }
+
+}
+
+.tab-title
+{
+  background: white;
+  padding: 10px;
+  color: $txt_main_color;
+  text-align: center;
+  text-transform: uppercase;
+}

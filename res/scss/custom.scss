@@ -1,0 +1,69 @@
+
+#routeEndPoints
+{
+  background: white;
+  padding-bottom: 18px;
+
+  input
+  {
+    padding: 12px 0px;
+    box-sizing: border-box;
+  }
+
+  label.input:first-child
+  {
+    margin-bottom: 12px;
+  }
+
+  label.input:last-child
+  {
+    margin-bottom: 0px;
+  }
+
+}
+
+#new-report-map
+{
+  height: 160px;
+  margin-bottom: 28px;
+}
+
+#view-report-map
+{
+  height: 160px;
+  margin-bottom: 28px;
+}
+
+#area
+{
+  margin: $space auto;
+  text-align: center;
+  letter-spacing: 3px;
+  color: #7c7c7c;
+
+  .down-arrow
+  {
+    display: inline-block;
+    width: 8px;
+    height: 5px;
+    background-image: url(img/caret-down.png);
+  }
+
+}
+
+#viewReportPage p
+{
+  color: #7c7c7c;
+  font-size: 11.25pt;
+  letter-spacing: 0.26px;
+  line-height: 1.25em;
+}
+
+#viewReportPage small
+{
+  display: block;
+  color: #b4b4b4;
+  font-size: 9pt;
+  letter-spacing: 0.21px;
+  margin-bottom: $space;
+}

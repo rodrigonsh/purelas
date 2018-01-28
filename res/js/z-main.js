@@ -17,6 +17,69 @@ $("[data-action='menu']").click(function(ev){
 
 });
 
+$("[data-modal]").click(function(ev){
+
+  ev.stopPropagation()
+
+  var target = ev.currentTarget
+  if ( target.classList.contains('modal') )
+  {
+    return;
+  }
+
+  console.log(".modal[data-modal="+target.dataset.modal+"]")
+
+  $(".modal[data-modal="+target.dataset.modal+"]").addClass('show')
+  $app.toggleClass('modal-over')
+
+});
+
+$("[data-action='closeModal']").click(function(ev){
+
+  ev.stopPropagation()
+
+  var t = ev.currentTarget
+  var count = 0
+  while( count < 10 && !t.dataset.hasOwnProperty('modal') )
+  {
+    t = t.parentNode;
+    count++
+  }
+
+  if ( count == 10 )
+  {
+    alert('Erro na interface, se este erro persistir contacte o desenvolvedor')
+  }
+
+  t.classList.remove('show')
+
+  $app.toggleClass('modal-over')
+
+});
+
+
+$("[data-action='save']").click(function(ev)
+{
+  ev.stopPropagation()
+  ev.preventDefault()
+
+  var t = ev.currentTarget
+  var count = 0
+  while( count < 10 && !t.classList.contains('page') )
+  {
+    t = t.parentNode;
+    count++
+  }
+
+  if ( count == 10 )
+  {
+    alert('Erro na interface, se este erro persistir contacte o desenvolvedor')
+  }
+
+  emit(t.dataset.page+"Save")
+
+})
+
 var pages = []
 var currentPage = q("#"+$navigator.dataset.page+"Page");
 var nextPage = null;
@@ -48,6 +111,7 @@ function setPage( pageName )
 
       currentPage.classList.remove('hiding')
       currentPage = nextPage
+      emit(currentPage.dataset.page+"After")
 
     } , 500 )
 
@@ -61,14 +125,31 @@ $("[data-page]").click(function(ev)
 
   ev.stopPropagation()
 
-  var currentTarget = ev.currentTarget;
+  var currentTarget = ev.currentTarget
+  var pageName = currentTarget.dataset.page
 
-  //console.log('click', currentTarget.tagName, currentTarget.dataset.page)
+  if ( currentTarget.classList.contains('page') )
+  {
+    return;
+  }
 
-  setPage( currentTarget.dataset.page )
+  var next = q(".page[data-page='"+pageName+"']")
+
+  if ( next.hasAttribute('auth') && UID == null )
+  {
+    setPage('login')
+  } else {
+    emit( pageName+"Before" )
+  }
 
   $app.removeClass('menu-open')
 
+
+});
+
+$("[data-action='logout']").click(function(ev){
+
+  logout()
 
 });
 

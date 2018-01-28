@@ -1,0 +1,48 @@
+.modal
+{
+  position: absolute ;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  background: rgba(0,0,0,0.9);
+  box-sizing: border-box;
+  z-index: -2000;
+  padding: 32px;
+  display: flex;
+  opacity: 0;
+
+  transition: z-index 0s, opacity 0.4s 0.1s;
+
+  flex-direction: column;
+  color: white;
+
+  h2
+  {
+    margin-top: 0px;
+  }
+
+  button
+  {
+    background: $app_primary_color;
+    border: 0;
+    color: white;
+    padding: 25px;
+    display: block;
+
+    font-family: "Roboto-Black";
+    font-size: 9.75pt;
+    flex-shrink: 0;
+    letter-spacing: 3.20px;
+    text-align: center;
+    text-transform: uppercase;
+
+  }
+
+}
+
+.modal.show
+{
+  z-index: 2000;
+  opacity: 1;
+}

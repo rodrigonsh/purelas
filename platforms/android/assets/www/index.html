@@ -49,8 +49,8 @@
         <div id='menu' class='deco'>
 
           <header>
-            <p>Adriana Flores Benviatti</p>
-            <small>adriflores@gmail.com</small>
+            <p>Visitante</p>
+            <small>Usuário Anônimo</small>
           </header>
 
           <nav>
@@ -175,6 +175,30 @@
 
 
             </div>
+
+          </div>
+
+
+          <div id='loginPage' class='page deco' data-page='login'>
+
+            <img class='breathes' src="img/logo-medium.svg" />
+
+            <span class='grows'></span>
+
+            <form action="#" class='breathes'>
+
+              <div class='processing'>
+                <img src='img/spinner.gif' />
+              </div>
+
+              <div class='interaction'>
+                <h1>Login</h1>
+                <input required type='email' placeholder="Email" />
+                <input required type='password' placeholder='Senha' />
+                <button>Entrar</button>
+              </div>
+
+            </form>
 
           </div>
 
@@ -455,7 +479,7 @@
           </div>
 
 
-          <div id='userPage' data-page='user' class='page'>
+          <div id='userPage' data-page='user' auth class='page'>
 
             <header>
               <button data-action='back'><img src="img/back.svg" /></button>
@@ -688,7 +712,7 @@
           </div>
 
 
-          <div id='newReportPage' data-page='new-report' class='page'>
+          <div id='newReportPage' data-page='new-report' auth class='page'>
 
             <header>
               <button data-action='back'><img src="img/back.svg" /></button>
@@ -816,7 +840,7 @@
       <script type="text/javascript" src="cordova.js"></script>
       <script type="text/javascript" src="app.js"></script>
 
-      <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAgQ3Td8h6homy1Hf2MIT9DUR9882g-42Q&callback=initMap"></script>
+      <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAgQ3Td8h6homy1Hf2MIT9DUR9882g-42Q&libraries=visualization&callback=initMap"></script>
 
     </body>
   </html>

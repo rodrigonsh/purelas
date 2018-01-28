@@ -1,0 +1,73 @@
+#registerPage form h1
+{
+  margin: 0px 0px $space 0px;
+  color: white;
+  text-align: center;
+  font-size: 9.75pt;
+  font-family: "Roboto-Black";
+  letter-spacing: 3.2px;
+  text-transform: uppercase;
+}
+
+#loginPage form input,
+#registerPage form input
+{
+  background-color: rgba(255,255,255,0.42);
+  border: 0;
+  margin-bottom: 8px;
+  color: white;
+}
+
+#loginPage form input::placeholder,
+#registerPage form input::placeholder
+{
+  color: white;
+}
+
+#loginPage form input:focus,
+#registerPage form input:focus
+{
+  outline: 1px solid white;
+}
+
+#loginPage form button[type='submit'],
+#registerPage form button[type='submit']
+{
+  margin-bottom: 8px;
+}
+
+#loginPage form button[type='button'],
+#registerPage form button[type='button']
+{
+  background: transparent;
+}
+
+#loginPage .wait,
+#registerPage .wait
+{
+  color: white;
+}
+
+#loginPage .error,
+#registerPage .error
+{
+  padding: 10px;
+  margin-bottom: 8px;
+  text-align: center;
+  background-color: $error_bg;
+  color: $error_txt;
+}
+
+#registerPage small
+{
+
+  display: block;
+  color: white;
+
+  a
+  {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+}
