@@ -4,6 +4,14 @@ Mapeamento de casos de abuso sexual
 
 Projeto criado sob encomenda pela FilmaDelas
 
+## WebApp
+
+O WebApp do projeto pode ser acessado em
+[purelas-190223.firebaseapp.com]
+
+Pode ser que a versão online não esteja sincronizada
+com o repositório no github.
+
 ## Compilando para App
 
 Clone o repositório do projeto
