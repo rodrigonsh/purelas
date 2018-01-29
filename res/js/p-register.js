@@ -21,6 +21,7 @@ $registerForm.addEventListener('submit', function(ev){
   }
   else
   {
+    $registerForm.classList.remove('failed')
     $registerForm.classList.add('processing')
     register( email, senhas[0].value )
   }

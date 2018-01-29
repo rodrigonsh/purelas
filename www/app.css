@@ -359,7 +359,7 @@ button:hover {
   z-index: 1000;
 }
 
-#navigator[data-page='new-report'] #newReportPage {
+#navigator[data-page='report-new'] #newReportPage {
   z-index: 1000;
 }
 
@@ -367,7 +367,7 @@ button:hover {
   z-index: 1000;
 }
 
-#navigator[data-page='view-report'] #viewReportPage {
+#navigator[data-page='report-view'] #viewReportPage {
   z-index: 1000;
 }
 

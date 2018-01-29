@@ -210,6 +210,7 @@ $loginForm.addEventListener('submit', function(ev){
   ev.preventDefault();
   ev.stopPropagation();
 
+  $loginForm.classList.remove('failed')
   $loginForm.classList.add('processing')
 
   var email = $loginForm.querySelector('[type=email]').value
@@ -249,6 +250,36 @@ addEventListener('mapBefore', function(){
 
 })
 
+addEventListener('opinionBefore', function(){
+
+  setPage('opinion')
+
+})
+
+addEventListener('partnersBefore', function(){
+
+  setPage('partners')
+
+})
+
+addEventListener('phonesBefore', function(){
+
+  setPage('phones')
+
+})
+
+addEventListener('preferencesBefore', function(){
+
+  setPage('preferences')
+
+})
+
+addEventListener('rateBefore', function(){
+
+  setPage('rate')
+
+})
+
 $registerForm = q("#registerPage form")
 
 addEventListener('registerAfter',  function()
@@ -272,6 +303,7 @@ $registerForm.addEventListener('submit', function(ev){
   }
   else
   {
+    $registerForm.classList.remove('failed')
     $registerForm.classList.add('processing')
     register( email, senhas[0].value )
   }
@@ -296,6 +328,18 @@ addEventListener('registerBefore', function(){
   {
     setPage('register')
   }
+
+})
+
+addEventListener('report-newBefore', function(){
+
+  setPage('report-new')
+
+})
+
+addEventListener('report-viewBefore', function(){
+
+  setPage('report-view')
 
 })
 
@@ -330,11 +374,17 @@ addEventListener('userSet', function(ev)
   {
     $("#menu header p").html("Visitante")
     $("#menu header small").html("Usuário Anônimo")
+
+    $("#userPage #userName").val("")
+    $("#userPage #userEmail").val("")
   }
 
   else
   {
+    $("#menu header p").html(currentUser.displayName)
     $("#menu header small").html(currentUser.email)
+
+    $("#userPage #userName").val(currentUser.displayName)
     $("#userPage #userEmail").val(currentUser.email)
   }
 
@@ -347,8 +397,6 @@ addEventListener('userDataUpdated', function()
 
   if ( userData == null ) return
 
-  $("#menu header p").html( userData.name )
-  $("#userPage #userName").val( userData.name )
   $("#userPage #userSex").val( userData.sex )
   $("#userPage #userEd").val( userData.ed )
   $("#userPage #userFmlCmp").val( userData.fmlCmp )

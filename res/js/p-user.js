@@ -17,11 +17,17 @@ addEventListener('userSet', function(ev)
   {
     $("#menu header p").html("Visitante")
     $("#menu header small").html("Usuário Anônimo")
+
+    $("#userPage #userName").val("")
+    $("#userPage #userEmail").val("")
   }
 
   else
   {
+    $("#menu header p").html(currentUser.displayName)
     $("#menu header small").html(currentUser.email)
+
+    $("#userPage #userName").val(currentUser.displayName)
     $("#userPage #userEmail").val(currentUser.email)
   }
 
@@ -34,8 +40,6 @@ addEventListener('userDataUpdated', function()
 
   if ( userData == null ) return
 
-  $("#menu header p").html( userData.name )
-  $("#userPage #userName").val( userData.name )
   $("#userPage #userSex").val( userData.sex )
   $("#userPage #userEd").val( userData.ed )
   $("#userPage #userFmlCmp").val( userData.fmlCmp )

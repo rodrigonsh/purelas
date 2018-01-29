@@ -47,7 +47,10 @@ function q(query)
 
 function emit( evName, data )
 {
-  console.log('emit', evName, data)
+
+  if ( data == undefined ) console.log('emit', evName)
+  else console.log('emit', evName, data)
+
   var e = new Event(evName)
   e.data = data
   dispatchEvent( e )
@@ -81,97 +84,100 @@ var auth = firebase.auth()
 
 UID = null
 
-var geofireRef = db.ref('geofire')
-var geoFire = new GeoFire(geofireRef);
+var newUser = null;
+var userData = null;
+var currentUser = null;
 
-var confirmUserCreation = false;
-var newUserEmail = null;
-
-function logoff()
+function logout()
 {
   UID = null
   auth.signOut()
-  emit('userSet')
 }
 
-function login( user, password )
+function login( email, password )
 {
+
   auth.signInWithEmailAndPassword(email, password)
-      .catch( function(error){
-
-          $loginSection.classList.remove('loading')
-
-          setTimeout( () => { $loginSection.classList.add('error') }, 200  )
-
-          if (error.code == "auth/user-not-found")
-          {
-
-            if ( !confirmUserCreation )
-            {
-
-              // TODO: internacionalizar
-              $loginSection.querySelector('h2').textContent = "Usuário não encontrado. Cadastrar?"
-              $loginSection.querySelector('button').innerHTML = "Entrar / Cadastrar"
-
-              confirmUserCreation = true
-              newUserEmail = email
-
-            } else {
-
-              if ( email == newUserEmail )
-              {
-                auth.createUserWithEmailAndPassword( email, password )
-              } else {
-                login( email , password )
-              }
-
-            }
-
-          }
-
-          else
-          {
-              alert( error.message )
-          }
-
-      } )
+    .catch( function(error)
+    {
+      emit("authError", error)
+    })
 }
 
-/*$loginForm.addEventListener( 'submit', function( ev ){
+function register( email, password )
+{
+  var newUser = true;
 
-    ev.preventDefault();
-    ev.stopPropagation();
-
-    email = $loginForm.querySelector('form input[type="email"]').value;
-    password = $loginForm.querySelector('form input[type="password"]').value;
-
-    $loginSection.classList = 'loading'
-
-    login(email, password);
-
-} )
-
-*/
+  auth.createUserWithEmailAndPassword( email, password )
+    .catch( function(error)
+    {
+      emit('registerError', error)
+    })
+}
 
 auth.onAuthStateChanged( function (user)
 {
 
-    if ( user == null )
-    {
-      UID = null;
-      emit('userSet', UID);
-      //$body.classList.remove("offline") // TODO: vestigial?
-      return
-    }
+  currentUser = user
 
-    else
-    {
-        UID = user.uid
-        emit('userSet', UID);
+  if ( user == null )
+  {
+    UID = null;
+  }
 
-    }
+  else
+  {
 
-} )
+    UID = user.uid
+
+    db.ref("users/"+UID).on('value', function(s){
+
+      userData = s.val()
+      emit('userDataUpdated')
+
+    })
+
+    if( newUser ) emit('userNew')
+    else emit('mapBefore')
+
+    newUser = false;
+
+  }
+
+  emit('userSet', UID);
+
+})
+
+
+addEventListener('userDataSave', function()
+{
+
+  currentUser.updateProfile( { displayName: userData.name } )
+  db.ref("users/"+UID)
+    .set( userData )
+    .then( function(ev){ emit('homeBefore') } )
+
+})
+
+var geofireRef = db.ref('geofire')
+var geoFire = new GeoFire(geofireRef);
+
+var errMessages =
+{
+  "auth/app-deleted": "A instância do app foi deletada",
+  "auth/app-not-authorized": "O app não está autorizado a autenticar-se com a API do Google",
+  "auth/argument-error": "Método invocado com argumentos incorretos",
+  "auth/invalid-api-key": "A chave de API fornecida não é válida",
+  "auth/invalid-user-token": "Credenciais vencidas, você deve fazer login novamente",
+  "auth/network-request-failed": "Ocorreu um erro na conexão",
+  "auth/operation-not-allowed": "Esta operação não é permitida",
+  "auth/requires-recent-login": "A data do último login do usuário é muito antiga",
+  "auth/too-many-requests": "Muitas requisições, por favor aguarde antes de tentar novamente",
+  "auth/unauthorized-domain": "Este domínio não é autorizado para operações OAUTH",
+  "auth/user-disabled": "Esta conta foi desabilitada por um adminstrador",
+  "auth/user-token-expired": "A autenticação expirou. Por favor faça login novamente",
+  "auth/web-storage-unsupported": "WebStorage não suportado ou não habilitado"
+}
 
 
 var mapAPIKey = "AIzaSyAgQ3Td8h6homy1Hf2MIT9DUR9882g-42Q"
@@ -186,7 +192,7 @@ function initMap()
   var cg = {lat: -20.4670068, lng: -54.6222753};
 
   map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 4,
+    zoom: 14,
     center: cg
   });
 
@@ -204,7 +210,23 @@ $loginForm.addEventListener('submit', function(ev){
   ev.preventDefault();
   ev.stopPropagation();
 
-  console.log('hey handsome!');
+  $loginForm.classList.remove('failed')
+  $loginForm.classList.add('processing')
+
+  var email = $loginForm.querySelector('[type=email]').value
+  var password = $loginForm.querySelector('[type=password]').value
+
+  login( email, password );
+
+})
+
+addEventListener('authError', function(ev)
+{
+
+  $loginForm.classList.remove('processing');
+  $loginForm.classList.add('failed')
+
+  // TODO: set message from firebase-errors.js
 
 })
 
@@ -228,6 +250,87 @@ addEventListener('mapBefore', function(){
 
 })
 
+addEventListener('opinionBefore', function(){
+
+  setPage('opinion')
+
+})
+
+addEventListener('partnersBefore', function(){
+
+  setPage('partners')
+
+})
+
+addEventListener('phonesBefore', function(){
+
+  setPage('phones')
+
+})
+
+addEventListener('preferencesBefore', function(){
+
+  setPage('preferences')
+
+})
+
+addEventListener('rateBefore', function(){
+
+  setPage('rate')
+
+})
+
+$registerForm = q("#registerPage form")
+
+addEventListener('registerAfter',  function()
+{
+  $registerForm.querySelector('[type=email]').value = ""
+  $("registerPage form [type=password]").val("")
+})
+
+$registerForm.addEventListener('submit', function(ev){
+
+  ev.preventDefault();
+  ev.stopPropagation();
+
+  var email = $registerForm.querySelector('[type=email]').value
+
+  var senhas = $registerForm.querySelectorAll('[type=password]')
+  if( senhas[0].value != senhas[1].value )
+  {
+    alert("As senhas devem coincidir")
+    return
+  }
+  else
+  {
+    $registerForm.classList.remove('failed')
+    $registerForm.classList.add('processing')
+    register( email, senhas[0].value )
+  }
+
+
+
+})
+
+addEventListener('registerError', function(ev)
+{
+
+  $registerForm.classList.remove('processing')
+  $registerForm.classList.add('failed')
+
+  // TODO: set error message from firebase-errors.js
+
+})
+
+addEventListener('registerBefore', function(){
+
+  if ( UID == null )
+  {
+    setPage('register')
+  }
+
+})
+
 addEventListener('reportsBefore', function(){
 
   setPage('reports')
@@ -237,6 +340,103 @@ addEventListener('reportsBefore', function(){
 addEventListener('routeBefore', function(){
 
   setPage('route')
+
+})
+
+addEventListener('userNew', function()
+{
+
+  var userData = {
+    name: "Seu nome",
+    registered_at: new Date().valueOf(),
+    logged_at: new Date().valueOf()
+  }
+
+  emit('userEdit')
+
+})
+
+addEventListener('userSet', function(ev)
+{
+  if ( currentUser == null )
+  {
+    $("#menu header p").html("Visitante")
+    $("#menu header small").html("Usuário Anônimo")
+
+    $("#userPage #userName").val("")
+    $("#userPage #userEmail").val("")
+  }
+
+  else
+  {
+    $("#menu header p").html(currentUser.displayName)
+    $("#menu header small").html(currentUser.email)
+
+    $("#userPage #userName").val(currentUser.displayName)
+    $("#userPage #userEmail").val(currentUser.email)
+  }
+
+})
+
+addEventListener('userDataUpdated', function()
+{
+
+  console.log('userDataUpdated', userData)
+
+  if ( userData == null ) return
+
+  $("#userPage #userSex").val( userData.sex )
+  $("#userPage #userEd").val( userData.ed )
+  $("#userPage #userFmlCmp").val( userData.fmlCmp )
+  $("#userPage #userFmlRnd").val( userData.fmlRnd )
+
+})
+
+addEventListener('userEdit', function()
+{
+  setPage('user')
+})
+
+addEventListener('userSave', function()
+{
+
+  // TODO: add processing
+
+  userData.name = $("#userPage #userName").val()
+  userData.sex = $("#userPage #userSex").val()
+  userData.ed = $("#userPage #userEd").val()
+  userData.fmlCmp = $("#userPage #userFmlCmp").val()
+  userData.fmlRnd = $("#userPage #userFmlRnd").val()
+
+  var userEmail = $("#userPage #userEmail").val()
+
+  if ( userEmail != currentUser.email )
+  {
+    console.log('try to set new email')
+    currentUser.updateEmail( userEmail )
+      .then( function(){ emit('userSet') } )
+      .catch( function(err){ alert( errMessages[err.code] ) } )
+  }
+
+  emit('userDataSave');
+
+})
+
+var $userForm = $('#userPage form')
+addEventListener('userBefore', function(ev)
+{
+  setPage('user')
+})
+
+$userForm.submit(function(ev)
+{
+  ev.preventDefault()
+  ev.stopPropagation()
+
+  if ( $userForm[0].checkValidity() )
+  {
+    emit('userSave')
+  }
 
 })
 
@@ -370,6 +570,69 @@ $("[data-action='menu']").click(function(ev){
 
 });
 
+$("[data-modal]").click(function(ev){
+
+  ev.stopPropagation()
+
+  var target = ev.currentTarget
+  if ( target.classList.contains('modal') )
+  {
+    return;
+  }
+
+  console.log(".modal[data-modal="+target.dataset.modal+"]")
+
+  $(".modal[data-modal="+target.dataset.modal+"]").addClass('show')
+  $app.toggleClass('modal-over')
+
+});
+
+$("[data-action='closeModal']").click(function(ev){
+
+  ev.stopPropagation()
+
+  var t = ev.currentTarget
+  var count = 0
+  while( count < 10 && !t.dataset.hasOwnProperty('modal') )
+  {
+    t = t.parentNode;
+    count++
+  }
+
+  if ( count == 10 )
+  {
+    alert('Erro na interface, se este erro persistir contacte o desenvolvedor')
+  }
+
+  t.classList.remove('show')
+
+  $app.toggleClass('modal-over')
+
+});
+
+
+$("[data-action='save']").click(function(ev)
+{
+  ev.stopPropagation()
+  ev.preventDefault()
+
+  var t = ev.currentTarget
+  var count = 0
+  while( count < 10 && !t.classList.contains('page') )
+  {
+    t = t.parentNode;
+    count++
+  }
+
+  if ( count == 10 )
+  {
+    alert('Erro na interface, se este erro persistir contacte o desenvolvedor')
+  }
+
+  emit(t.dataset.page+"Save")
+
+})
+
 var pages = []
 var currentPage = q("#"+$navigator.dataset.page+"Page");
 var nextPage = null;
@@ -418,6 +681,11 @@ $("[data-page]").click(function(ev)
   var currentTarget = ev.currentTarget
   var pageName = currentTarget.dataset.page
 
+  if ( currentTarget.classList.contains('page') )
+  {
+    return;
+  }
+
   var next = q(".page[data-page='"+pageName+"']")
 
   if ( next.hasAttribute('auth') && UID == null )
@@ -429,6 +697,12 @@ $("[data-page]").click(function(ev)
 
   $app.removeClass('menu-open')
 
+
+});
+
+$("[data-action='logout']").click(function(ev){
+
+  logout()
 
 });
 
@@ -458,4 +732,4 @@ document.addEventListener('backbutton', function(){
 });
 
 
-setPage('login')
+setPage('map')

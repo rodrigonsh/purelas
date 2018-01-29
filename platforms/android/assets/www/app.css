@@ -39,6 +39,37 @@ h5 {
   src: url("Roboto/Roboto-Regular.ttf");
 }
 
+.txt-center {
+  text-align: center;
+}
+
+.wait {
+  display: none;
+}
+
+.processing .wait {
+  display: block;
+  text-align: center;
+}
+
+.processing .interaction {
+  display: none;
+}
+
+.error {
+  display: none;
+}
+
+.failed .error {
+  display: block;
+}
+
+.justify-center {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
 .grows {
   -webkit-box-flex: 1;
       -ms-flex-positive: 1;
@@ -128,6 +159,7 @@ button:hover {
   margin: 0px;
   overflow: hidden;
   width: 100vw;
+  position: relative;
   -ms-touch-action: pan-y;
       touch-action: pan-y;
 }
@@ -347,6 +379,10 @@ button:hover {
   z-index: 1000;
 }
 
+#navigator[data-page='register'] #registerPage {
+  z-index: 1000;
+}
+
 header {
   height: 56px;
   background: #924f97;
@@ -511,6 +547,9 @@ card[chevron] {
 
 form {
   padding: 32px 0px 18px;
+  width: 100%;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 
 form label {
@@ -739,6 +778,131 @@ check[on] {
   left: -58px;
 }
 
+#registerPage form h1 {
+  margin: 0px 0px 18px 0px;
+  color: white;
+  text-align: center;
+  font-size: 9.75pt;
+  font-family: "Roboto-Black";
+  letter-spacing: 3.2px;
+  text-transform: uppercase;
+}
+
+#loginPage form input,
+#registerPage form input {
+  background-color: rgba(255, 255, 255, 0.42);
+  border: 0;
+  margin-bottom: 8px;
+  color: white;
+}
+
+#loginPage form input::-webkit-input-placeholder,
+#registerPage form input::-webkit-input-placeholder {
+  color: white;
+}
+
+#loginPage form input:-ms-input-placeholder,
+#registerPage form input:-ms-input-placeholder {
+  color: white;
+}
+
+#loginPage form input::-ms-input-placeholder,
+#registerPage form input::-ms-input-placeholder {
+  color: white;
+}
+
+#loginPage form input::placeholder,
+#registerPage form input::placeholder {
+  color: white;
+}
+
+#loginPage form input:focus,
+#registerPage form input:focus {
+  outline: 1px solid white;
+}
+
+#loginPage form button[type='submit'],
+#registerPage form button[type='submit'] {
+  margin-bottom: 8px;
+}
+
+#loginPage form button[type='button'],
+#registerPage form button[type='button'] {
+  background: transparent;
+}
+
+#loginPage .wait,
+#registerPage .wait {
+  color: white;
+}
+
+#loginPage .error,
+#registerPage .error {
+  padding: 10px;
+  margin-bottom: 8px;
+  text-align: center;
+  background-color: #ff0052;
+  color: white;
+}
+
+#registerPage small {
+  display: block;
+  color: white;
+}
+
+#registerPage small a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.modal {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  background: rgba(0, 0, 0, 0.9);
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  z-index: -2000;
+  padding: 32px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  opacity: 0;
+  -webkit-transition: z-index 0s, opacity 0.4s 0.1s;
+  transition: z-index 0s, opacity 0.4s 0.1s;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  color: white;
+}
+
+.modal h2 {
+  margin-top: 0px;
+}
+
+.modal button {
+  background: #924f97;
+  border: 0;
+  color: white;
+  padding: 25px;
+  display: block;
+  font-family: "Roboto-Black";
+  font-size: 9.75pt;
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+  letter-spacing: 3.20px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.modal.show {
+  z-index: 2000;
+  opacity: 1;
+}
+
 #routeEndPoints {
   background: white;
   padding-bottom: 18px;
@@ -795,39 +959,6 @@ check[on] {
   font-size: 9pt;
   letter-spacing: 0.21px;
   margin-bottom: 18px;
-}
-
-#loginPage form h1 {
-  margin: 0px 0px 18px 0px;
-  color: white;
-  text-align: center;
-  font-size: 9.75pt;
-  font-family: "Roboto-Black";
-  letter-spacing: 3.2px;
-  text-transform: uppercase;
-}
-
-#loginPage form input {
-  background-color: rgba(255, 255, 255, 0.42);
-  border: 0;
-  margin-bottom: 8px;
-  color: white;
-}
-
-#loginPage form input::-webkit-input-placeholder {
-  color: white;
-}
-
-#loginPage form input:-ms-input-placeholder {
-  color: white;
-}
-
-#loginPage form input::-ms-input-placeholder {
-  color: white;
-}
-
-#loginPage form input::placeholder {
-  color: white;
 }
 
 body {
@@ -895,4 +1026,9 @@ body {
 #app.menu-open {
   -webkit-transform: translateX(0px);
           transform: translateX(0px);
+}
+
+#app.modal-over #navigator {
+  -webkit-filter: blur(6px);
+          filter: blur(6px);
 }

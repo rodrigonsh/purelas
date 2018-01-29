@@ -5,6 +5,7 @@ $loginForm.addEventListener('submit', function(ev){
   ev.preventDefault();
   ev.stopPropagation();
 
+  $loginForm.classList.remove('failed')
   $loginForm.classList.add('processing')
 
   var email = $loginForm.querySelector('[type=email]').value

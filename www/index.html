@@ -75,14 +75,14 @@
                 <span class='i'><img src='img/messages.svg' /></span>
                 Dê sua opinião
               </li>
-              <li data-page='rate'>
+              <!--li data-page='rate'>
                 <span class='i'><img src='img/rate.svg' /></span>
                 Avalie o app
-              </li>
-              <li data-page='preferences'>
+              </li-->
+              <!--li data-page='preferences'>
                 <span class='i'><img src='img/preferences.svg' /></span>
                 Configurações
-              </li>
+              </li-->
               <li data-action='logout'>
                 <span class='i'><img src='img/logout.svg' /></span>
                 Sair
@@ -213,6 +213,10 @@
                 Aguarde...
               </div>
 
+              <div class='error'>
+                Erro ao cadastrar usuário
+              </div>
+
               <div class='interaction'>
                 <h1>Nova Conta</h1>
                 <input required type='email' placeholder="Email" />
@@ -252,7 +256,7 @@
 
             <div id='map' class='grows'></div>
 
-            <button data-page="new-report" class='fab'>+</button>
+            <button data-page="report-new" class='fab'>+</button>
 
           </div>
 
@@ -317,21 +321,21 @@
 
               <div class='inset'>
 
-                <card id="a246754de" chevron data-page="view-report">
+                <card id="a246754de" chevron data-page="report-view">
                   <address>Rua da Majestade, centro</address>
                   <p>Ut wisi enim ad minim veniam, quis nostrudexerci tation
                     ullamcorper suscipit lobortis….</p>
                   <date></date>
                 </card>
 
-                <card id="ewunqwe" chevron data-page="view-report">
+                <card id="ewunqwe" chevron data-page="report-view">
                   <address>Rua da Majestade, centro</address>
                   <p>Ut wisi enim ad minim veniam, quis nostrudexerci tation
                     ullamcorper suscipit lobortis….</p>
                   <date></date>
                 </card>
 
-                <card id="ewunqwe" chevron data-page="view-report">
+                <card id="ewunqwe" chevron data-page="report-view">
                   <address>Rua da Majestade, centro</address>
                   <p>Ut wisi enim ad minim veniam, quis nostrudexerci tation
                     ullamcorper suscipit lobortis….</p>
@@ -342,7 +346,7 @@
 
             </div>
 
-            <button data-page="new-report" class='fab'>+</button>
+            <button data-page="report-new" class='fab'>+</button>
 
           </div>
 
@@ -760,12 +764,12 @@
           </div>
 
 
-          <div id='newReportPage' data-page='new-report' auth class='page'>
+          <div id='newReportPage' data-page='report-new' auth class='page'>
 
             <header>
               <button data-action='back'><img src="img/back.svg" /></button>
               <h2>Novo Relato</h2>
-              <button data-action='new-report'><img src="img/tick.svg" /></button>
+              <button data-action='report-new'><img src="img/tick.svg" /></button>
             </header>
 
             <div class='inset scrolls'>
@@ -774,7 +778,7 @@
 
                 <label>Onde aconteceu o abuso?</label>
                 <input name='geocode' placeholder="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pesquise pelo endereço" />
-                <div id="new-report-map"></div>
+                <div id="report-new-map"></div>
 
                 <label>Como aconteceu o abuso?</label>
                 <textarea rows='10'></textarea>
@@ -834,7 +838,7 @@
           </div>
 
 
-          <div id='viewReportPage' data-page='view-report' class='page'>
+          <div id='viewReportPage' data-page='report-view' class='page'>
 
             <header>
               <button data-action='back'><img src="img/back.svg" /></button>
@@ -843,7 +847,7 @@
 
             <div class='scrolls'>
 
-            <div id="view-report-map"></div>
+            <div id="report-view-map"></div>
 
               <div class='inset'>
 
