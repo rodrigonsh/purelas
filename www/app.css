@@ -43,6 +43,10 @@ h5 {
   text-align: center;
 }
 
+.wip {
+  display: none;
+}
+
 .wait {
   display: none;
 }
@@ -545,6 +549,14 @@ card[chevron] {
   background-position: right;
 }
 
+card date {
+  display: block;
+  font-size: 9pt;
+  font-family: "Roboto-Regular";
+  margin-top: 10px;
+  color: #b4b4b4;
+}
+
 form {
   padding: 32px 0px 18px;
   width: 100%;
@@ -922,12 +934,12 @@ check[on] {
   margin-bottom: 0px;
 }
 
-#new-report-map {
+#report-new-map {
   height: 160px;
   margin-bottom: 28px;
 }
 
-#view-report-map {
+#report-view-map {
   height: 160px;
   margin-bottom: 28px;
 }

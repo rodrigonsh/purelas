@@ -248,7 +248,7 @@
 
             <div class='tabs'>
               <button data-page='map' active><img src="img/map.svg" /></button>
-              <button data-page='route'><img src="img/route.svg" /></button>
+              <button class="wip" data-page='route'><img src="img/route.svg" /></button>
               <button data-page='reports'><img src="img/messages.svg" /></button>
             </div>
 
@@ -271,7 +271,7 @@
 
             <div class='tabs'>
               <button data-page='map'><img src="img/map.svg" /></button>
-              <button data-page='route' active><img src="img/route.svg" /></button>
+              <button class='wip' data-page='route' active><img src="img/route.svg" /></button>
               <button data-page='reports'><img src="img/messages.svg" /></button>
             </div>
 
@@ -306,7 +306,7 @@
 
             <div class='tabs'>
               <button data-page='map' ><img src="img/map.svg" /></button>
-              <button data-page='route'><img src="img/route.svg" /></button>
+              <button class='wip' data-page='route'><img src="img/route.svg" /></button>
               <button data-page='reports' active><img src="img/messages.svg" /></button>
             </div>
 
@@ -314,34 +314,12 @@
 
               <div class='tab-title'>Relatos</div>
 
-              <p id="area" data-page="area-select">
+              <p class='wip' id="area" data-page="area-select">
                 Centro, Campo Grande, MS
                 <span class='down-arrow'></span>
               </p>
 
-              <div class='inset'>
-
-                <card id="a246754de" chevron data-page="report-view">
-                  <address>Rua da Majestade, centro</address>
-                  <p>Ut wisi enim ad minim veniam, quis nostrudexerci tation
-                    ullamcorper suscipit lobortis….</p>
-                  <date></date>
-                </card>
-
-                <card id="ewunqwe" chevron data-page="report-view">
-                  <address>Rua da Majestade, centro</address>
-                  <p>Ut wisi enim ad minim veniam, quis nostrudexerci tation
-                    ullamcorper suscipit lobortis….</p>
-                  <date></date>
-                </card>
-
-                <card id="ewunqwe" chevron data-page="report-view">
-                  <address>Rua da Majestade, centro</address>
-                  <p>Ut wisi enim ad minim veniam, quis nostrudexerci tation
-                    ullamcorper suscipit lobortis….</p>
-                  <date></date>
-                </card>
-
+              <div class='inset' data-action='view'>
               </div>
 
             </div>
@@ -769,7 +747,7 @@
             <header>
               <button data-action='back'><img src="img/back.svg" /></button>
               <h2>Novo Relato</h2>
-              <button data-action='report-new'><img src="img/tick.svg" /></button>
+              <button data-action='save'><img src="img/tick.svg" /></button>
             </header>
 
             <div class='inset scrolls'>
@@ -781,12 +759,12 @@
                 <div id="report-new-map"></div>
 
                 <label>Como aconteceu o abuso?</label>
-                <textarea rows='10'></textarea>
+                <textarea name='report' rows='10'></textarea>
 
                 <label>Quem é o agressor?</label>
-                <textarea rows='10'></textarea>
+                <textarea name='agressor' rows='10'></textarea>
 
-                <button data-page='thanks' type="button">Enviar</button>
+                <button>Enviar</button>
 
                 <p class='disclaimer'>
                   Seu relato será publicado anônimamente parasua segurança e
@@ -847,35 +825,20 @@
 
             <div class='scrolls'>
 
-            <div id="report-view-map"></div>
+              <div id="report-view-map"></div>
 
               <div class='inset'>
 
                 <h5>Como aconteceu?</h5>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetueradipiscing elit, sed diam
-                  nonummy nibheuismod tincidunt ut laoreet dolore magnaaliquam erat
-                  volutpat. Ut wisi enim ad minimveniam, quis nostrud exerci tation
-                  ullamcorpersuscipit lobortis nisl ut aliquip ex ea commodoconsequat.
-                </p>
-                <p>
-                  Duis autem vel eum iriure dolor in hendrerit invulputate velit esse
-                  molestie consequat, velillum dolore eu feugiat nulla facilisis at
-                  veroeros et accumsan et iusto odio dignissim quiblandit praesent
-                  luptatum zzril delenit augueduis dolore te feugait nulla facilisi.
-                </p>
+                <p id='report'></p>
 
                 <h5>Que foi o agressor?</h5>
+                <p id='agressor'></p>
 
-                <p>
-                  Lorem ipsum dolor sit amet, consectetueradipiscing elit, sed
-                  diam nonummy nibheuismod tincidunt ut laoreet dolore magnaaliquam
-                  erat volutpat. Ut wisi enim ad minimveniam, quis nostrud exerci
-                  tation ullamcorpersuscipit lobortis nisl ut aliquip ex ea
-                  commodoconsequat.
-                </p>
-
-                <small>Relato publicado dia 22/07/2017</small>
+                <small>
+                  Relato publicado dia
+                  <span id='published_at'></span>
+                </small>
 
               </div>
 

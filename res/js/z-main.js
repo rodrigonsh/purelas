@@ -63,19 +63,7 @@ $("[data-action='save']").click(function(ev)
   ev.stopPropagation()
   ev.preventDefault()
 
-  var t = ev.currentTarget
-  var count = 0
-  while( count < 10 && !t.classList.contains('page') )
-  {
-    t = t.parentNode;
-    count++
-  }
-
-  if ( count == 10 )
-  {
-    alert('Erro na interface, se este erro persistir contacte o desenvolvedor')
-  }
-
+  var t = getTargetPage(v.currentTarget)
   emit(t.dataset.page+"Save")
 
 })
@@ -179,4 +167,15 @@ document.addEventListener('backbutton', function(){
 });
 
 
-setPage('map')
+$("[data-action='view']").click(function(ev)
+{
+
+  ev.stopPropagation()
+  ev.preventDefault()
+
+  var t = getTargetPage(ev.currentTarget)
+  emit(t.dataset.page+"View", ev.target)
+
+})
+
+setPage('welcome')

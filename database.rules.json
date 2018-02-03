@@ -1,0 +1,31 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+
+    "reports":
+    {
+      ".read": true,
+    },
+
+    "geofire":
+    {
+      ".read": true,
+      ".write": true,
+    },
+
+    "users":
+      {
+        
+        ".read": false,
+
+        "$uid":
+            {
+              ".read": "auth !== null && auth.uid == $uid",
+              ".write":  "auth !== null && auth.uid == $uid",
+            }
+
+      }
+
+  }
+}
