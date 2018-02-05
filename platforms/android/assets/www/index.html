@@ -75,14 +75,14 @@
                 <span class='i'><img src='img/messages.svg' /></span>
                 Dê sua opinião
               </li>
-              <li data-page='rate'>
+              <!--li data-page='rate'>
                 <span class='i'><img src='img/rate.svg' /></span>
                 Avalie o app
-              </li>
-              <li data-page='preferences'>
+              </li-->
+              <!--li data-page='preferences'>
                 <span class='i'><img src='img/preferences.svg' /></span>
                 Configurações
-              </li>
+              </li-->
               <li data-action='logout'>
                 <span class='i'><img src='img/logout.svg' /></span>
                 Sair
@@ -213,6 +213,10 @@
                 Aguarde...
               </div>
 
+              <div class='error'>
+                Erro ao cadastrar usuário
+              </div>
+
               <div class='interaction'>
                 <h1>Nova Conta</h1>
                 <input required type='email' placeholder="Email" />
@@ -244,7 +248,7 @@
 
             <div class='tabs'>
               <button data-page='map' active><img src="img/map.svg" /></button>
-              <button data-page='route'><img src="img/route.svg" /></button>
+              <button class="wip" data-page='route'><img src="img/route.svg" /></button>
               <button data-page='reports'><img src="img/messages.svg" /></button>
             </div>
 
@@ -252,7 +256,7 @@
 
             <div id='map' class='grows'></div>
 
-            <button data-page="new-report" class='fab'>+</button>
+            <button data-page="report-new" class='fab'>+</button>
 
           </div>
 
@@ -267,7 +271,7 @@
 
             <div class='tabs'>
               <button data-page='map'><img src="img/map.svg" /></button>
-              <button data-page='route' active><img src="img/route.svg" /></button>
+              <button class='wip' data-page='route' active><img src="img/route.svg" /></button>
               <button data-page='reports'><img src="img/messages.svg" /></button>
             </div>
 
@@ -302,7 +306,7 @@
 
             <div class='tabs'>
               <button data-page='map' ><img src="img/map.svg" /></button>
-              <button data-page='route'><img src="img/route.svg" /></button>
+              <button class='wip' data-page='route'><img src="img/route.svg" /></button>
               <button data-page='reports' active><img src="img/messages.svg" /></button>
             </div>
 
@@ -310,39 +314,17 @@
 
               <div class='tab-title'>Relatos</div>
 
-              <p id="area" data-page="area-select">
+              <p class='wip' id="area" data-page="area-select">
                 Centro, Campo Grande, MS
                 <span class='down-arrow'></span>
               </p>
 
-              <div class='inset'>
-
-                <card id="a246754de" chevron data-page="view-report">
-                  <address>Rua da Majestade, centro</address>
-                  <p>Ut wisi enim ad minim veniam, quis nostrudexerci tation
-                    ullamcorper suscipit lobortis….</p>
-                  <date></date>
-                </card>
-
-                <card id="ewunqwe" chevron data-page="view-report">
-                  <address>Rua da Majestade, centro</address>
-                  <p>Ut wisi enim ad minim veniam, quis nostrudexerci tation
-                    ullamcorper suscipit lobortis….</p>
-                  <date></date>
-                </card>
-
-                <card id="ewunqwe" chevron data-page="view-report">
-                  <address>Rua da Majestade, centro</address>
-                  <p>Ut wisi enim ad minim veniam, quis nostrudexerci tation
-                    ullamcorper suscipit lobortis….</p>
-                  <date></date>
-                </card>
-
+              <div class='inset' data-action='view'>
               </div>
 
             </div>
 
-            <button data-page="new-report" class='fab'>+</button>
+            <button data-page="report-new" class='fab'>+</button>
 
           </div>
 
@@ -760,12 +742,12 @@
           </div>
 
 
-          <div id='newReportPage' data-page='new-report' auth class='page'>
+          <div id='newReportPage' data-page='report-new' auth class='page'>
 
             <header>
               <button data-action='back'><img src="img/back.svg" /></button>
               <h2>Novo Relato</h2>
-              <button data-action='new-report'><img src="img/tick.svg" /></button>
+              <button data-action='save'><img src="img/tick.svg" /></button>
             </header>
 
             <div class='inset scrolls'>
@@ -774,15 +756,15 @@
 
                 <label>Onde aconteceu o abuso?</label>
                 <input name='geocode' placeholder="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pesquise pelo endereço" />
-                <div id="new-report-map"></div>
+                <div id="report-new-map"></div>
 
                 <label>Como aconteceu o abuso?</label>
-                <textarea rows='10'></textarea>
+                <textarea name='report' rows='10'></textarea>
 
                 <label>Quem é o agressor?</label>
-                <textarea rows='10'></textarea>
+                <textarea name='agressor' rows='10'></textarea>
 
-                <button data-page='thanks' type="button">Enviar</button>
+                <button>Enviar</button>
 
                 <p class='disclaimer'>
                   Seu relato será publicado anônimamente parasua segurança e
@@ -834,7 +816,7 @@
           </div>
 
 
-          <div id='viewReportPage' data-page='view-report' class='page'>
+          <div id='viewReportPage' data-page='report-view' class='page'>
 
             <header>
               <button data-action='back'><img src="img/back.svg" /></button>
@@ -843,35 +825,20 @@
 
             <div class='scrolls'>
 
-            <div id="view-report-map"></div>
+              <div id="report-view-map"></div>
 
               <div class='inset'>
 
                 <h5>Como aconteceu?</h5>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetueradipiscing elit, sed diam
-                  nonummy nibheuismod tincidunt ut laoreet dolore magnaaliquam erat
-                  volutpat. Ut wisi enim ad minimveniam, quis nostrud exerci tation
-                  ullamcorpersuscipit lobortis nisl ut aliquip ex ea commodoconsequat.
-                </p>
-                <p>
-                  Duis autem vel eum iriure dolor in hendrerit invulputate velit esse
-                  molestie consequat, velillum dolore eu feugiat nulla facilisis at
-                  veroeros et accumsan et iusto odio dignissim quiblandit praesent
-                  luptatum zzril delenit augueduis dolore te feugait nulla facilisi.
-                </p>
+                <p id='report'></p>
 
                 <h5>Que foi o agressor?</h5>
+                <p id='agressor'></p>
 
-                <p>
-                  Lorem ipsum dolor sit amet, consectetueradipiscing elit, sed
-                  diam nonummy nibheuismod tincidunt ut laoreet dolore magnaaliquam
-                  erat volutpat. Ut wisi enim ad minimveniam, quis nostrud exerci
-                  tation ullamcorpersuscipit lobortis nisl ut aliquip ex ea
-                  commodoconsequat.
-                </p>
-
-                <small>Relato publicado dia 22/07/2017</small>
+                <small>
+                  Relato publicado dia
+                  <span id='published_at'></span>
+                </small>
 
               </div>
 

@@ -43,6 +43,10 @@ h5 {
   text-align: center;
 }
 
+.wip {
+  display: none;
+}
+
 .wait {
   display: none;
 }
@@ -359,7 +363,7 @@ button:hover {
   z-index: 1000;
 }
 
-#navigator[data-page='new-report'] #newReportPage {
+#navigator[data-page='report-new'] #newReportPage {
   z-index: 1000;
 }
 
@@ -367,7 +371,7 @@ button:hover {
   z-index: 1000;
 }
 
-#navigator[data-page='view-report'] #viewReportPage {
+#navigator[data-page='report-view'] #viewReportPage {
   z-index: 1000;
 }
 
@@ -543,6 +547,14 @@ card[chevron] {
   background-image: url(img/chevron.png);
   background-repeat: no-repeat;
   background-position: right;
+}
+
+card date {
+  display: block;
+  font-size: 9pt;
+  font-family: "Roboto-Regular";
+  margin-top: 10px;
+  color: #b4b4b4;
 }
 
 form {
@@ -922,12 +934,12 @@ check[on] {
   margin-bottom: 0px;
 }
 
-#new-report-map {
+#report-new-map {
   height: 160px;
   margin-bottom: 28px;
 }
 
-#view-report-map {
+#report-view-map {
   height: 160px;
   margin-bottom: 28px;
 }

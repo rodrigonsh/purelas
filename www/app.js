@@ -448,6 +448,12 @@ addEventListener('notificationsBefore', function(){
 
 })
 
+addEventListener('onboardingBefore', function(){
+
+  setPage('onboarding')
+
+})
+
 addEventListener('opinionBefore', function(){
 
   setPage('opinion')
