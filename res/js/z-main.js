@@ -9,7 +9,7 @@ setTimeout(function(){
 var $navigator = document.getElementById('navigator');
 var $app = $('#app');
 
-$("[data-action='menu']").click(function(ev){
+$("[data-action='menu']").on('tap', function(ev){
 
   ev.stopPropagation()
 
@@ -17,7 +17,7 @@ $("[data-action='menu']").click(function(ev){
 
 });
 
-$("[data-modal]").click(function(ev){
+$("[data-modal]").on('tap', function(ev){
 
   ev.stopPropagation()
 
@@ -34,7 +34,7 @@ $("[data-modal]").click(function(ev){
 
 });
 
-$("[data-action='closeModal']").click(function(ev){
+$("[data-action='closeModal']").on('tap', function(ev){
 
   ev.stopPropagation()
 
@@ -58,7 +58,7 @@ $("[data-action='closeModal']").click(function(ev){
 });
 
 
-$("[data-action='save']").click(function(ev)
+$("[data-action='save']").on('tap', function(ev)
 {
   ev.stopPropagation()
   ev.preventDefault()
@@ -108,7 +108,7 @@ function setPage( pageName )
   }
 }
 
-$("[data-page]").click(function(ev)
+$("[data-page]").on('tap', function(ev)
 {
 
   ev.stopPropagation()
@@ -135,28 +135,38 @@ $("[data-page]").click(function(ev)
 
 });
 
-$("[data-action='logout']").click(function(ev){
+$("[data-action='logout']").on('tap', function(ev){
 
   logout()
 
 });
 
-$("[data-action='back']").click(function(ev){
+$("[data-action='back']").on('tap', function(ev){
 
   ev.stopPropagation()
-
   setPage('map');
 
 });
 
-document.addEventListener('backbutton', function(){
+addEventListener('keyup', function(ev){
+  if( ev.keyCode == 27 )
+  {
+    emit('backbutton')
+  }
+})
+
+addEventListener('backbutton', function(){
 
   $app.removeClass('menu-open')
 
-  if ( pages.length > 0 )
+  if ( pages.length > 1 )
   {
-    var p = pages.pop()
-    setPage(page);
+    var current = pages.pop()
+    var before = pages.pop()
+
+    console.log('current:', current, 'before:', before)
+
+    setPage(before)
   }
   else
   {
@@ -166,8 +176,19 @@ document.addEventListener('backbutton', function(){
 
 });
 
+$("[data-action=map-center]").on('tap', function(ev)
+{
 
-$("[data-action='view']").click(function(ev)
+  ev.preventDefault()
+  ev.stopPropagation()
+
+  console.log('map-center tap')
+
+  getCoords()
+
+})
+
+$("[data-action='view']").on('tap', function(ev)
 {
 
   ev.stopPropagation()
@@ -178,4 +199,11 @@ $("[data-action='view']").click(function(ev)
 
 })
 
-setPage('welcome')
+if ( localStorage.getItem('onboard') == null )
+{
+  setPage('welcome')
+}
+else
+{
+  setPage('map')
+}

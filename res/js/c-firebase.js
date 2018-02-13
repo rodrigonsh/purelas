@@ -11,5 +11,11 @@ firebase.initializeApp(config);
 
 var db = firebase.database()
 var auth = firebase.auth()
+var connectedRef = db.ref(".info/connected");
 
 UID = null
+
+connectedRef.on("value", function(snap) {
+  if (snap.val() === true) emit("online")
+  else emit("offline")
+});

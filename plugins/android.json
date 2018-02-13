@@ -7,10 +7,10 @@
     "files": {}
   },
   "installed_plugins": {
-    "cordova-plugin-whitelist": {
-      "PACKAGE_NAME": "io.cordova.hellocordova"
-    },
     "cordova-plugin-geolocation": {
+      "PACKAGE_NAME": "br.purelas.app"
+    },
+    "cordova-plugin-whitelist": {
       "PACKAGE_NAME": "br.purelas.app"
     }
   },

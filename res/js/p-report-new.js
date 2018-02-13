@@ -1,4 +1,5 @@
 var $reportNewForm = q('#newReportPage form')
+var $reportNewType = q('#newReportPage [name="type"]')
 var $reportNewGeocode = q('#newReportPage [name=geocode]')
 var $reportNewText = q('#newReportPage [name=report]')
 var $reportNewAgressor = q('#newReportPage [name=agressor]')
@@ -22,6 +23,7 @@ addEventListener('report-newBefore', function(){
 
 
   reportNewCoords = null
+  $reportNewType.value = "nd"
   $reportNewGeocode.value = ""
   $reportNewText.value = ""
   $reportNewAgressor.value = ""
@@ -111,6 +113,7 @@ function reportNewBeforeSave()
 
   var rep =
   {
+    type: $reportNewType.value,
     address: $reportNewGeocode.value,
     report: $reportNewText.value,
     agressor: $reportNewAgressor.value,

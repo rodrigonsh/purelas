@@ -1,4 +1,6 @@
 $map = q("#map")
+$mapCenter = q("#mapPage [data-action=map-center]")
+
 $map.addEventListener('touchmove', function(ev){
   ev.stopPropagation()
 })
@@ -12,8 +14,14 @@ addEventListener('mapBefore', function(){
 })
 
 
+addEventListener('getPosition', function()
+{
+  $mapCenter.classList.add('pulse')
+})
+
 addEventListener('gotPosition', function(ev)
 {
+  $mapCenter.classList.remove('pulse')
   map.setCenter( currentLatLng )
 })
 

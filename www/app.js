@@ -105,6 +105,7 @@ function makeLatLng(coords)
  * License: MIT
  */
 var GeoFire=function(){"use strict";function e(e,n){return v(e),g(n),{".priority":n,g:n,l:e}}function n(e){if(null!==e&&e.hasOwnProperty("l")&&Array.isArray(e.l)&&2===e.l.length)return e.l;throw new Error("Unexpected GeoFire location object encountered: "+JSON.stringify(e))}function t(e){var n;return n="function"==typeof e.key?e.key():"string"==typeof e.key||null===e.key?e.key:e.name()}var r=function(e){if(this.cancel=function(){"undefined"!=typeof n&&(n(),n=void 0)},"function"!=typeof e)throw new Error("callback must be a function");var n=e},i=function(t){if(this.ref=function(){return r},this.set=function(n,t){var i;if("string"==typeof n&&0!==n.length)i={},i[n]=t;else{if("object"!=typeof n)throw new Error("keyOrLocations must be a string or a mapping of key - location pairs.");if("undefined"!=typeof t)throw new Error("The location argument should not be used if you pass an object to set().");i=n}var o={};return Object.keys(i).forEach(function(n){y(n);var t=i[n];if(null===t)o[n]=null;else{v(t);var r=p(t);o[n]=e(t,r)}}),r.update(o)},this.get=function(e){return y(e),r.child(e).once("value").then(function(e){var t=e.val();return null===t?null:n(t)})},this.remove=function(e){return this.set(e,null)},this.query=function(e){return new C(r,e)},"[object Object]"!==Object.prototype.toString.call(t))throw new Error("firebaseRef must be an instance of Firebase");var r=t};i.distance=function(e,n){v(e),v(n);var t=6371,r=b(n[0]-e[0]),i=b(n[1]-e[1]),o=Math.sin(r/2)*Math.sin(r/2)+Math.cos(b(e[0]))*Math.cos(b(n[0]))*Math.sin(i/2)*Math.sin(i/2),a=2*Math.atan2(Math.sqrt(o),Math.sqrt(1-o));return t*a};var o=10,a="0123456789bcdefghjkmnpqrstuvwxyz",u=40007860,f=110574,c=5,l=22*c,s=6378137,h=.00669447819799,d=1e-12;Math.log2=Math.log2||function(e){return Math.log(e)/Math.log(2)};var y=function(e){var n;if("string"!=typeof e?n="key must be a string":0===e.length?n="key cannot be the empty string":1+o+e.length>755?n="key is too long to be stored in Firebase":/[\[\].#$\/\u0000-\u001F\u007F]/.test(e)&&(n="key cannot contain any of the following characters: . # $ ] [ /"),"undefined"!=typeof n)throw new Error("Invalid GeoFire key '"+e+"': "+n)},v=function(e){var n;if(Array.isArray(e))if(2!==e.length)n="expected array of length 2, got length "+e.length;else{var t=e[0],r=e[1];"number"!=typeof t||isNaN(t)?n="latitude must be a number":-90>t||t>90?n="latitude must be within the range [-90, 90]":"number"!=typeof r||isNaN(r)?n="longitude must be a number":(-180>r||r>180)&&(n="longitude must be within the range [-180, 180]")}else n="location must be an array";if("undefined"!=typeof n)throw new Error("Invalid GeoFire location '"+e+"': "+n)},g=function(e){var n;if("string"!=typeof e)n="geohash must be a string";else if(0===e.length)n="geohash cannot be the empty string";else for(var t=0,r=e.length;r>t;++t)-1===a.indexOf(e[t])&&(n='geohash cannot contain "'+e[t]+'"');if("undefined"!=typeof n)throw new Error("Invalid GeoFire geohash '"+e+"': "+n)},m=function(e,n){if("object"!=typeof e)throw new Error("query criteria must be an object");if("undefined"==typeof e.center&&"undefined"==typeof e.radius)throw new Error("radius and/or center must be specified");if(n&&("undefined"==typeof e.center||"undefined"==typeof e.radius))throw new Error("query criteria for a new query must contain both a center and a radius");for(var t=Object.keys(e),r=t.length,i=0;r>i;++i){var o=t[i];if("center"!==o&&"radius"!==o)throw new Error("Unexpected attribute '"+o+"'' found in query criteria")}if("undefined"!=typeof e.center&&v(e.center),"undefined"!=typeof e.radius){if("number"!=typeof e.radius||isNaN(e.radius))throw new Error("radius must be a number");if(e.radius<0)throw new Error("radius must be greater than or equal to 0")}},b=function(e){if("number"!=typeof e||isNaN(e))throw new Error("Error: degrees must be a number");return e*Math.PI/180},p=function(e,n){if(v(e),"undefined"!=typeof n){if("number"!=typeof n||isNaN(n))throw new Error("precision must be a number");if(0>=n)throw new Error("precision must be greater than 0");if(n>22)throw new Error("precision cannot be greater than 22");if(Math.round(n)!==n)throw new Error("precision must be an integer")}n=n||o;for(var t={min:-90,max:90},r={min:-180,max:180},i="",u=0,f=0,c=1;i.length<n;){var l=c?e[1]:e[0],s=c?r:t,h=(s.min+s.max)/2;l>h?(u=(u<<1)+1,s.min=h):(u=(u<<1)+0,s.max=h),c=!c,4>f?f++:(f=0,i+=a[u],u=0)}return i},w=function(e,n){var t=b(n),r=Math.cos(t)*s*Math.PI/180,i=1/Math.sqrt(1-h*Math.sin(t)*Math.sin(t)),o=r*i;return d>o?e>0?360:0:Math.min(360,e/o)},k=function(e,n){var t=w(e,n);return Math.abs(t)>1e-6?Math.max(1,Math.log2(360/t)):1},M=function(e){return Math.min(Math.log2(u/2/e),l)},E=function(e){if(180>=e&&e>=-180)return e;var n=e+180;return n>0?n%360-180:180- -n%360},x=function(e,n){var t=n/f,r=Math.min(90,e[0]+t),i=Math.max(-90,e[0]-t),o=2*Math.floor(M(n)),a=2*Math.floor(k(n,r))-1,u=2*Math.floor(k(n,i))-1;return Math.min(o,a,u,l)},O=function(e,n){var t=n/f,r=Math.min(90,e[0]+t),i=Math.max(-90,e[0]-t),o=w(n,r),a=w(n,i),u=Math.max(o,a);return[[e[0],e[1]],[e[0],E(e[1]-u)],[e[0],E(e[1]+u)],[r,e[1]],[r,E(e[1]-u)],[r,E(e[1]+u)],[i,e[1]],[i,E(e[1]-u)],[i,E(e[1]+u)]]},_=function(e,n){g(e);var t=Math.ceil(n/c);if(e.length<t)return[e,e+"~"];e=e.substring(0,t);var r=e.substring(0,e.length-1),i=a.indexOf(e.charAt(e.length-1)),o=n-r.length*c,u=c-o,f=i>>u<<u,l=f+(1<<u);return l>31?[r+a[f],r+"~"]:[r+a[f],r+a[l]]},j=function(e,n){v(e);var t=Math.max(1,x(e,n)),r=Math.ceil(t/c),i=O(e,n),o=i.map(function(e){return _(p(e,r),t)});return o.filter(function(e,n){return!o.some(function(t,r){return n>r&&e[0]===t[0]&&e[1]===t[1]})})},C=function(e,a){function u(e,n,t,r){_[e].forEach(function(e){"undefined"==typeof t||null===t?e(n,null,null):e(n,t,r)})}function f(){_.ready.forEach(function(e){e()})}function c(e){var n=e.split(":");if(2!==n.length)throw new Error("Invalid internal state! Not a valid geohash query: "+e);return n}function l(e){if(2!==e.length)throw new Error("Not a valid geohash query: "+e);return e[0]+":"+e[1]}function s(e,n){var t=O.orderByChild("g").startAt(e[0]).endAt(e[1]);t.off("child_added",n.childAddedCallback),t.off("child_removed",n.childRemovedCallback),t.off("child_changed",n.childChangedCallback),t.off("value",n.valueCallback)}function h(){for(var e=Object.keys(q),n=e.length,t=0;n>t;++t){var r=e[t],i=q[r];if(i.active===!1){var o=c(r);s(o,i),delete q[r]}}for(e=Object.keys(F),n=e.length,t=0;n>t;++t){var a=e[t];if(!y(F[a].geohash)){if(F[a].isInQuery)throw new Error("Internal State error, trying to remove location that is still in query");delete F[a]}}N=!1,null!==A&&(clearTimeout(A),A=null)}function d(e,n){v(n);var t,r,a=F.hasOwnProperty(e)?F[e].isInQuery:!1,f=F.hasOwnProperty(e)?F[e].location:null;t=i.distance(n,P),r=G>=t,F[e]={location:n,distanceFromCenter:t,isInQuery:r,geohash:p(n,o)},r&&!a?u("key_entered",e,n,t):!r||null===f||n[0]===f[0]&&n[1]===f[1]?!r&&a&&u("key_exited",e,n,t):u("key_moved",e,n,t)}function y(e){for(var n=Object.keys(q),t=n.length,r=0;t>r;++r){var i=n[r];if(q.hasOwnProperty(i)){var o=c(i);if(e>=o[0]&&e<=o[1])return!0}}return!1}function g(e,n){var t=F[e];if(delete F[e],"undefined"!=typeof t&&t.isInQuery){var r=n?i.distance(n,P):null;u("key_exited",e,n,r)}}function b(e){d(t(e),n(e.val()))}function w(e){d(t(e),n(e.val()))}function k(e){var r=t(e);F.hasOwnProperty(r)&&O.child(r).once("value",function(e){var t=null===e.val()?null:n(e.val()),i=null!==t?p(t):null;y(i)||g(r,t)})}function M(e){var n=x.indexOf(e);n>-1&&x.splice(n,1),I=0===x.length,I&&f()}function E(){var e=j(P,1e3*G).map(l);e=e.filter(function(n,t){return e.indexOf(n)===t});for(var n=Object.keys(q),t=n.length,r=0;t>r;++r){var i=n[r],o=e.indexOf(i);-1===o?q[i].active=!1:(q[i].active=!0,e.splice(o,1))}N===!1&&Object.keys(q).length>25&&(N=!0,A=setTimeout(h,10)),x=e.slice(),e.forEach(function(e){var n=c(e),t=O.orderByChild("g").startAt(n[0]).endAt(n[1]),r=t.on("child_added",b),i=t.on("child_removed",k),o=t.on("child_changed",w),a=t.on("value",function(){t.off("value",a),M(e)});q[e]={active:!0,childAddedCallback:r,childRemovedCallback:i,childChangedCallback:o,valueCallback:a}}),0===e.length&&M()}if(this.center=function(){return P},this.radius=function(){return G},this.updateCriteria=function(e){m(e),P=e.center||P,G=e.radius||G;for(var n=Object.keys(F),t=n.length,r=0;t>r;++r){var o=n[r];if(C===!0)break;var a=F[o],f=a.isInQuery;a.distanceFromCenter=i.distance(a.location,P),a.isInQuery=a.distanceFromCenter<=G,f&&!a.isInQuery?u("key_exited",o,a.location,a.distanceFromCenter):!f&&a.isInQuery&&u("key_entered",o,a.location,a.distanceFromCenter)}I=!1,E()},this.on=function(e,n){if(-1===["ready","key_entered","key_exited","key_moved"].indexOf(e))throw new Error('event type must be "ready", "key_entered", "key_exited", or "key_moved"');if("function"!=typeof n)throw new Error("callback must be a function");if(_[e].push(n),"key_entered"===e)for(var t=Object.keys(F),i=t.length,o=0;i>o;++o){var a=t[o],u=F[a];"undefined"!=typeof u&&u.isInQuery&&n(a,u.location,u.distanceFromCenter)}return"ready"===e&&I&&n(),new r(function(){_[e].splice(_[e].indexOf(n),1)})},this.cancel=function(){C=!0,_={ready:[],key_entered:[],key_exited:[],key_moved:[]};for(var e=Object.keys(q),n=e.length,t=0;n>t;++t){var r=e[t],i=c(r);s(i,q[r]),delete q[r]}F={},clearInterval(Q)},"[object Object]"!==Object.prototype.toString.call(e))throw new Error("firebaseRef must be an instance of Firebase");var x,O=e,_={ready:[],key_entered:[],key_exited:[],key_moved:[]},C=!1,I=!1,F={},q={},N=!1,A=null,Q=setInterval(function(){N===!1&&h()},1e4);m(a,!0);var P=a.center,G=a.radius;E()};return i}();"undefined"!=typeof module&&"undefined"!=typeof process&&(module.exports=GeoFire);
+!function(a,b){"use strict";var c,d,e,f="._tap",g="._tapActive",h="tap",i="clientX clientY screenX screenY pageX pageY".split(" "),j={count:0,event:0},k=function(a,c){var d=c.originalEvent,e=b.Event(d);e.type=a;for(var f=0,g=i.length;g>f;f++)e[i[f]]=c[i[f]];return e},l=function(a){if(a.isTrigger)return!1;var c=j.event,d=Math.abs(a.pageX-c.pageX),e=Math.abs(a.pageY-c.pageY),f=Math.max(d,e);return a.timeStamp-c.timeStamp<b.tap.TIME_DELTA&&f<b.tap.POSITION_DELTA&&(!c.touches||1===j.count)&&o.isTracking},m=function(a){if(!e)return!1;var c=Math.abs(a.pageX-e.pageX),d=Math.abs(a.pageY-e.pageY),f=Math.max(c,d);return Math.abs(a.timeStamp-e.timeStamp)<750&&f<b.tap.POSITION_DELTA},n=function(a){if(0===a.type.indexOf("touch")){a.touches=a.originalEvent.changedTouches;for(var b=a.touches[0],c=0,d=i.length;d>c;c++)a[i[c]]=b[i[c]]}a.timeStamp=Date.now?Date.now():+new Date},o={isEnabled:!1,isTracking:!1,enable:function(){o.isEnabled||(o.isEnabled=!0,c=b(a.body).on("touchstart"+f,o.onStart).on("mousedown"+f,o.onStart).on("click"+f,o.onClick))},disable:function(){o.isEnabled&&(o.isEnabled=!1,c.off(f))},onStart:function(a){a.isTrigger||(n(a),(!b.tap.LEFT_BUTTON_ONLY||a.touches||1===a.which)&&(a.touches&&(j.count=a.touches.length),o.isTracking||(a.touches||!m(a))&&(o.isTracking=!0,j.event=a,a.touches?(e=a,c.on("touchend"+f+g,o.onEnd).on("touchcancel"+f+g,o.onCancel)):c.on("mouseup"+f+g,o.onEnd))))},onEnd:function(a){var c;a.isTrigger||(n(a),l(a)&&(c=k(h,a),d=c,b(j.event.target).trigger(c)),o.onCancel(a))},onCancel:function(a){a&&"touchcancel"===a.type&&a.preventDefault(),o.isTracking=!1,c.off(g)},onClick:function(a){return!a.isTrigger&&d&&d.isDefaultPrevented()&&d.target===a.target&&d.pageX===a.pageX&&d.pageY===a.pageY&&a.timeStamp-d.timeStamp<750?(d=null,!1):void 0}};b(a).ready(o.enable),b.tap={POSITION_DELTA:10,TIME_DELTA:400,LEFT_BUTTON_ONLY:!0}}(document,jQuery);
 var config = {
     apiKey: "AIzaSyB-ajkLDUfzB9jgJvEnSS4vWP7rtI-dC8Q",
     authDomain: "purelas-190223.firebaseapp.com",
@@ -118,8 +119,14 @@ firebase.initializeApp(config);
 
 var db = firebase.database()
 var auth = firebase.auth()
+var connectedRef = db.ref(".info/connected");
 
 UID = null
+
+connectedRef.on("value", function(snap) {
+  if (snap.val() === true) emit("online")
+  else emit("offline")
+});
 
 moment.locale("pt");
 
@@ -203,13 +210,18 @@ var reportsRef = db.ref('reports')
 
 var geoFire = new GeoFire(geofireRef);
 
-var geoInfos = {}
-var reports = {}
+var geoInfos = JSON.parse(localStorage.getItem('geoInfos'))
+var currentGeoQuery = JSON.parse(localStorage.getItem('currentGeoQuery'))
+var reports = JSON.parse(localStorage.getItem('reports'))
 
-var geoQuery = geoFire.query({
-  center: [0,0],
-  radius: 5,
-});
+if ( geoInfos == null ) geoInfos = {}
+if ( reports == null ) reports = {}
+if ( currentGeoQuery == null )
+{
+  currentGeoQuery = { center: [0,0], radius: 50 }
+}
+
+var geoQuery = geoFire.query( currentGeoQuery );
 
 // Attach event callbacks to the query
 
@@ -223,12 +235,13 @@ var onKeyEnteredRegistration = geoQuery.on("key_entered", function(key, location
     .on('value', function(s)
     {
       reports[ key ] = s.val()
+      localStorage.setItem('reports', JSON.stringify(reports))
       emit('reportsChanged')
     })
 
 
   geoInfos[ key ] = { d: distance, l: location }
-
+  emit('geoInfosChanged')
 
 });
 
@@ -242,7 +255,7 @@ var onKeyExitedRegistration = geoQuery.on("key_exited", function(key, location) 
   delete geoInfos[ key ]
 
   emit('reportsChanged')
-  localStorage.setItem('reports', JSON.stringify( reports ))
+  emit('geoInfosChanged')
 
 });
 
@@ -250,34 +263,69 @@ var onKeyMovedRegistration = geoQuery.on("key_moved", function(key, location, di
   key = parseInt(key)
   geoInfos[ key ] = { d: distance, l: location }
   emit('reportsChanged')
+  emit('geoInfosChanged')
 });
 
 
 addEventListener('gotPosition', function(ev)
 {
   console.log('atualizando criterio geoQuery')
-  geoQuery.updateCriteria({ center: currentPosition })
+
+  currentGeoQuery.center = currentPosition
+  geoQuery.updateCriteria(currentGeoQuery)
+
+  localStorage.setItem( 'currentGeoQuery', JSON.stringify(currentGeoQuery) )
+
 })
 
-var currentPosition = [ -20.4670068, -54.6222753 ]
-var currentLatLng = { lat: -20.4670068, lng: -54.6222753 };
+addEventListener('reportsChanged', function(ev)
+{
+  localStorage.setItem('reports', JSON.stringify( reports ))
+})
+
+addEventListener('geoInfosChanged', function(ev)
+{
+  localStorage.setItem('geoInfos', JSON.stringify( geoInfos ))
+})
+
+var currentPosition = localStorage.getItem('currentPosition')
+var currentLatLng = localStorage.getItem('currentLatLng')
+
+if ( currentPosition == null )
+{
+
+  currentPosition = [-20.4670068, -54.6222753]
+  currentLatLng = { lat: -20.4670068, lng: -54.6222753 };
+
+  getCoords()
+
+}
+
+function getCoords()
+{
+
+  emit('getCoords')
+
+  navigator.geolocation.getCurrentPosition(
+    gotPosition,
+    noPosition)
+  return true
+}
 
 function gotPosition(pos)
 {
   currentPosition = [pos.coords.latitude, pos.coords.longitude];
   currentLatLng = { lat:pos.coords.latitude, lng: pos.coords.longitude }
-  emit('gotPosition', JSON.stringify(currentLatLng));
+  emit('gotPosition', currentLatLng);
 }
 
 function noPosition()
 {
-  console.log("no Position... shit");
+  alert("Erro ao obter localização por GPS");
+  emit('noPosition')
 }
 
-navigator.geolocation.watchPosition(
-  gotPosition,
-  noPosition
-  )
+setTimeout( getCoords, 10000 )
 
 var errMessages =
 {
@@ -324,7 +372,8 @@ function initMap()
 
   map = new google.maps.Map(document.getElementById('map'), {
     zoom: 14,
-    center: currentLatLng
+    center: currentLatLng,
+    disableDefaultUI: true,
   });
 
   map.data.setStyle(function(feature)
@@ -391,6 +440,8 @@ addEventListener('loginBefore', function(){
 })
 
 $map = q("#map")
+$mapCenter = q("#mapPage [data-action=map-center]")
+
 $map.addEventListener('touchmove', function(ev){
   ev.stopPropagation()
 })
@@ -404,8 +455,14 @@ addEventListener('mapBefore', function(){
 })
 
 
+addEventListener('getPosition', function()
+{
+  $mapCenter.classList.add('pulse')
+})
+
 addEventListener('gotPosition', function(ev)
 {
+  $mapCenter.classList.remove('pulse')
   map.setCenter( currentLatLng )
 })
 
@@ -451,6 +508,8 @@ addEventListener('notificationsBefore', function(){
 addEventListener('onboardingBefore', function(){
 
   setPage('onboarding')
+
+  localStorage.setItem('onboard', true)
 
 })
 
@@ -536,6 +595,7 @@ addEventListener('registerBefore', function(){
 })
 
 var $reportNewForm = q('#newReportPage form')
+var $reportNewType = q('#newReportPage [name="type"]')
 var $reportNewGeocode = q('#newReportPage [name=geocode]')
 var $reportNewText = q('#newReportPage [name=report]')
 var $reportNewAgressor = q('#newReportPage [name=agressor]')
@@ -559,6 +619,7 @@ addEventListener('report-newBefore', function(){
 
 
   reportNewCoords = null
+  $reportNewType.value = "nd"
   $reportNewGeocode.value = ""
   $reportNewText.value = ""
   $reportNewAgressor.value = ""
@@ -648,6 +709,7 @@ function reportNewBeforeSave()
 
   var rep =
   {
+    type: $reportNewType.value,
     address: $reportNewGeocode.value,
     report: $reportNewText.value,
     agressor: $reportNewAgressor.value,
@@ -1022,7 +1084,7 @@ setTimeout(function(){
 var $navigator = document.getElementById('navigator');
 var $app = $('#app');
 
-$("[data-action='menu']").click(function(ev){
+$("[data-action='menu']").on('tap', function(ev){
 
   ev.stopPropagation()
 
@@ -1030,7 +1092,7 @@ $("[data-action='menu']").click(function(ev){
 
 });
 
-$("[data-modal]").click(function(ev){
+$("[data-modal]").on('tap', function(ev){
 
   ev.stopPropagation()
 
@@ -1047,7 +1109,7 @@ $("[data-modal]").click(function(ev){
 
 });
 
-$("[data-action='closeModal']").click(function(ev){
+$("[data-action='closeModal']").on('tap', function(ev){
 
   ev.stopPropagation()
 
@@ -1071,7 +1133,7 @@ $("[data-action='closeModal']").click(function(ev){
 });
 
 
-$("[data-action='save']").click(function(ev)
+$("[data-action='save']").on('tap', function(ev)
 {
   ev.stopPropagation()
   ev.preventDefault()
@@ -1121,7 +1183,7 @@ function setPage( pageName )
   }
 }
 
-$("[data-page]").click(function(ev)
+$("[data-page]").on('tap', function(ev)
 {
 
   ev.stopPropagation()
@@ -1148,28 +1210,38 @@ $("[data-page]").click(function(ev)
 
 });
 
-$("[data-action='logout']").click(function(ev){
+$("[data-action='logout']").on('tap', function(ev){
 
   logout()
 
 });
 
-$("[data-action='back']").click(function(ev){
+$("[data-action='back']").on('tap', function(ev){
 
   ev.stopPropagation()
-
   setPage('map');
 
 });
 
-document.addEventListener('backbutton', function(){
+addEventListener('keyup', function(ev){
+  if( ev.keyCode == 27 )
+  {
+    emit('backbutton')
+  }
+})
+
+addEventListener('backbutton', function(){
 
   $app.removeClass('menu-open')
 
-  if ( pages.length > 0 )
+  if ( pages.length > 1 )
   {
-    var p = pages.pop()
-    setPage(page);
+    var current = pages.pop()
+    var before = pages.pop()
+
+    console.log('current:', current, 'before:', before)
+
+    setPage(before)
   }
   else
   {
@@ -1179,8 +1251,19 @@ document.addEventListener('backbutton', function(){
 
 });
 
+$("[data-action=map-center]").on('tap', function(ev)
+{
 
-$("[data-action='view']").click(function(ev)
+  ev.preventDefault()
+  ev.stopPropagation()
+
+  console.log('map-center tap')
+
+  getCoords()
+
+})
+
+$("[data-action='view']").on('tap', function(ev)
 {
 
   ev.stopPropagation()
@@ -1191,4 +1274,11 @@ $("[data-action='view']").click(function(ev)
 
 })
 
-setPage('welcome')
+if ( localStorage.getItem('onboard') == null )
+{
+  setPage('welcome')
+}
+else
+{
+  setPage('map')
+}
