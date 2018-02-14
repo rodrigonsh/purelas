@@ -333,24 +333,27 @@ function getCoords()
 
   emit('getPosition')
 
-  navigator.geolocation.getCurrentPosition(
+  navigator.geolocation.watchPosition(
     gotPosition,
     noPosition)
 
   return true
-  
+
 }
 
 function gotPosition(pos)
 {
   currentPosition = [pos.coords.latitude, pos.coords.longitude];
   currentLatLng = { lat:pos.coords.latitude, lng: pos.coords.longitude }
+
+  localStorage.setItem('currentPosition', JSON.stringify(currentPosition))
+  localStorage.setItem('currentLatLng', JSON.stringify(currentLatLng))
+
   emit('gotPosition', currentLatLng);
 }
 
 function noPosition()
 {
-  alert("Erro ao obter localização por GPS");
   emit('noPosition')
 }
 
@@ -631,6 +634,12 @@ var $reportNewAgressor = q('#newReportPage [name=agressor]')
 var reportNewMarker= null
 var reportNewCoords = null
 
+$reportNewMap = q("#report-new-map")
+
+$reportNewMap.addEventListener('touchmove', function(ev){
+  ev.stopPropagation()
+})
+
 addEventListener('report-newBefore', function(){
 
   $reportNewGeocode.focus()
@@ -708,6 +717,8 @@ geocodeXHR.onload = function()
 
 $reportNewGeocode.addEventListener('keyup', debounce(function() {
 
+  if ( $reportNewGeocode.value.trim() == "" ) return;
+
   console.log('geocoding', $reportNewGeocode.value)
 
   var params = [
@@ -782,6 +793,12 @@ var reportViewMarker = null
 var $viewReportText = q("#viewReportPage #report")
 var $viewReportAgressor = q("#viewReportPage #agressor")
 var $viewReportDate = q("#viewReportPage #published_at")
+
+$reportViewMap = q("#report-view-map")
+
+$reportViewMap.addEventListener('touchmove', function(ev){
+  ev.stopPropagation()
+})
 
 addEventListener('reportsView', function(ev)
 {
@@ -1248,7 +1265,8 @@ $("[data-action='logout']").on('tap', function(ev){
 $("[data-action='back']").on('tap', function(ev){
 
   ev.stopPropagation()
-  setPage('map');
+  emit('backbutton')
+  //setPage('map');
 
 });
 
@@ -1259,7 +1277,7 @@ addEventListener('keyup', function(ev){
   }
 })
 
-addEventListener('backbutton', function(ev){
+document.addEventListener('backbutton', function(ev){
 
   alert('onbackbutton')
   console.log('onbackbutton')
@@ -1285,7 +1303,7 @@ addEventListener('backbutton', function(ev){
   }
 
 
-});
+}, false);
 
 $("[data-action=map-center]").on('tap', function(ev)
 {
@@ -1293,9 +1311,7 @@ $("[data-action=map-center]").on('tap', function(ev)
   ev.preventDefault()
   ev.stopPropagation()
 
-  console.log('map-center tap')
-
-  getCoords()
+  emit('map-center')
 
 })
 

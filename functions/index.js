@@ -19,7 +19,7 @@ exports.sendReport = functions.https.onRequest((req, res) => {
 
   cors(req, res, function(){
 
-    if (!req.isPost) return
+    //if (!req.isPost) return res.status(200).send("tem gente");
 
     var ts = new Date().valueOf()
 
@@ -28,11 +28,14 @@ exports.sendReport = functions.https.onRequest((req, res) => {
 
     delete req.body.coords
 
-    admin.database().ref('/reports').child(ts).set(req.body)
-    geoFire.set(ts.toString(), coords)
+    return admin.database().ref('/reports').child(ts).set(req.body)
+    .then( function(){
 
-    res.status(200).send(ts);
+      return geoFire.set(ts.toString(), coords)
+      .then( function(){ return res.status(200).send(ts) } )
 
+    } )    
+    .catch( function(q){ console.log(q) } )
   })
 
 

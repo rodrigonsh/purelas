@@ -6,6 +6,12 @@ var $reportNewAgressor = q('#newReportPage [name=agressor]')
 var reportNewMarker= null
 var reportNewCoords = null
 
+$reportNewMap = q("#report-new-map")
+
+$reportNewMap.addEventListener('touchmove', function(ev){
+  ev.stopPropagation()
+})
+
 addEventListener('report-newBefore', function(){
 
   $reportNewGeocode.focus()
@@ -82,6 +88,8 @@ geocodeXHR.onload = function()
 
 
 $reportNewGeocode.addEventListener('keyup', debounce(function() {
+
+  if ( $reportNewGeocode.value.trim() == "" ) return;
 
   console.log('geocoding', $reportNewGeocode.value)
 

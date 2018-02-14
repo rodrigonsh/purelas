@@ -16,24 +16,27 @@ function getCoords()
 
   emit('getPosition')
 
-  navigator.geolocation.getCurrentPosition(
+  navigator.geolocation.watchPosition(
     gotPosition,
     noPosition)
 
   return true
-  
+
 }
 
 function gotPosition(pos)
 {
   currentPosition = [pos.coords.latitude, pos.coords.longitude];
   currentLatLng = { lat:pos.coords.latitude, lng: pos.coords.longitude }
+
+  localStorage.setItem('currentPosition', JSON.stringify(currentPosition))
+  localStorage.setItem('currentLatLng', JSON.stringify(currentLatLng))
+
   emit('gotPosition', currentLatLng);
 }
 
 function noPosition()
 {
-  alert("Erro ao obter localização por GPS");
   emit('noPosition')
 }
 

@@ -4,6 +4,12 @@ var $viewReportText = q("#viewReportPage #report")
 var $viewReportAgressor = q("#viewReportPage #agressor")
 var $viewReportDate = q("#viewReportPage #published_at")
 
+$reportViewMap = q("#report-view-map")
+
+$reportViewMap.addEventListener('touchmove', function(ev){
+  ev.stopPropagation()
+})
+
 addEventListener('reportsView', function(ev)
 {
 

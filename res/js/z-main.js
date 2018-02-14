@@ -144,7 +144,8 @@ $("[data-action='logout']").on('tap', function(ev){
 $("[data-action='back']").on('tap', function(ev){
 
   ev.stopPropagation()
-  setPage('map');
+  emit('backbutton')
+  //setPage('map');
 
 });
 
@@ -155,10 +156,7 @@ addEventListener('keyup', function(ev){
   }
 })
 
-addEventListener('backbutton', function(ev){
-
-  alert('onbackbutton')
-  console.log('onbackbutton')
+document.addEventListener('backbutton', function(ev){
 
   ev.stopPropagation()
   ev.preventDefault()
@@ -181,7 +179,7 @@ addEventListener('backbutton', function(ev){
   }
 
 
-});
+}, false);
 
 $("[data-action=map-center]").on('tap', function(ev)
 {
@@ -189,9 +187,7 @@ $("[data-action=map-center]").on('tap', function(ev)
   ev.preventDefault()
   ev.stopPropagation()
 
-  console.log('map-center tap')
-
-  getCoords()
+  emit('map-center')
 
 })
 
