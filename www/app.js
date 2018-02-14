@@ -165,6 +165,7 @@ function logout()
 {
   UID = null
   auth.signOut()
+  alert("Usuário foi desconectado")
 }
 
 function login( email, password )
@@ -1295,7 +1296,6 @@ document.addEventListener('backbutton', function(ev){
   }
   else
   {
-    alert('vou sairrr')
     navigator.app.exitApp()
   }
 

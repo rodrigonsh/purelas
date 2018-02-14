@@ -6,6 +6,7 @@ function logout()
 {
   UID = null
   auth.signOut()
+  alert("Usuário foi desconectado")
 }
 
 function login( email, password )

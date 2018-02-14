@@ -174,7 +174,6 @@ document.addEventListener('backbutton', function(ev){
   }
   else
   {
-    alert('vou sairrr')
     navigator.app.exitApp()
   }
 

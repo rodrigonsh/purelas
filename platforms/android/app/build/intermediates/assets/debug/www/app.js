@@ -165,6 +165,7 @@ function logout()
 {
   UID = null
   auth.signOut()
+  alert("Usuário foi desconectado")
 }
 
 function login( email, password )
@@ -1279,9 +1280,6 @@ addEventListener('keyup', function(ev){
 
 document.addEventListener('backbutton', function(ev){
 
-  alert('onbackbutton')
-  console.log('onbackbutton')
-
   ev.stopPropagation()
   ev.preventDefault()
 
@@ -1298,7 +1296,6 @@ document.addEventListener('backbutton', function(ev){
   }
   else
   {
-    alert('vou sairrr')
     navigator.app.exitApp()
   }
 
