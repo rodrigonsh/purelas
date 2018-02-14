@@ -72,6 +72,14 @@ h1.breathes {
   display: block;
 }
 
+.login {
+  display: none;
+}
+
+.logged .login {
+  display: block;
+}
+
 .justify-center {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
@@ -154,6 +162,48 @@ button:hover {
           box-shadow: 0px -3px 2px black;
   -webkit-transform: scale(0.95);
           transform: scale(0.95);
+}
+
+.pulse {
+  -webkit-box-shadow: 0 0 0 rgba(204, 169, 44, 0.4);
+          box-shadow: 0 0 0 rgba(204, 169, 44, 0.4);
+  -webkit-animation: pulse 2s infinite;
+          animation: pulse 2s infinite;
+}
+
+.pulse:hover {
+  -webkit-animation: none;
+          animation: none;
+}
+
+@-webkit-keyframes pulse {
+  0% {
+    -webkit-box-shadow: 0 0 0 0 rgba(204, 169, 44, 0.4);
+            box-shadow: 0 0 0 0 rgba(204, 169, 44, 0.4);
+  }
+  70% {
+    -webkit-box-shadow: 0 0 0 10px rgba(204, 169, 44, 0);
+            box-shadow: 0 0 0 10px rgba(204, 169, 44, 0);
+  }
+  100% {
+    -webkit-box-shadow: 0 0 0 0 rgba(204, 169, 44, 0);
+            box-shadow: 0 0 0 0 rgba(204, 169, 44, 0);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    -webkit-box-shadow: 0 0 0 0 rgba(204, 169, 44, 0.4);
+            box-shadow: 0 0 0 0 rgba(204, 169, 44, 0.4);
+  }
+  70% {
+    -webkit-box-shadow: 0 0 0 10px rgba(204, 169, 44, 0);
+            box-shadow: 0 0 0 10px rgba(204, 169, 44, 0);
+  }
+  100% {
+    -webkit-box-shadow: 0 0 0 0 rgba(204, 169, 44, 0);
+            box-shadow: 0 0 0 0 rgba(204, 169, 44, 0);
+  }
 }
 
 #splash {
@@ -298,6 +348,16 @@ button:hover {
   text-align: center;
   padding: 20px;
   font-size: 6.75pt;
+}
+
+#menu li.login {
+  display: none;
+}
+
+.logged #menu li.login {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 #navigator {

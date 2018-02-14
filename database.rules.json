@@ -10,13 +10,14 @@
 
     "geofire":
     {
+      ".indexOn": "g",
       ".read": true,
       ".write": true,
     },
 
     "users":
       {
-        
+
         ".read": false,
 
         "$uid":

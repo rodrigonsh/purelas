@@ -54,7 +54,7 @@ function emit( evName, data )
 
   var e = new Event(evName)
   e.data = data
-  dispatchEvent( e )
+  setTimeout(function(){dispatchEvent( e )},200)
 
 }
 
@@ -93,6 +93,33 @@ function makeLatLng(coords)
   return { lat: coords[0], lng: coords[1] }
 }
 
+var $app = $('#app')[0]
+console.log($app)
+
+addEventListener('online', function()
+{
+  $app.classList.remove('offline')
+})
+
+addEventListener('offline', function()
+{
+  console.log('should add offline class')
+  $app.classList.add('offline')
+  console.assert($app.classList.contains('offline'))
+})
+
+addEventListener('userSet', function()
+{
+  if ( currentUser != null )
+  {
+    $app.classList.add('logged')
+  } else {
+    console.log('not logged')
+    $app.classList.remove('logged')
+  }
+
+})
+
 /*!
  * GeoFire is an open-source library that allows you to store and query a set
  * of keys based on their geographic location. At its heart, GeoFire simply
@@ -124,8 +151,8 @@ var connectedRef = db.ref(".info/connected");
 UID = null
 
 connectedRef.on("value", function(snap) {
-  if (snap.val() === true) emit("online")
-  else emit("offline")
+  if (snap.val() === true) setTimeout(function(){ emit("online") }, 500)
+  else setTimeout(function(){ emit("offline") }, 500)
 });
 
 moment.locale("pt");
@@ -304,12 +331,14 @@ if ( currentPosition == null )
 function getCoords()
 {
 
-  emit('getCoords')
+  emit('getPosition')
 
   navigator.geolocation.getCurrentPosition(
     gotPosition,
     noPosition)
+
   return true
+  
 }
 
 function gotPosition(pos)
@@ -1013,13 +1042,13 @@ shell.addEventListener('touchmove', function(ev)
   //console.log(touchDiffX, touchDiffY)
 
   var currTranslate = parseInt(
-    $app[0].style.transform
+    $app.style.transform
       .replace('translateX(', '')
-      .substr( 0, $app[0].style.transform.length-1 )
+      .substr( 0, $app.style.transform.length-1 )
     )
 
   offset = -244
-  if ( $app[0].classList.contains('menu-open') )
+  if ( $app.classList.contains('menu-open') )
   {
 
     offset = 0;
@@ -1047,7 +1076,7 @@ shell.addEventListener('touchmove', function(ev)
 
   finalOffset = offset + touchDiffX;
 
-  $app[0].style.transform = "translateX("+finalOffset+"px)"
+  $app.style.transform = "translateX("+finalOffset+"px)"
 
 })
 
@@ -1059,14 +1088,14 @@ shell.addEventListener('touchend', function(ev)
 
   if ( touchDiffX > 60 )
   {
-    $app[0].classList.add('menu-open')
+    $app.classList.add('menu-open')
   }
   else
   {
-    $app[0].classList.remove('menu-open')
+    $app.classList.remove('menu-open')
   }
 
-  $app[0].style.transform = null
+  $app.style.transform = null
 
   shell.classList.remove('drag')
 
@@ -1082,13 +1111,13 @@ setTimeout(function(){
 }, 1500)
 
 var $navigator = document.getElementById('navigator');
-var $app = $('#app');
+
 
 $("[data-action='menu']").on('tap', function(ev){
 
   ev.stopPropagation()
 
-  $app.toggleClass('menu-open')
+  $app.classList.toggle('menu-open')
 
 });
 
@@ -1105,7 +1134,7 @@ $("[data-modal]").on('tap', function(ev){
   console.log(".modal[data-modal="+target.dataset.modal+"]")
 
   $(".modal[data-modal="+target.dataset.modal+"]").addClass('show')
-  $app.toggleClass('modal-over')
+  $app.classList.toggle('modal-over')
 
 });
 
@@ -1128,7 +1157,7 @@ $("[data-action='closeModal']").on('tap', function(ev){
 
   t.classList.remove('show')
 
-  $app.toggleClass('modal-over')
+  $app.classList.toggle('modal-over')
 
 });
 
@@ -1205,7 +1234,7 @@ $("[data-page]").on('tap', function(ev)
     emit( pageName+"Before" )
   }
 
-  $app.removeClass('menu-open')
+  $app.classList.remove('menu-open')
 
 
 });
@@ -1230,9 +1259,15 @@ addEventListener('keyup', function(ev){
   }
 })
 
-addEventListener('backbutton', function(){
+addEventListener('backbutton', function(ev){
 
-  $app.removeClass('menu-open')
+  alert('onbackbutton')
+  console.log('onbackbutton')
+
+  ev.stopPropagation()
+  ev.preventDefault()
+
+  $app.classList.remove('menu-open')
 
   if ( pages.length > 1 )
   {
@@ -1245,6 +1280,7 @@ addEventListener('backbutton', function(){
   }
   else
   {
+    alert('vou sairrr')
     navigator.app.exitApp()
   }
 

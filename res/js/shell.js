@@ -31,13 +31,13 @@ shell.addEventListener('touchmove', function(ev)
   //console.log(touchDiffX, touchDiffY)
 
   var currTranslate = parseInt(
-    $app[0].style.transform
+    $app.style.transform
       .replace('translateX(', '')
-      .substr( 0, $app[0].style.transform.length-1 )
+      .substr( 0, $app.style.transform.length-1 )
     )
 
   offset = -244
-  if ( $app[0].classList.contains('menu-open') )
+  if ( $app.classList.contains('menu-open') )
   {
 
     offset = 0;
@@ -65,7 +65,7 @@ shell.addEventListener('touchmove', function(ev)
 
   finalOffset = offset + touchDiffX;
 
-  $app[0].style.transform = "translateX("+finalOffset+"px)"
+  $app.style.transform = "translateX("+finalOffset+"px)"
 
 })
 
@@ -77,14 +77,14 @@ shell.addEventListener('touchend', function(ev)
 
   if ( touchDiffX > 60 )
   {
-    $app[0].classList.add('menu-open')
+    $app.classList.add('menu-open')
   }
   else
   {
-    $app[0].classList.remove('menu-open')
+    $app.classList.remove('menu-open')
   }
 
-  $app[0].style.transform = null
+  $app.style.transform = null
 
   shell.classList.remove('drag')
 

@@ -14,12 +14,14 @@ if ( currentPosition == null )
 function getCoords()
 {
 
-  emit('getCoords')
+  emit('getPosition')
 
   navigator.geolocation.getCurrentPosition(
     gotPosition,
     noPosition)
+
   return true
+  
 }
 
 function gotPosition(pos)

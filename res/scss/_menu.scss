@@ -76,3 +76,6 @@
   }
 
 }
+
+#menu li.login{ display: none; }
+.logged #menu li.login{ display: flex; }

@@ -22,6 +22,9 @@
 .error{ display: none; }
 .failed .error{ display: block; }
 
+.login{ display: none; }
+.logged .login{ display: block; }
+
 .justify-center
 {
   justify-content: center;
@@ -77,7 +80,7 @@ button:hover
   background: $app_primary_color;
   border-radius: 50%;
   box-shadow: 0px 5px 20px rgba(0,0,0,0.3);
-  position: fixed;
+  position: absolute;
   bottom: $space;
   right: $space;
   color: white;
@@ -109,6 +112,9 @@ button:hover
   box-shadow: 0px -3px 2px black;
   transform: scale(0.95);
 }
+
+
+// pulse: https://codepen.io/olam/pen/zcqea
 
 .pulse {
   box-shadow: 0 0 0 rgba(204,169,44, 0.4);

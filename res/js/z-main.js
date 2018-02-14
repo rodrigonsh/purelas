@@ -7,13 +7,13 @@ setTimeout(function(){
 }, 1500)
 
 var $navigator = document.getElementById('navigator');
-var $app = $('#app');
+
 
 $("[data-action='menu']").on('tap', function(ev){
 
   ev.stopPropagation()
 
-  $app.toggleClass('menu-open')
+  $app.classList.toggle('menu-open')
 
 });
 
@@ -30,7 +30,7 @@ $("[data-modal]").on('tap', function(ev){
   console.log(".modal[data-modal="+target.dataset.modal+"]")
 
   $(".modal[data-modal="+target.dataset.modal+"]").addClass('show')
-  $app.toggleClass('modal-over')
+  $app.classList.toggle('modal-over')
 
 });
 
@@ -53,7 +53,7 @@ $("[data-action='closeModal']").on('tap', function(ev){
 
   t.classList.remove('show')
 
-  $app.toggleClass('modal-over')
+  $app.classList.toggle('modal-over')
 
 });
 
@@ -130,7 +130,7 @@ $("[data-page]").on('tap', function(ev)
     emit( pageName+"Before" )
   }
 
-  $app.removeClass('menu-open')
+  $app.classList.remove('menu-open')
 
 
 });
@@ -155,9 +155,15 @@ addEventListener('keyup', function(ev){
   }
 })
 
-addEventListener('backbutton', function(){
+addEventListener('backbutton', function(ev){
 
-  $app.removeClass('menu-open')
+  alert('onbackbutton')
+  console.log('onbackbutton')
+
+  ev.stopPropagation()
+  ev.preventDefault()
+
+  $app.classList.remove('menu-open')
 
   if ( pages.length > 1 )
   {
@@ -170,6 +176,7 @@ addEventListener('backbutton', function(){
   }
   else
   {
+    alert('vou sairrr')
     navigator.app.exitApp()
   }
 

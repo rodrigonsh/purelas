@@ -11,7 +11,7 @@ function emit( evName, data )
 
   var e = new Event(evName)
   e.data = data
-  dispatchEvent( e )
+  setTimeout(function(){dispatchEvent( e )},200)
 
 }
 
