@@ -16,6 +16,11 @@ $reportEditMap.addEventListener('touchmove', function(ev){
 addEventListener('report-editBefore', function()
 {
 
+  if ( localStorage.getItem('onboard') == null )
+  {
+    return emit('onboardingBefore')
+  }
+
   if ( mapsReady && reportEditMap == null )
   {
     emit('reportEditMapRender')

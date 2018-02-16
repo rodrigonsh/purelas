@@ -726,6 +726,11 @@ $reportEditMap.addEventListener('touchmove', function(ev){
 addEventListener('report-editBefore', function()
 {
 
+  if ( localStorage.getItem('onboard') == null )
+  {
+    return emit('onboardingBefore')
+  }
+
   if ( mapsReady && reportEditMap == null )
   {
     emit('reportEditMapRender')
@@ -1141,6 +1146,14 @@ $userForm.submit(function(ev)
 
 })
 
+addEventListener('welcomeBefore', function(){
+
+  setPage('welcome')
+
+  localStorage.setItem('welcome', true)
+
+})
+
 $("preference").click( function(ev)
 {
 
@@ -1478,9 +1491,9 @@ $("[data-action='view']").on('tap', function(ev)
 
 })
 
-if ( localStorage.getItem('onboard') == null )
+if ( localStorage.getItem('welcome') == null )
 {
-  setPage('welcome')
+  emit('welcomeBefore')
 }
 else
 {

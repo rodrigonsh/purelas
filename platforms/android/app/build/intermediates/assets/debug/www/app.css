@@ -284,9 +284,9 @@ button:hover {
 }
 
 #splash .deco {
-  opacity: 0;
-  -webkit-transition: opacity 0.7s;
-  transition: opacity 0.7s;
+  opacity: 0.05;
+  -webkit-transition: opacity 0.6s;
+  transition: opacity 0.6s;
 }
 
 #splash.show .deco {

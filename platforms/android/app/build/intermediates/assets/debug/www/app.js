@@ -1425,7 +1425,7 @@ addEventListener('keyup', function(ev){
 
 function onBackButton(ev){
 
-  console.log('opa!')
+  console.log('opa!', pages)
 
   ev.stopPropagation()
   ev.preventDefault()
@@ -1435,10 +1435,11 @@ function onBackButton(ev){
   if ( pages.length > 1 )
   {
     var current = pages.pop()
+    var before = pages.pop()
 
     if ( before == 'thanks' )
     {
-      var before = pages.pop()
+      before = pages.pop()
     }
 
     console.log('current:', current, 'before:', before)

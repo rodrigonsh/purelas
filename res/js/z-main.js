@@ -212,9 +212,9 @@ $("[data-action='view']").on('tap', function(ev)
 
 })
 
-if ( localStorage.getItem('onboard') == null )
+if ( localStorage.getItem('welcome') == null )
 {
-  setPage('welcome')
+  emit('welcomeBefore')
 }
 else
 {
