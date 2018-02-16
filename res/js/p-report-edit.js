@@ -121,6 +121,11 @@ $reportEditGeocode.addEventListener('keyup', debounce(function() {
 function reportEditBeforeSave()
 {
 
+  $reportEditType.blur()
+  $reportEditGeocode.blur()
+  $reportEditText.blur()
+  $reportEditAgressor.blur()
+
   console.log( 'shall we save?' )
 
   if ( reportEditCoords == null )

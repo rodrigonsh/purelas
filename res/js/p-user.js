@@ -1,3 +1,10 @@
+var $userDataName = $("#userPage #userName")
+var $userDataEmail = $("#userPage #userEmail")
+var $userDataSex = $("#userPage #userSex")
+var $userDataEd = $("#userPage #userEd")
+var $userDataFmlCmp = $("#userPage #userFmlCmp")
+var $userDataFmlRnd = $("#userPage #userFmlRnd")
+
 addEventListener('userNew', function()
 {
 
@@ -18,8 +25,8 @@ addEventListener('userSet', function(ev)
     $("#menu header p").html("Visitante")
     $("#menu header small").html("Usuário Anônimo")
 
-    $("#userPage #userName").val("")
-    $("#userPage #userEmail").val("")
+    $userDataName.val("")
+    $userDataEmail.val("")
   }
 
   else
@@ -27,8 +34,8 @@ addEventListener('userSet', function(ev)
     $("#menu header p").html(currentUser.displayName)
     $("#menu header small").html(currentUser.email)
 
-    $("#userPage #userName").val(currentUser.displayName)
-    $("#userPage #userEmail").val(currentUser.email)
+    $userDataName.val(currentUser.displayName)
+    $userDataEmail.val(currentUser.email)
   }
 
 })
@@ -40,10 +47,10 @@ addEventListener('userDataUpdated', function()
 
   if ( userData == null ) return
 
-  $("#userPage #userSex").val( userData.sex )
-  $("#userPage #userEd").val( userData.ed )
-  $("#userPage #userFmlCmp").val( userData.fmlCmp )
-  $("#userPage #userFmlRnd").val( userData.fmlRnd )
+  $userDataSex.val( userData.sex )
+  $userDataEd.val( userData.ed )
+  $userDataFmlCmp.val( userData.fmlCmp )
+  $userDataFmlRnd.val( userData.fmlRnd )
 
 })
 
@@ -57,13 +64,19 @@ addEventListener('userSave', function()
 
   // TODO: add processing
 
-  userData.name = $("#userPage #userName").val()
-  userData.sex = $("#userPage #userSex").val()
-  userData.ed = $("#userPage #userEd").val()
-  userData.fmlCmp = $("#userPage #userFmlCmp").val()
-  userData.fmlRnd = $("#userPage #userFmlRnd").val()
+  $userDataName.blur()
+  $userDataSex.blur()
+  $userDataEd.blur()
+  $userDataFmlCmp.blur()
+  $userDataFmlRnd.blur()
 
-  var userEmail = $("#userPage #userEmail").val()
+  userData.name = $userDataName.val()
+  userData.sex = $userDataSex.val()
+  userData.ed = $userDataEd.val()
+  userData.fmlCmp = $userDataFmlCmp.val()
+  userData.fmlRnd = $userDataFmlRnd.val()
+
+  var userEmail = $userDataEmail.val()
 
   if ( userEmail != currentUser.email )
   {

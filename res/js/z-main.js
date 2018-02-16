@@ -63,6 +63,12 @@ $("[data-action='save']").on('tap', function(ev)
   ev.stopPropagation()
   ev.preventDefault()
 
+  if( 'Keyboard' in window )
+  {
+    console.log('gotta hide that keyboard')
+    Keyboard.hide()
+  }
+
   var t = getTargetPage(ev.currentTarget)
   emit(t.dataset.page+"Save")
 

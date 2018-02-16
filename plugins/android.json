@@ -15,6 +15,9 @@
     },
     "cordova-plugin-statusbar": {
       "PACKAGE_NAME": "br.purelas.app"
+    },
+    "cordova-plugin-keyboard": {
+      "PACKAGE_NAME": "br.purelas.app"
     }
   },
   "dependent_plugins": {}

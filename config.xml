@@ -32,5 +32,6 @@
     </platform>
     <plugin name="cordova-plugin-geolocation" spec="^4.0.1" />
     <plugin name="cordova-plugin-statusbar" spec="^2.4.1" />
+    <plugin name="cordova-plugin-keyboard" spec="^1.2.0" />
     <engine name="android" spec="^7.0.0" />
 </widget>
