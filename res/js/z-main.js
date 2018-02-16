@@ -146,7 +146,6 @@ $("[data-action='back']").on('tap', function(ev){
 
   ev.stopPropagation()
   emit('backbutton')
-  //setPage('map');
 
 });
 
@@ -160,7 +159,7 @@ addEventListener('keyup', function(ev){
 
 function onBackButton(ev){
 
-  console.log('opa!')
+  console.log('opa!', pages)
 
   ev.stopPropagation()
   ev.preventDefault()
@@ -171,6 +170,11 @@ function onBackButton(ev){
   {
     var current = pages.pop()
     var before = pages.pop()
+
+    if ( before == 'thanks' )
+    {
+      before = pages.pop()
+    }
 
     console.log('current:', current, 'before:', before)
 

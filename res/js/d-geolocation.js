@@ -28,4 +28,5 @@ function noPosition()
 
 var watchPosition = navigator.geolocation.watchPosition(
   gotPosition,
-  noPosition)
+  noPosition,
+  { timeout: 30000 })

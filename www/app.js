@@ -378,7 +378,8 @@ function noPosition()
 
 var watchPosition = navigator.geolocation.watchPosition(
   gotPosition,
-  noPosition)
+  noPosition,
+  { timeout: 30000 })
 
 
 var userReport = JSON.parse( localStorage.getItem('userReport') )
@@ -1015,6 +1016,11 @@ addEventListener('thanksBefore', function(){
 
 })
 
+addEventListener('thanksAfter', function()
+{
+  setTimeout( () => emit('mapBefore'), 5000 )
+})
+
 addEventListener('thanks', function(ev)
 {
 
@@ -1031,6 +1037,7 @@ addEventListener('thanks', function(ev)
   }
 
   emit('thanksBefore')
+
 
 })
 
@@ -1405,7 +1412,6 @@ $("[data-action='back']").on('tap', function(ev){
 
   ev.stopPropagation()
   emit('backbutton')
-  //setPage('map');
 
 });
 
@@ -1419,7 +1425,7 @@ addEventListener('keyup', function(ev){
 
 function onBackButton(ev){
 
-  console.log('opa!')
+  console.log('opa!', pages)
 
   ev.stopPropagation()
   ev.preventDefault()
@@ -1430,6 +1436,11 @@ function onBackButton(ev){
   {
     var current = pages.pop()
     var before = pages.pop()
+
+    if ( before == 'thanks' )
+    {
+      before = pages.pop()
+    }
 
     console.log('current:', current, 'before:', before)
 

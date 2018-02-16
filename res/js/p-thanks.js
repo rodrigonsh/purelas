@@ -7,6 +7,11 @@ addEventListener('thanksBefore', function(){
 
 })
 
+addEventListener('thanksAfter', function()
+{
+  setTimeout( () => emit('mapBefore'), 5000 )
+})
+
 addEventListener('thanks', function(ev)
 {
 
@@ -23,5 +28,6 @@ addEventListener('thanks', function(ev)
   }
 
   emit('thanksBefore')
+
 
 })

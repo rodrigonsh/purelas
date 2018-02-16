@@ -30,9 +30,15 @@
 #map
 {
   background-image: url(img/clock.svg);
-  background-position: center;
+  background-position: center 45%;
   background-repeat: no-repeat;
   background-size: 64px;
+}
+
+.offline #map
+{
+  background-image: url(img/no-internet.svg);
+  background-size: 50%;
 }
 
 #report-edit-map

@@ -12,6 +12,7 @@
     <access origin="*" />
     <preference name="orientation" value="portrait" />
     <preference name="loadUrlTimeoutValue" value="700000" />
+    <preference name="StatusBarBackgroundColor" value="#6e3073" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <allow-intent href="tel:*" />
@@ -30,5 +31,6 @@
         <allow-intent href="itms-apps:*" />
     </platform>
     <plugin name="cordova-plugin-geolocation" spec="^4.0.1" />
+    <plugin name="cordova-plugin-statusbar" spec="^2.4.1" />
     <engine name="android" spec="^7.0.0" />
 </widget>

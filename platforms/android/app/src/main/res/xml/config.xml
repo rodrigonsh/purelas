@@ -7,6 +7,10 @@
         <param name="android-package" value="org.apache.cordova.whitelist.WhitelistPlugin" />
         <param name="onload" value="true" />
     </feature>
+    <feature name="StatusBar">
+        <param name="android-package" value="org.apache.cordova.statusbar.StatusBar" />
+        <param name="onload" value="true" />
+    </feature>
     <name>Purelas</name>
     <description>
         App para proteção feminina
@@ -30,4 +34,5 @@
     <preference name="loglevel" value="DEBUG" />
     <preference name="orientation" value="portrait" />
     <preference name="loadUrlTimeoutValue" value="700000" />
+    <preference name="StatusBarBackgroundColor" value="#6e3073" />
 </widget>
