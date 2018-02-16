@@ -1,0 +1,33 @@
+<div id='routePage' class='page' data-page='route'>
+
+  <header>
+    <button data-action='menu'><img src="img/menu.svg" /></button>
+    <h1>PURELAS</h1>
+    <button data-page='notifications'><img src="img/notification.svg" /></button>
+  </header>
+
+  <div class='tabs'>
+    <button data-page='map'><img src="img/map.svg" /></button>
+    <button class='wip' data-page='route' active><img src="img/route.svg" /></button>
+    <button data-page='reports'><img src="img/messages.svg" /></button>
+  </div>
+
+  <div class='tab-title'>Minha Rota</div>
+
+  <form class='inset' id="routeEndPoints">
+
+    <label class='input'>
+      <img src="img/origin.svg" />
+      <input name="origem" placeholder="Endereço de Partida" />
+    </label>
+
+    <label class='input'>
+      <img src="img/destination.svg" />
+      <input name="destino" placeholder="Destino" />
+    </label>
+
+  </form>
+
+  <div id='route' class='grows'></div>
+
+</div>

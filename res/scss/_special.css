@@ -98,3 +98,9 @@
 {
   left: -58px;
 }
+
+.special .cont p strong
+{
+  font-size: 22px;
+  letter-spacing: 1px; 
+}

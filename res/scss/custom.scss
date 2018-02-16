@@ -22,17 +22,78 @@
 
 }
 
-#report-new-map
+.map.loading > div
+{
+  opacity: 0;
+}
+
+#map
+{
+  background-image: url(img/clock.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 64px;
+}
+
+#report-edit-map
 {
   height: 160px;
   margin-bottom: 28px;
+  background-color: #e7e7e7;
+  background-image: url(img/clock.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 64px;
 }
 
 #report-view-map
 {
   height: 160px;
   margin-bottom: 28px;
+  background-color: #e7e6e7;
+  background-image: url(img/clock.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 64px;
 }
+
+#reportsPage .tab-title
+{
+  margin-bottom: $space;
+}
+
+.empty
+{
+  padding: 64px;
+  text-align: center;
+  font-size: 32px;
+  color: gray;
+
+  small{ display: block; }
+
+}
+
+.cat
+{
+  display: none;
+
+  position: absolute;
+  bottom: 30px;
+  right: 100px;
+  left: $space;
+  font-size: 23px;
+  line-height: 22px;
+  color: gray;
+
+  img
+  {
+    position: relative;
+    bottom: -2px;
+  }
+
+}
+
+.show-cat .cat{ display: flex; }
 
 #area
 {

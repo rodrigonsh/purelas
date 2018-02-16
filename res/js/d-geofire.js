@@ -1,9 +1,9 @@
-var geofireRef = db.ref('geofire')
+var reportsGeoFireRef = db.ref('geoReports')
 var reportsRef = db.ref('reports')
 
-var geoFire = new GeoFire(geofireRef);
-
+var reportsGeoFire = new GeoFire(reportsGeoFireRef);
 var geoInfos = JSON.parse(localStorage.getItem('geoInfos'))
+
 var currentGeoQuery = JSON.parse(localStorage.getItem('currentGeoQuery'))
 var reports = JSON.parse(localStorage.getItem('reports'))
 
@@ -14,22 +14,36 @@ if ( currentGeoQuery == null )
   currentGeoQuery = { center: [0,0], radius: 50 }
 }
 
-var geoQuery = geoFire.query( currentGeoQuery );
+var reportsGeoQuery = reportsGeoFire.query( currentGeoQuery );
 
 // Attach event callbacks to the query
 
-var onKeyEnteredRegistration = geoQuery.on("key_entered", function(key, location, distance) {
+var onKeyEnteredRegistration = reportsGeoQuery.on("key_entered", function(key, location, distance) {
 
-  key = parseInt(key)
-
-  console.log(key + " entered the query. Hi " + key + "!", distance);
+  console.log(key, "entered the query. Hi!", distance);
 
   reportsRef.child( key )
     .on('value', function(s)
     {
-      reports[ key ] = s.val()
-      localStorage.setItem('reports', JSON.stringify(reports))
-      emit('reportsChanged')
+
+      var val = s.val()
+
+      if ( val != null )
+      {
+
+        val.k = key
+        var ts = val.timestamp
+        delete val.timestamp
+
+        geoInfos[ key ].timestamp = ts
+        reports[ ts ] = val
+
+        localStorage.setItem('reports', JSON.stringify(reports))
+
+        emit('reportsChanged')
+
+      }
+
     })
 
 
@@ -38,13 +52,11 @@ var onKeyEnteredRegistration = geoQuery.on("key_entered", function(key, location
 
 });
 
-var onKeyExitedRegistration = geoQuery.on("key_exited", function(key, location) {
-
-  key = parseInt(key)
+var onKeyExitedRegistration = reportsGeoQuery.on("key_exited", function(key, location) {
 
   console.log(key + " migrated out of the query. Bye bye :(");
 
-  delete reports[ key ]
+  delete reports[ geoInfos[key].timestamp ]
   delete geoInfos[ key ]
 
   emit('reportsChanged')
@@ -52,11 +64,14 @@ var onKeyExitedRegistration = geoQuery.on("key_exited", function(key, location) 
 
 });
 
-var onKeyMovedRegistration = geoQuery.on("key_moved", function(key, location, distance) {
-  key = parseInt(key)
-  geoInfos[ key ] = { d: distance, l: location }
+var onKeyMovedRegistration = reportsGeoQuery.on("key_moved", function(key, location, distance) {
+
+  geoInfos[ key ].distance = distance
+  geoInfos[ key ].location = location
+
   emit('reportsChanged')
   emit('geoInfosChanged')
+
 });
 
 
@@ -65,7 +80,7 @@ addEventListener('gotPosition', function(ev)
   console.log('atualizando criterio geoQuery')
 
   currentGeoQuery.center = currentPosition
-  geoQuery.updateCriteria(currentGeoQuery)
+  reportsGeoQuery.updateCriteria(currentGeoQuery)
 
   localStorage.setItem( 'currentGeoQuery', JSON.stringify(currentGeoQuery) )
 

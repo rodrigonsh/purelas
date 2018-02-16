@@ -1,10 +1,17 @@
+$reportsPage = q("#reportsPage")
+$reportsList = q("#reportsPage [data-action=view]")
+
+
 addEventListener('reportsBefore', function(){
+
+  var keys = Object.keys( geoInfos )
+  if ( keys.length == 0  ) $reportsPage.classList.add('nodata')
+  else $reportsPage.classList.remove('nodata')
 
   setPage('reports')
 
 })
 
-$reportsList = q("#reportsPage [data-action=view]")
 
 addEventListener('reportsChanged', function()
 {
@@ -40,5 +47,11 @@ addEventListener('reportsChanged', function()
     $reportsList.appendChild(card)
 
   }
+
+  if ( timestamps.length == 0 ) $reportsPage.classList.add('nodata')
+  else $reportsPage.classList.remove('nodata')
+
+  if ( timestamps.length < 3 ) $reportsPage.classList.add('show-cat')
+  else $reportsPage.classList.remove('show-cat')
 
 })

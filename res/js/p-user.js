@@ -77,11 +77,14 @@ addEventListener('userSave', function()
 
 })
 
-var $userForm = $('#userPage form')
 addEventListener('userBefore', function(ev)
 {
   setPage('user')
 })
+
+
+
+var $userForm = $('#userPage form')
 
 $userForm.submit(function(ev)
 {

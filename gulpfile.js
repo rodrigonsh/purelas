@@ -16,9 +16,19 @@ var sassOptions = {
 };
 
 // Definimos o diretorio dos arquivos para evitar repetição futuramente
+var html_files = "./res/html/*.html";
 var js_files = "./res/js/*.js";
 var scss_files = "./res/scss/*.scss";
 var scss_index =  "./res/scss/app.scss";
+
+
+gulp.task('html', function() {
+
+	gulp.src(html_files)
+	.pipe(concat('index.html'))
+	.pipe(gulp.dest('./www/'));
+
+});
 
 gulp.task('js', function() {
 
@@ -38,7 +48,7 @@ gulp.task('styles', function() {
   .pipe(autoprefixer())
 	//.pipe(uglify())
 	.pipe(gulp.dest('./www/'))
-  //.pipe( browserSync.reload({ stream:true }) );
+  .pipe( browserSync.reload({ stream:true }) );
 	});
 
 
@@ -63,9 +73,9 @@ gulp.task('serve', function(done) {
 });
 
 
-gulp.task('default', ['styles', 'js', 'serve'], function() {
+gulp.task('default', ['html', 'styles', 'js', 'serve'], function() {
 
-  gulp.watch('./www/index.html', browserSync.reload);
+  gulp.watch(html_files, ['html', browserSync.reload] );
 
   gulp.watch(js_files, ['js', browserSync.reload] );
 

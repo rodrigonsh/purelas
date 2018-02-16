@@ -89,3 +89,15 @@ shell.addEventListener('touchend', function(ev)
   shell.classList.remove('drag')
 
 })
+
+function toast(msg)
+{
+  q("toast span").textContent = msg
+
+  q("toast").removeAttribute('hidden')
+
+  setTimeout( function()
+  {
+    q("toast").setAttribute('hidden', 'hidden')
+  }, 5000)
+}

@@ -1,5 +1,4 @@
 $map = q("#map")
-$mapCenter = q("#mapPage [data-action=map-center]")
 
 $map.addEventListener('touchmove', function(ev){
   ev.stopPropagation()
@@ -14,45 +13,62 @@ addEventListener('mapBefore', function(){
 })
 
 
-addEventListener('getPosition', function()
-{
-  $mapCenter.classList.add('pulse')
-})
-
 addEventListener('gotPosition', function(ev)
 {
-  $mapCenter.classList.remove('pulse')
   map.setCenter( currentLatLng )
 })
 
 addEventListener('reportsChanged', function(ev)
 {
-  // plot markers and shit
+  // clear markers
   for( var i=0; i<markersArray.length; i++ )
   {
     markersArray[i].setMap(null);
+    delete markersArray[i]
   }
 
-  var keys = Object.keys( geoInfos )
+  var keys = Object.keys( reports )
   for( var i=0; i<keys.length; i++ )
   {
 
-    pos = { lat: geoInfos[keys[i]].l[0], lng: geoInfos[keys[i]].l[1] }
+    var rep = reports[keys[i]]
 
     var m = new google.maps.Marker({
-      position: pos,
+      position: makeLatLng( rep.coords ),
       map: map,
       icon: {
         path: google.maps.SymbolPath.CIRCLE,
-        fillColor: '#904f98',
+        fillColor: '#904f98', //TODO: color code
         fillOpacity: .8,
-        scale: 20,
+        scale: 20, // TODO: scale according to recency
         strokeColor: '#904f98',
         strokeWeight: .5
       }
     })
 
     markersArray.push(m)
+
+    while ( 'before' in rep )
+    {
+
+      rep = rep.before
+
+      var m = new google.maps.Marker({
+        position: makeLatLng( rep.coords ),
+        map: map,
+        icon: {
+          path: google.maps.SymbolPath.CIRCLE,
+          fillColor: '#904f98', //TODO: color code
+          fillOpacity: .8,
+          scale: 20, // TODO: scale according to recency
+          strokeColor: '#904f98',
+          strokeWeight: .5
+        }
+      })
+
+      markersArray.push(m)
+
+    }
 
   }
 

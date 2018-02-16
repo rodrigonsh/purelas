@@ -1,28 +1,14 @@
-var currentPosition = localStorage.getItem('currentPosition')
-var currentLatLng = localStorage.getItem('currentLatLng')
+var currentPosition = JSON.parse(localStorage.getItem('currentPosition'))
+var currentLatLng = JSON.parse(localStorage.getItem('currentLatLng'))
 
 if ( currentPosition == null )
 {
 
   currentPosition = [-20.4670068, -54.6222753]
-  currentLatLng = { lat: -20.4670068, lng: -54.6222753 };
-
-  getCoords()
+  currentLatLng = { lat: -20.4670068, lng: -54.6222753 }
 
 }
 
-function getCoords()
-{
-
-  emit('getPosition')
-
-  navigator.geolocation.watchPosition(
-    gotPosition,
-    noPosition)
-
-  return true
-
-}
 
 function gotPosition(pos)
 {
@@ -37,7 +23,9 @@ function gotPosition(pos)
 
 function noPosition()
 {
-  emit('noPosition')
+  toast('Erro ao obter sua localização, por favor ative seu GPS')
 }
 
-setTimeout( getCoords, 10000 )
+var watchPosition = navigator.geolocation.watchPosition(
+  gotPosition,
+  noPosition)

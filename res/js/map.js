@@ -3,7 +3,7 @@ var mapAPIKey = "AIzaSyAgQ3Td8h6homy1Hf2MIT9DUR9882g-42Q"
 
 var map = null
 var route = null
-var reportNewMap = null
+var reportEditMap = null
 var reportViewMap = null
 var mapsReady = false
 var renderMap = null
@@ -23,10 +23,10 @@ function getCircle()
 function initMap()
 {
 
+  console.log('initMap', currentLatLng)
 
   map = new google.maps.Map(document.getElementById('map'), {
     zoom: 14,
-    center: currentLatLng,
     disableDefaultUI: true,
   });
 
@@ -40,7 +40,15 @@ function initMap()
 
   });
 
+  if ( currentLatLng != null )
+  {
+    try
+    {
+      console.log( typeof currentLatLng, currentLatLng.lat, currentLatLng.lng )
+      map.setCenter( currentLatLng )
+    } catch( e ){ console.error( e, currentLatLng ) }
 
+  }
 
   mapsReady = true
 

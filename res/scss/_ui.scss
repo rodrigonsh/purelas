@@ -25,6 +25,9 @@
 .login{ display: none; }
 .logged .login{ display: block; }
 
+.empty{ display: none; }
+.nodata .empty{ display: block; }
+
 .justify-center
 {
   justify-content: center;
@@ -75,18 +78,27 @@ button:hover
 
 .fab
 {
-  width: 51px;
-  height: 51px;
-  background: $app_primary_color;
+  padding: 0px;
+  padding-top: 0px;
+  padding-right: 0px;
+  padding-bottom: 0px;
+  padding-left: 0px;
+  width: 64px;
+  height: 64px;
+  background: #924f97;
   border-radius: 50%;
-  box-shadow: 0px 5px 20px rgba(0,0,0,0.3);
+  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.3);
   position: absolute;
-  bottom: $space;
-  right: $space;
+  bottom: 18px;
+  right: 18px;
   color: white;
   font-size: 28px;
   border: none;
   transition: 0.3s box-shadow;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .fab.secondary

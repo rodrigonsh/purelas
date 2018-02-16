@@ -1,0 +1,40 @@
+toast
+{
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  background: black;
+  color: wheat;
+  display: flex;
+  padding: 0px;
+
+  transition: bottom 0.4s;
+
+  span
+  {
+    flex-grow: 1;
+    flex-shrink: 1;
+    padding: 10px 14px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  button
+  {
+    flex-grow: 0;
+    flex-shrink: 0;
+    border: 0;
+    border-left: 1px solid #191919;
+    padding: 10px 16px;
+    background: #080808;
+    color: yellow;
+    text-transform: uppercase;
+  }
+
+}
+
+toast[hidden]
+{
+  bottom: -50px;
+}

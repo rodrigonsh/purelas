@@ -5,8 +5,8 @@ const GeoFire = require('geofire');
 
 admin.initializeApp(functions.config().firebase);
 
-const geoRef = admin.database().ref('/geofire')
-const geoFire = new GeoFire(geoRef);
+const geoReportsRef = admin.database().ref('/geoReports')
+const reportsGeoFire = new GeoFire(geoReportsRef);
 
 // // Create and Deploy Your First Cloud Functions
 // // https://firebase.google.com/docs/functions/write-firebase-functions
@@ -31,10 +31,10 @@ exports.sendReport = functions.https.onRequest((req, res) => {
     return admin.database().ref('/reports').child(ts).set(req.body)
     .then( function(){
 
-      return geoFire.set(ts.toString(), coords)
+      return reportsGeoFire.set(ts.toString(), coords)
       .then( function(){ return res.status(200).send(ts) } )
 
-    } )    
+    } )
     .catch( function(q){ console.log(q) } )
   })
 

@@ -1,5 +1,8 @@
+var currentReport = null;
+
 var reportViewMarker = null
 
+var $viewReportAddress = q("#viewReportPage #address")
 var $viewReportText = q("#viewReportPage #report")
 var $viewReportAgressor = q("#viewReportPage #agressor")
 var $viewReportDate = q("#viewReportPage #published_at")
@@ -25,37 +28,23 @@ addEventListener('reportsView', function(ev)
   }
 
   var target = ev.data
-  console.log(target)
+  console.log(target.nodeName)
 
-  if ( target.nodeName != "card" )
+  if ( target.nodeName != "CARD" )
   {
     target = target.parentNode
   }
 
+  console.log( target, target.getAttribute('id') )
+
   ts = parseInt( target.getAttribute('id') )
 
-  var rep = reports[ts]
+  currentReport = reports[ts]
 
-  $viewReportText.textContent = rep.report
-  $viewReportAgressor.textContent = rep.agressor
+  $viewReportAddress.textContent = currentReport.address
+  $viewReportText.textContent = currentReport.report
+  $viewReportAgressor.textContent = currentReport.agressor
   $viewReportDate.textContent = moment(ts).format("LL")
-
-  reportViewMap.setCenter( makeLatLng(geoInfos[ts].l) )
-
-  if ( reportViewMarker == null )
-  {
-
-    reportViewMarker = new google.maps.Marker({
-      position: makeLatLng(geoInfos[ts].l),
-      map: reportViewMap
-    })
-
-  }
-
-  else
-  {
-    reportViewMarker.setPosition( makeLatLng(geoInfos[ts].l) )
-  }
 
   setPage('report-view')
 
@@ -63,9 +52,22 @@ addEventListener('reportsView', function(ev)
 
 addEventListener('reportViewMapRender', function()
 {
+
   reportViewMap = new google.maps.Map(
     document.getElementById('report-view-map'), {
     zoom: 14,
-    center: currentLatLng
+    center: makeLatLng(currentReport.coords)
   })
+
+  if ( reportViewMarker == null )
+  {
+
+    reportViewMarker = new google.maps.Marker({
+      map: reportViewMap
+    })
+
+  }
+
+  reportViewMarker.setPosition( makeLatLng( currentReport.coords ) )
+
 })

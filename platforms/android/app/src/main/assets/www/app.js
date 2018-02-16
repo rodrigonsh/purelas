@@ -52,9 +52,9 @@ function emit( evName, data )
   if ( data == undefined ) console.log('emit', evName)
   else console.log('emit', evName, data)
 
-  var e = new Event(evName)
+  var e = new Event(evName, {bubbles: true})
   e.data = data
-  setTimeout(function(){dispatchEvent( e )},200)
+  setTimeout(function(){ document.dispatchEvent( e ) },200)
 
 }
 
@@ -94,7 +94,6 @@ function makeLatLng(coords)
 }
 
 var $app = $('#app')[0]
-console.log($app)
 
 addEventListener('online', function()
 {
@@ -119,6 +118,8 @@ addEventListener('userSet', function()
   }
 
 })
+
+$("#splash").addClass('show');
 
 /*!
  * GeoFire is an open-source library that allows you to store and query a set
@@ -160,12 +161,12 @@ moment.locale("pt");
 var newUser = null;
 var userData = null;
 var currentUser = null;
+var afterAuth = null;
 
 function logout()
 {
   UID = null
   auth.signOut()
-  alert("Usuário foi desconectado")
 }
 
 function login( email, password )
@@ -196,7 +197,8 @@ auth.onAuthStateChanged( function (user)
 
   if ( user == null )
   {
-    UID = null;
+    UID = null
+    afterAuth = null
   }
 
   else
@@ -211,8 +213,14 @@ auth.onAuthStateChanged( function (user)
 
     })
 
+    emit('updateLoginInfo')
+
     if( newUser ) emit('userNew')
-    else emit('mapBefore')
+    else
+    {
+      if ( afterAuth == null )  emit('mapBefore')
+      else emit( afterAuth+'Before' )
+    }
 
     newUser = false;
 
@@ -229,16 +237,25 @@ addEventListener('userDataSave', function()
   currentUser.updateProfile( { displayName: userData.name } )
   db.ref("users/"+UID)
     .set( userData )
-    .then( function(ev){ emit('homeBefore') } )
+    .then( function(ev){ emit('thanks', 'user') } )
 
 })
 
-var geofireRef = db.ref('geofire')
+addEventListener('updateLoginInfo', function()
+{
+
+  db.ref("users/"+UID)
+    .child('logged_at')
+    .set( new Date().valueOf() )
+
+})
+
+var reportsGeoFireRef = db.ref('geoReports')
 var reportsRef = db.ref('reports')
 
-var geoFire = new GeoFire(geofireRef);
-
+var reportsGeoFire = new GeoFire(reportsGeoFireRef);
 var geoInfos = JSON.parse(localStorage.getItem('geoInfos'))
+
 var currentGeoQuery = JSON.parse(localStorage.getItem('currentGeoQuery'))
 var reports = JSON.parse(localStorage.getItem('reports'))
 
@@ -249,22 +266,36 @@ if ( currentGeoQuery == null )
   currentGeoQuery = { center: [0,0], radius: 50 }
 }
 
-var geoQuery = geoFire.query( currentGeoQuery );
+var reportsGeoQuery = reportsGeoFire.query( currentGeoQuery );
 
 // Attach event callbacks to the query
 
-var onKeyEnteredRegistration = geoQuery.on("key_entered", function(key, location, distance) {
+var onKeyEnteredRegistration = reportsGeoQuery.on("key_entered", function(key, location, distance) {
 
-  key = parseInt(key)
-
-  console.log(key + " entered the query. Hi " + key + "!", distance);
+  console.log(key, "entered the query. Hi!", distance);
 
   reportsRef.child( key )
     .on('value', function(s)
     {
-      reports[ key ] = s.val()
-      localStorage.setItem('reports', JSON.stringify(reports))
-      emit('reportsChanged')
+
+      var val = s.val()
+
+      if ( val != null )
+      {
+
+        val.k = key
+        var ts = val.timestamp
+        delete val.timestamp
+
+        geoInfos[ key ].timestamp = ts
+        reports[ ts ] = val
+
+        localStorage.setItem('reports', JSON.stringify(reports))
+
+        emit('reportsChanged')
+
+      }
+
     })
 
 
@@ -273,13 +304,11 @@ var onKeyEnteredRegistration = geoQuery.on("key_entered", function(key, location
 
 });
 
-var onKeyExitedRegistration = geoQuery.on("key_exited", function(key, location) {
-
-  key = parseInt(key)
+var onKeyExitedRegistration = reportsGeoQuery.on("key_exited", function(key, location) {
 
   console.log(key + " migrated out of the query. Bye bye :(");
 
-  delete reports[ key ]
+  delete reports[ geoInfos[key].timestamp ]
   delete geoInfos[ key ]
 
   emit('reportsChanged')
@@ -287,11 +316,14 @@ var onKeyExitedRegistration = geoQuery.on("key_exited", function(key, location) 
 
 });
 
-var onKeyMovedRegistration = geoQuery.on("key_moved", function(key, location, distance) {
-  key = parseInt(key)
-  geoInfos[ key ] = { d: distance, l: location }
+var onKeyMovedRegistration = reportsGeoQuery.on("key_moved", function(key, location, distance) {
+
+  geoInfos[ key ].distance = distance
+  geoInfos[ key ].location = location
+
   emit('reportsChanged')
   emit('geoInfosChanged')
+
 });
 
 
@@ -300,7 +332,7 @@ addEventListener('gotPosition', function(ev)
   console.log('atualizando criterio geoQuery')
 
   currentGeoQuery.center = currentPosition
-  geoQuery.updateCriteria(currentGeoQuery)
+  reportsGeoQuery.updateCriteria(currentGeoQuery)
 
   localStorage.setItem( 'currentGeoQuery', JSON.stringify(currentGeoQuery) )
 
@@ -316,31 +348,17 @@ addEventListener('geoInfosChanged', function(ev)
   localStorage.setItem('geoInfos', JSON.stringify( geoInfos ))
 })
 
-var currentPosition = localStorage.getItem('currentPosition')
-var currentLatLng = localStorage.getItem('currentLatLng')
+var currentPosition = JSON.parse(localStorage.getItem('currentPosition'))
+var currentLatLng = JSON.parse(localStorage.getItem('currentLatLng'))
 
 if ( currentPosition == null )
 {
 
   currentPosition = [-20.4670068, -54.6222753]
-  currentLatLng = { lat: -20.4670068, lng: -54.6222753 };
-
-  getCoords()
+  currentLatLng = { lat: -20.4670068, lng: -54.6222753 }
 
 }
 
-function getCoords()
-{
-
-  emit('getPosition')
-
-  navigator.geolocation.watchPosition(
-    gotPosition,
-    noPosition)
-
-  return true
-
-}
 
 function gotPosition(pos)
 {
@@ -355,10 +373,48 @@ function gotPosition(pos)
 
 function noPosition()
 {
-  emit('noPosition')
+  toast('Erro ao obter sua localização, por favor ative seu GPS')
 }
 
-setTimeout( getCoords, 10000 )
+var watchPosition = navigator.geolocation.watchPosition(
+  gotPosition,
+  noPosition)
+
+
+var userReport = JSON.parse( localStorage.getItem('userReport') )
+var userReportRef = null;
+
+function resetuserReport()
+{
+  userReport = {
+    type: '',
+    address: '',
+    report: '',
+    agressor: '',
+    timestamp: new Date().valueOf(),
+    coords: [0,0]
+  }
+}
+
+if ( userReport == null ) resetuserReport()
+
+
+addEventListener('userSet', function()
+{
+  if ( UID == null ) return
+
+  userReportRef = db.ref( '/reports/'+UID )
+  userReportRef.on('value', function(s)
+  {
+
+    if ( s.val() == null ) resetuserReport()
+    else userReport = s.val()
+
+    localStorage.setItem( 'userReport' , JSON.stringify( userReport ) )
+
+  })
+
+})
 
 var errMessages =
 {
@@ -382,7 +438,7 @@ var mapAPIKey = "AIzaSyAgQ3Td8h6homy1Hf2MIT9DUR9882g-42Q"
 
 var map = null
 var route = null
-var reportNewMap = null
+var reportEditMap = null
 var reportViewMap = null
 var mapsReady = false
 var renderMap = null
@@ -402,10 +458,10 @@ function getCircle()
 function initMap()
 {
 
+  console.log('initMap', currentLatLng)
 
   map = new google.maps.Map(document.getElementById('map'), {
     zoom: 14,
-    center: currentLatLng,
     disableDefaultUI: true,
   });
 
@@ -419,7 +475,15 @@ function initMap()
 
   });
 
+  if ( currentLatLng != null )
+  {
+    try
+    {
+      console.log( typeof currentLatLng, currentLatLng.lat, currentLatLng.lng )
+      map.setCenter( currentLatLng )
+    } catch( e ){ console.error( e, currentLatLng ) }
 
+  }
 
   mapsReady = true
 
@@ -473,7 +537,6 @@ addEventListener('loginBefore', function(){
 })
 
 $map = q("#map")
-$mapCenter = q("#mapPage [data-action=map-center]")
 
 $map.addEventListener('touchmove', function(ev){
   ev.stopPropagation()
@@ -488,45 +551,62 @@ addEventListener('mapBefore', function(){
 })
 
 
-addEventListener('getPosition', function()
-{
-  $mapCenter.classList.add('pulse')
-})
-
 addEventListener('gotPosition', function(ev)
 {
-  $mapCenter.classList.remove('pulse')
   map.setCenter( currentLatLng )
 })
 
 addEventListener('reportsChanged', function(ev)
 {
-  // plot markers and shit
+  // clear markers
   for( var i=0; i<markersArray.length; i++ )
   {
     markersArray[i].setMap(null);
+    delete markersArray[i]
   }
 
-  var keys = Object.keys( geoInfos )
+  var keys = Object.keys( reports )
   for( var i=0; i<keys.length; i++ )
   {
 
-    pos = { lat: geoInfos[keys[i]].l[0], lng: geoInfos[keys[i]].l[1] }
+    var rep = reports[keys[i]]
 
     var m = new google.maps.Marker({
-      position: pos,
+      position: makeLatLng( rep.coords ),
       map: map,
       icon: {
         path: google.maps.SymbolPath.CIRCLE,
-        fillColor: '#904f98',
+        fillColor: '#904f98', //TODO: color code
         fillOpacity: .8,
-        scale: 20,
+        scale: 20, // TODO: scale according to recency
         strokeColor: '#904f98',
         strokeWeight: .5
       }
     })
 
     markersArray.push(m)
+
+    while ( 'before' in rep )
+    {
+
+      rep = rep.before
+
+      var m = new google.maps.Marker({
+        position: makeLatLng( rep.coords ),
+        map: map,
+        icon: {
+          path: google.maps.SymbolPath.CIRCLE,
+          fillColor: '#904f98', //TODO: color code
+          fillOpacity: .8,
+          scale: 20, // TODO: scale according to recency
+          strokeColor: '#904f98',
+          strokeWeight: .5
+        }
+      })
+
+      markersArray.push(m)
+
+    }
 
   }
 
@@ -627,54 +707,72 @@ addEventListener('registerBefore', function(){
 
 })
 
-var $reportNewForm = q('#newReportPage form')
-var $reportNewType = q('#newReportPage [name="type"]')
-var $reportNewGeocode = q('#newReportPage [name=geocode]')
-var $reportNewText = q('#newReportPage [name=report]')
-var $reportNewAgressor = q('#newReportPage [name=agressor]')
-var reportNewMarker= null
-var reportNewCoords = null
+var $reportEditForm = q('#reportEditPage form')
+var $reportEditType = q('#reportEditPage [name="type"]')
+var $reportEditGeocode = q('#reportEditPage [name=geocode]')
+var $reportEditMapWr = q('#reportEditPage #report-edit-map')
+var $reportEditText = q('#reportEditPage [name=report]')
+var $reportEditAgressor = q('#reportEditPage [name=agressor]')
+var reportEditMarker= null
+var reportEditCoords = null
 
-$reportNewMap = q("#report-new-map")
+$reportEditMap = q("#report-edit-map")
 
-$reportNewMap.addEventListener('touchmove', function(ev){
+$reportEditMap.addEventListener('touchmove', function(ev){
   ev.stopPropagation()
 })
 
-addEventListener('report-newBefore', function(){
+addEventListener('report-editBefore', function()
+{
 
-  $reportNewGeocode.focus()
-
-  if ( mapsReady && reportNewMap == null )
+  if ( mapsReady && reportEditMap == null )
   {
-    emit('reportNewMapRender')
+    emit('reportEditMapRender')
   }
 
-  if( !mapsReady && reportNewMap == null )
+  if( !mapsReady && reportEditMap == null )
   {
     // enqueue rendering
-    renderMap = 'reportNewMap'
+    renderMap = 'reportEditMap'
   }
 
+  reportEditCoords = makeLatLng(userReport.coords)
+  $reportEditType.value = userReport.type
+  $reportEditGeocode.value = userReport.address
+  $reportEditText.value = userReport.report
+  $reportEditAgressor.value = userReport.agressor
 
-  reportNewCoords = null
-  $reportNewType.value = "nd"
-  $reportNewGeocode.value = ""
-  $reportNewText.value = ""
-  $reportNewAgressor.value = ""
-
-  setPage('report-new')
+  setPage('report-edit')
 
 })
 
 
-addEventListener('reportNewMapRender', function()
+addEventListener('reportEditMapRender', function()
 {
-  reportNewMap = new google.maps.Map(
-    document.getElementById('report-new-map'), {
+
+  console.log('HEY! reportEditMapRender', reportEditMarker)
+
+  reportEditMap = new google.maps.Map(
+    document.getElementById('report-edit-map'), {
       zoom: 14,
-      center: currentLatLng
+      center: makeLatLng(userReport.coords)
     })
+
+    if ( reportEditMarker == null )
+    {
+
+      reportEditMarker = new google.maps.Marker({
+        map: reportEditMap
+      })
+
+      /*if ( userReport != null )
+      {
+      }*/
+
+    }
+
+    reportEditMarker.setPosition( makeLatLng(userReport.coords) )
+
 })
 
 
@@ -684,47 +782,34 @@ geocodeXHR = new XMLHttpRequest()
 geocodeXHR.onload = function()
 {
 
+  $reportEditMapWr.classList.remove('loading')
+
   var res = JSON.parse(geocodeXHR.responseText)
 
   if ( res.status != "OK" )
   {
-    alert('erro no geocoding')
+    reportEditCoords = null
+    alert('Endereço não retornou coordenadas! Envie um endereço válido')
     return
   }
 
-  reportNewCoords = res.results[0].geometry.location
+  reportEditCoords = res.results[0].geometry.location
 
-  reportNewMap.setCenter( reportNewCoords )
-
-  if ( reportNewMarker == null )
-  {
-
-    reportNewMarker = new google.maps.Marker({
-      position: reportNewCoords,
-      map: reportNewMap
-    })
-
-  }
-
-  else
-  {
-    reportNewMarker.setPosition( reportNewCoords )
-  }
-
-
+  reportEditMap.setCenter( reportEditCoords )
+  reportEditMarker.setPosition( reportEditCoords )
 
 }
 
 
-$reportNewGeocode.addEventListener('keyup', debounce(function() {
+$reportEditGeocode.addEventListener('keyup', debounce(function() {
 
-  if ( $reportNewGeocode.value.trim() == "" ) return;
+  if ( $reportEditGeocode.value.trim() == "" ) return;
 
-  console.log('geocoding', $reportNewGeocode.value)
+  console.log('geocoding', $reportEditGeocode.value)
 
   var params = [
     geocodeURI,
-    "?address=", $reportNewGeocode.value,
+    "?address=", $reportEditGeocode.value,
     "&key=", mapAPIKey
   ]
 
@@ -733,64 +818,61 @@ $reportNewGeocode.addEventListener('keyup', debounce(function() {
   geocodeXHR.open( "GET", encodeURI(uriParams) )
   geocodeXHR.send()
 
+  $reportEditMapWr.classList.add('loading')
+
 }, 1000))
 
-function reportNewBeforeSave()
+function reportEditBeforeSave()
 {
 
   console.log( 'shall we save?' )
 
-  if ( reportNewCoords == null )
+  if ( reportEditCoords == null )
   {
-    alert("Endereço sem coordenadas!")
+    alert("Endereço inválido!  Você deve informar um endereço válido")
     return
   }
 
   var timestamp = new Date().valueOf()
+  coords = [ reportEditCoords.lat, reportEditCoords.lng ]
 
   var rep =
   {
-    type: $reportNewType.value,
-    address: $reportNewGeocode.value,
-    report: $reportNewText.value,
-    agressor: $reportNewAgressor.value,
-    uid: UID,
-    coords: reportNewCoords
+    type: $reportEditType.value,
+    address: $reportEditGeocode.value,
+    report: $reportEditText.value,
+    agressor: $reportEditAgressor.value,
+    timestamp: timestamp,
+    coords: coords,
+    before: userReport
   }
 
+  reportsRef.child( UID ).set( rep )
+  reportsGeoFire.set( UID, coords )
 
-  var req = new XMLHttpRequest();
-  req.onload = function()
-  {
-    console.log('req onload', req.responseText)
-  }
+  emit('thanks', 'report')
 
-  var url = "https://us-central1-purelas-190223.cloudfunctions.net/sendReport"
-
-  req.open('POST', url, true);
-  req.setRequestHeader('Content-Type', 'application/json');
-  req.send(JSON.stringify(rep));
-
-  // TODO: adicionar index no firebase
-
-  setPage('thanks')
+  // TODO: save report to upload in case of no internet
 
 }
 
-$reportNewForm.addEventListener('submit', function(ev)
+$reportEditForm.addEventListener('submit', function(ev)
 {
 
   ev.stopPropagation()
   ev.preventDefault()
 
-  reportNewBeforeSave()
+  reportEditBeforeSave()
 
 })
 
-addEventListener('report-newSave', reportNewBeforeSave)
+addEventListener('report-editSave', reportEditBeforeSave)
+
+var currentReport = null;
 
 var reportViewMarker = null
 
+var $viewReportAddress = q("#viewReportPage #address")
 var $viewReportText = q("#viewReportPage #report")
 var $viewReportAgressor = q("#viewReportPage #agressor")
 var $viewReportDate = q("#viewReportPage #published_at")
@@ -816,37 +898,23 @@ addEventListener('reportsView', function(ev)
   }
 
   var target = ev.data
-  console.log(target)
+  console.log(target.nodeName)
 
-  if ( target.nodeName != "card" )
+  if ( target.nodeName != "CARD" )
   {
     target = target.parentNode
   }
 
+  console.log( target, target.getAttribute('id') )
+
   ts = parseInt( target.getAttribute('id') )
 
-  var rep = reports[ts]
+  currentReport = reports[ts]
 
-  $viewReportText.textContent = rep.report
-  $viewReportAgressor.textContent = rep.agressor
+  $viewReportAddress.textContent = currentReport.address
+  $viewReportText.textContent = currentReport.report
+  $viewReportAgressor.textContent = currentReport.agressor
   $viewReportDate.textContent = moment(ts).format("LL")
-
-  reportViewMap.setCenter( makeLatLng(geoInfos[ts].l) )
-
-  if ( reportViewMarker == null )
-  {
-
-    reportViewMarker = new google.maps.Marker({
-      position: makeLatLng(geoInfos[ts].l),
-      map: reportViewMap
-    })
-
-  }
-
-  else
-  {
-    reportViewMarker.setPosition( makeLatLng(geoInfos[ts].l) )
-  }
 
   setPage('report-view')
 
@@ -854,20 +922,40 @@ addEventListener('reportsView', function(ev)
 
 addEventListener('reportViewMapRender', function()
 {
+
   reportViewMap = new google.maps.Map(
     document.getElementById('report-view-map'), {
     zoom: 14,
-    center: currentLatLng
+    center: makeLatLng(currentReport.coords)
   })
+
+  if ( reportViewMarker == null )
+  {
+
+    reportViewMarker = new google.maps.Marker({
+      map: reportViewMap
+    })
+
+  }
+
+  reportViewMarker.setPosition( makeLatLng( currentReport.coords ) )
+
 })
 
+$reportsPage = q("#reportsPage")
+$reportsList = q("#reportsPage [data-action=view]")
+
+
 addEventListener('reportsBefore', function(){
+
+  var keys = Object.keys( geoInfos )
+  if ( keys.length == 0  ) $reportsPage.classList.add('nodata')
+  else $reportsPage.classList.remove('nodata')
 
   setPage('reports')
 
 })
 
-$reportsList = q("#reportsPage [data-action=view]")
 
 addEventListener('reportsChanged', function()
 {
@@ -904,11 +992,45 @@ addEventListener('reportsChanged', function()
 
   }
 
+  if ( timestamps.length == 0 ) $reportsPage.classList.add('nodata')
+  else $reportsPage.classList.remove('nodata')
+
+  if ( timestamps.length < 3 ) $reportsPage.classList.add('show-cat')
+  else $reportsPage.classList.remove('show-cat')
+
 })
 
 addEventListener('routeBefore', function(){
 
   setPage('route')
+
+})
+
+$thanksMessage = q("#thanksPage p strong")
+$thanksAux = q("#thanksPage p.aux")
+
+addEventListener('thanksBefore', function(){
+
+  setPage('thanks')
+
+})
+
+addEventListener('thanks', function(ev)
+{
+
+  if ( ev.data == 'user' )
+  {
+    $thanksMessage.textContent = "Obrigado por atualizar suas informações"
+    $thanksAux.textContent = "Seus dados são sigilosos e não serão compartilhados"
+  }
+
+  if ( ev.data == 'report' )
+  {
+    $thanksMessage.textContent = "Obrigado por compartilhar seu relato"
+    $thanksAux.textContent = "Esta informação é anônima"
+  }
+
+  emit('thanksBefore')
 
 })
 
@@ -991,11 +1113,14 @@ addEventListener('userSave', function()
 
 })
 
-var $userForm = $('#userPage form')
 addEventListener('userBefore', function(ev)
 {
   setPage('user')
 })
+
+
+
+var $userForm = $('#userPage form')
 
 $userForm.submit(function(ev)
 {
@@ -1119,14 +1244,26 @@ shell.addEventListener('touchend', function(ev)
 
 })
 
+function toast(msg)
+{
+  q("toast span").textContent = msg
+
+  q("toast").removeAttribute('hidden')
+
+  setTimeout( function()
+  {
+    q("toast").setAttribute('hidden', 'hidden')
+  }, 5000)
+}
+
 
 setTimeout(function(){
   $("#splash").addClass('hiding');
-}, 1000)
+}, 1500)
 
 setTimeout(function(){
   $("#splash").addClass('hidden');
-}, 1500)
+}, 2500)
 
 var $navigator = document.getElementById('navigator');
 
@@ -1185,7 +1322,7 @@ $("[data-action='save']").on('tap', function(ev)
   ev.stopPropagation()
   ev.preventDefault()
 
-  var t = getTargetPage(v.currentTarget)
+  var t = getTargetPage(ev.currentTarget)
   emit(t.dataset.page+"Save")
 
 })
@@ -1247,6 +1384,7 @@ $("[data-page]").on('tap', function(ev)
 
   if ( next.hasAttribute('auth') && UID == null )
   {
+    afterAuth = pageName
     setPage('login')
   } else {
     emit( pageName+"Before" )
@@ -1278,7 +1416,10 @@ addEventListener('keyup', function(ev){
   }
 })
 
-document.addEventListener('backbutton', function(ev){
+
+function onBackButton(ev){
+
+  console.log('opa!')
 
   ev.stopPropagation()
   ev.preventDefault()
@@ -1300,7 +1441,10 @@ document.addEventListener('backbutton', function(ev){
   }
 
 
-}, false);
+}
+
+window.addEventListener('backbutton', onBackButton, false);
+document.addEventListener('backbutton', onBackButton, false);
 
 $("[data-action=map-center]").on('tap', function(ev)
 {

@@ -1,10 +1,10 @@
 setTimeout(function(){
   $("#splash").addClass('hiding');
-}, 1000)
+}, 1500)
 
 setTimeout(function(){
   $("#splash").addClass('hidden');
-}, 1500)
+}, 2500)
 
 var $navigator = document.getElementById('navigator');
 
@@ -63,7 +63,7 @@ $("[data-action='save']").on('tap', function(ev)
   ev.stopPropagation()
   ev.preventDefault()
 
-  var t = getTargetPage(v.currentTarget)
+  var t = getTargetPage(ev.currentTarget)
   emit(t.dataset.page+"Save")
 
 })
@@ -125,6 +125,7 @@ $("[data-page]").on('tap', function(ev)
 
   if ( next.hasAttribute('auth') && UID == null )
   {
+    afterAuth = pageName
     setPage('login')
   } else {
     emit( pageName+"Before" )
@@ -156,7 +157,10 @@ addEventListener('keyup', function(ev){
   }
 })
 
-document.addEventListener('backbutton', function(ev){
+
+function onBackButton(ev){
+
+  console.log('opa!')
 
   ev.stopPropagation()
   ev.preventDefault()
@@ -178,7 +182,10 @@ document.addEventListener('backbutton', function(ev){
   }
 
 
-}, false);
+}
+
+window.addEventListener('backbutton', onBackButton, false);
+document.addEventListener('backbutton', onBackButton, false);
 
 $("[data-action=map-center]").on('tap', function(ev)
 {

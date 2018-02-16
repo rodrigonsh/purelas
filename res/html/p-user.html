@@ -1,0 +1,85 @@
+<div id='userPage' data-page='user' auth class='page'>
+
+  <header>
+    <button data-action='back'><img src="img/back.svg" /></button>
+    <h2>Meus Dados</h2>
+    <button data-action='save'><img src="img/tick.svg" /></button>
+  </header>
+
+  <div class='scrolls'>
+
+    <form method="post">
+
+      <div class='inset'>
+
+        <label for='userName'>Nome</label>
+        <input id="userName" required />
+
+        <label for='userEmail'>Email</label>
+        <input id="userEmail" type='email' required />
+
+        <label>Senha</label>
+        <input type="password" name="senha1" value='ignore' />
+
+        <label>Nova Senha</label>
+        <input type="password" name="senha2" value='ignore' />
+
+      </div>
+
+      <hr />
+
+      <div class="inset">
+
+        <!-- https://www.tcm.go.gov.br/site/wp-content/uploads/2017/07/Tabela_de_Escolaridade.pdf-->
+        <label for='userEd'>Escolaridade</label>
+        <select id='userEd'>
+          <option value="">Escolha uma opção</option>
+          <option value='1'>Fundamental - Incompleto</option>
+          <option value='2'>Fundamental - Completo</option>
+          <option value='3'>Médio - Incompleto</option>
+          <option value='4'>Médio - Completo</option>
+          <option value='5'>Superior - Incompleto</option>
+          <option value='6'>Superior - Completo</option>
+        </select>
+
+        <label for='userSex'>Sexo</label>
+        <select id='userSex'>
+          <option value="">Escolha uma opção</option>
+          <option value="m">Mulher</option>
+          <option value="h">Homem</option>
+        </select>
+
+        <label for='userFmlCmp'>Composição Familiar</label>
+        <select id='userFmlCmp'>
+          <option value=''>Escolha uma opção</option>
+          <option value='unipessoal'>Moro só</option>
+          <option value='nao-parentes'>2+ sem parentesco</option>
+          <option value='parentes'>2+ com parentesco</option>
+        </select>
+
+        <label for='userFmlRnd'>Renda Familiar</label>
+        <select id='userFmlRnd'>
+          <option value=''>Escolha uma opção</option>
+          <option value="E">Até 2 salários mínimos</option>
+          <option value="D">2 a 4 salários mínimos</option>
+          <option value="C">4 a 10 salários mínimos</option>
+          <option value="B">10 a 20 salários mínimos</option>
+          <option value="A">Acima de 20 salários mínimos</option>
+        </select>
+
+        <button class='block'>
+          Enviar
+        </button>
+
+        <p class='disclaimer'>
+          Seus dados não serão públicos para sua segurança e
+          agradecemos sua colaboração
+        </p>
+
+      </div>
+
+    </form>
+
+  </div>
+
+</div>

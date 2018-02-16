@@ -22,7 +22,7 @@ Instale as dependências do node
 
     npm install
 
-Execute o gulp para compilar os javascripts e sass
+Execute o gulp para compilar os htmls, javascripts e sass
 
     gulp
 
@@ -31,3 +31,12 @@ Envie a versão de debug para seu android
     cordova run android
 
 Nota: você deve ter um aparelho com modo de desenvolvedor ativado
+
+## Não edite o index.html
+
+O arquivo index.html é gerado gulp através da concatenação dos arquivos em
+res/html/\*.html
+
+Toda e qualquer modificação que for necessária no código html deve ser
+feita no arquivo correspondente e em seguida deve-se deixar o gulp concatenar
+os arquivos em um index.html

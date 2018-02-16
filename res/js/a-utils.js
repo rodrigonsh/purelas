@@ -9,9 +9,9 @@ function emit( evName, data )
   if ( data == undefined ) console.log('emit', evName)
   else console.log('emit', evName, data)
 
-  var e = new Event(evName)
+  var e = new Event(evName, {bubbles: true})
   e.data = data
-  setTimeout(function(){dispatchEvent( e )},200)
+  setTimeout(function(){ document.dispatchEvent( e ) },200)
 
 }
 

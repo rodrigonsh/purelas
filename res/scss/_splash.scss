@@ -1,7 +1,7 @@
 
-#splash
+#splash,
+#splash .deco
 {
-
   position: fixed;
   top: 0px;
   left: 0px;
@@ -19,12 +19,32 @@
   opacity: 1;
   transition: opacity 0.5s;
 
+  background: white;
+
   img
   {
     display: block;
   }
 
+  footer
+  {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    padding: 18px;
+    font-size: 12px;
+    color: white;
+    text-align: center;
+
+    a{ color: white; font-weight: bold; }
+
+  }
+
 }
+
+#splash .deco{ opacity: 0;  transition: opacity 0.7s; }
+#splash.show .deco{ opacity: 1; }
 
 #splash.hiding
 {

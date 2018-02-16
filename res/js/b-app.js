@@ -1,5 +1,4 @@
 var $app = $('#app')[0]
-console.log($app)
 
 addEventListener('online', function()
 {
@@ -24,3 +23,5 @@ addEventListener('userSet', function()
   }
 
 })
+
+$("#splash").addClass('show');

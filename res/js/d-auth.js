@@ -1,12 +1,12 @@
 var newUser = null;
 var userData = null;
 var currentUser = null;
+var afterAuth = null;
 
 function logout()
 {
   UID = null
   auth.signOut()
-  alert("Usuário foi desconectado")
 }
 
 function login( email, password )
@@ -37,7 +37,8 @@ auth.onAuthStateChanged( function (user)
 
   if ( user == null )
   {
-    UID = null;
+    UID = null
+    afterAuth = null
   }
 
   else
@@ -52,8 +53,14 @@ auth.onAuthStateChanged( function (user)
 
     })
 
+    emit('updateLoginInfo')
+
     if( newUser ) emit('userNew')
-    else emit('mapBefore')
+    else
+    {
+      if ( afterAuth == null )  emit('mapBefore')
+      else emit( afterAuth+'Before' )
+    }
 
     newUser = false;
 
@@ -70,6 +77,15 @@ addEventListener('userDataSave', function()
   currentUser.updateProfile( { displayName: userData.name } )
   db.ref("users/"+UID)
     .set( userData )
-    .then( function(ev){ emit('homeBefore') } )
+    .then( function(ev){ emit('thanks', 'user') } )
+
+})
+
+addEventListener('updateLoginInfo', function()
+{
+
+  db.ref("users/"+UID)
+    .child('logged_at')
+    .set( new Date().valueOf() )
 
 })
