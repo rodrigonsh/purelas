@@ -7,9 +7,7 @@ addEventListener('online', function()
 
 addEventListener('offline', function()
 {
-  console.log('should add offline class')
   $app.classList.add('offline')
-  console.assert($app.classList.contains('offline'))
 })
 
 addEventListener('userSet', function()
@@ -18,7 +16,6 @@ addEventListener('userSet', function()
   {
     $app.classList.add('logged')
   } else {
-    console.log('not logged')
     $app.classList.remove('logged')
   }
 

@@ -1,7 +1,18 @@
 var newUser = null;
-var userData = null;
+var userData = JSON.parse( localStorage.getItem('userData') );
 var currentUser = null;
 var afterAuth = null;
+
+if ( userData == null )
+{
+  userData =
+  {
+    name: "Seu nome",
+    registered_at: null,
+    logged_at: new Date().valueOf(),
+    
+  }
+}
 
 function logout()
 {
@@ -69,6 +80,8 @@ auth.onAuthStateChanged( function (user)
 
 addEventListener('userDataSave', function()
 {
+
+  localStorage.setItem( 'userData', JSON.stringify(userData) )
 
   currentUser.updateProfile( { displayName: userData.name } )
   db.ref("users/"+UID)
