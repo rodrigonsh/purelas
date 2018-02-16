@@ -22,6 +22,9 @@
 .error{ display: none; }
 .failed .error{ display: block; }
 
+.success{ display: none; }
+.successful .success{ display: block; }
+
 .login{ display: none; }
 .logged .login{ display: block; }
 

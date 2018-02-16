@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Fri Feb 16 09:10:08 AMST 2018
+#Fri Feb 16 11:30:56 AMST 2018
 5.base=/home/rodrigo/purelas/platforms/android/app/build/intermediates/assets/debug
 42.base=/home/rodrigo/purelas/platforms/android/app/build/intermediates/res/debug/resources-debug.ap_
 32.set=ASSET

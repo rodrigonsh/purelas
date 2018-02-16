@@ -56,11 +56,7 @@ auth.onAuthStateChanged( function (user)
     emit('updateLoginInfo')
 
     if( newUser ) emit('userNew')
-    else
-    {
-      if ( afterAuth == null )  emit('mapBefore')
-      else emit( afterAuth+'Before' )
-    }
+    if ( afterAuth != null ) emit( afterAuth+'Before' )
 
     newUser = false;
 
@@ -78,6 +74,7 @@ addEventListener('userDataSave', function()
   db.ref("users/"+UID)
     .set( userData )
     .then( function(ev){ emit('thanks', 'user') } )
+    .catch( function(err){ emit('err', {kind:'user', err:err}) } )
 
 })
 
@@ -87,5 +84,6 @@ addEventListener('updateLoginInfo', function()
   db.ref("users/"+UID)
     .child('logged_at')
     .set( new Date().valueOf() )
+    .catch( function(err){ emit('err', {kind:'user', err:err}) } )
 
 })

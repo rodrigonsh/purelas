@@ -49,11 +49,16 @@ function q(query)
 function emit( evName, data )
 {
 
-  if ( data == undefined ) console.log('emit', evName)
-  else console.log('emit', evName, data)
+  if (evName == 'error') console.error("ERROR!", data)
+  else
+  {
+    if ( data == undefined ) console.log('emit', evName)
+    else console.log('emit', evName, data)
+  }
 
   var e = new Event(evName, {bubbles: true})
   e.data = data
+
   setTimeout(function(){ document.dispatchEvent( e ) },200)
 
 }
@@ -152,8 +157,8 @@ var connectedRef = db.ref(".info/connected");
 UID = null
 
 connectedRef.on("value", function(snap) {
-  if (snap.val() === true) setTimeout(function(){ emit("online") }, 500)
-  else setTimeout(function(){ emit("offline") }, 500)
+  if ( snap.val() === true ) setTimeout( function(){ emit("online") }, 500 )
+  else setTimeout( function(){ emit("offline") }, 500 )
 });
 
 moment.locale("pt");
@@ -216,11 +221,7 @@ auth.onAuthStateChanged( function (user)
     emit('updateLoginInfo')
 
     if( newUser ) emit('userNew')
-    else
-    {
-      if ( afterAuth == null )  emit('mapBefore')
-      else emit( afterAuth+'Before' )
-    }
+    if ( afterAuth != null ) emit( afterAuth+'Before' )
 
     newUser = false;
 
@@ -238,6 +239,7 @@ addEventListener('userDataSave', function()
   db.ref("users/"+UID)
     .set( userData )
     .then( function(ev){ emit('thanks', 'user') } )
+    .catch( function(err){ emit('err', {kind:'user', err:err}) } )
 
 })
 
@@ -247,6 +249,7 @@ addEventListener('updateLoginInfo', function()
   db.ref("users/"+UID)
     .child('logged_at')
     .set( new Date().valueOf() )
+    .catch( function(err){ emit('err', {kind:'user', err:err}) } )
 
 })
 
@@ -501,6 +504,52 @@ function initMap()
 
 }
 
+var error = null;
+var $errorPage = q("#errorPage")
+
+addEventListener('err', function(ev)
+{
+
+  console.log('error', ev)
+
+  ev.stopPropagation()
+  ev.preventDefault()
+
+  if ( ! 'data' in ev ) return;
+
+  error =
+  {
+    kind: ev.data.kind,
+    err: ev.data.err,
+    uid: UID
+  }
+
+  console.log( 'error! borasalvar?', error )
+
+  $errorPage.classList.remove('failed')
+  $errorPage.classList.remove('successful')
+  $errorPage.classList.add('processing')
+
+  db.ref('errors').child( new Date().valueOf() ).set( error )
+    .then( function()
+    {
+      $errorPage.classList.remove('processing')
+      $errorPage.classList.add('successful')
+      toast("O erro foi registrado")
+      return true
+    }, function(msg)
+    {
+      $errorPage.classList.remove('processing')
+      $errorPage.classList.add('failed')
+      $errorPage.querySelector('error-type').textContent = error.type
+      $errorPage.querySelector('error-msg').textContent = error.err
+      return false
+    })
+
+    setPage('error')
+
+})
+
 $loginForm = q("#loginPage form")
 
 $loginForm.addEventListener('submit', function(ev){
@@ -624,6 +673,33 @@ addEventListener('onboardingBefore', function(){
   setPage('onboarding')
 
   localStorage.setItem('onboard', true)
+
+})
+
+$opinionForm = q('#opinionPage form')
+
+$opinionForm.addEventListener('submit', function(ev)
+{
+  ev.stopPropagation()
+  ev.preventDefault()
+
+  var opinion =
+  {
+    text: $opinionForm.querySelector('textarea').value.trim(),
+    uid: UID
+  }
+
+  if ( opinion.text == "")
+  {
+    alert('Opinião deve ser preenchida')
+    return;
+  }
+
+  console.log( 'borasalvar?', opinion )
+
+  db.ref('opinions').child( new Date().valueOf() ).set( opinion )
+    .then( function(){ emit('thanks', 'opinion') } )
+    .catch( function(msg){ emit("err", {kind:"opinion", err:msg} ) } )
 
 })
 
@@ -1043,7 +1119,13 @@ addEventListener('thanks', function(ev)
   if ( ev.data == 'report' )
   {
     $thanksMessage.textContent = "Obrigado por compartilhar seu relato"
-    $thanksAux.textContent = "Esta informação é anônima"
+    $thanksAux.textContent = "Esta informação é anônima e você pode editá-la quando quiser"
+  }
+
+  if ( ev.data == 'opinion' )
+  {
+    $thanksMessage.textContent = "Agradecemos sua opinião"
+    $thanksAux.textContent = "Ela será levada à sério e responderemos se for necessário"
   }
 
   emit('thanksBefore')

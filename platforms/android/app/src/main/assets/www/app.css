@@ -72,6 +72,14 @@ h1.breathes {
   display: block;
 }
 
+.success {
+  display: none;
+}
+
+.successful .success {
+  display: block;
+}
+
 .login {
   display: none;
 }
@@ -538,6 +546,10 @@ button:hover {
 }
 
 #navigator[data-page='register'] #registerPage {
+  z-index: 1000;
+}
+
+#navigator[data-page='error'] #errorPage {
   z-index: 1000;
 }
 

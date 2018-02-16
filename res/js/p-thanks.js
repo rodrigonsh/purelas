@@ -24,7 +24,13 @@ addEventListener('thanks', function(ev)
   if ( ev.data == 'report' )
   {
     $thanksMessage.textContent = "Obrigado por compartilhar seu relato"
-    $thanksAux.textContent = "Esta informação é anônima"
+    $thanksAux.textContent = "Esta informação é anônima e você pode editá-la quando quiser"
+  }
+
+  if ( ev.data == 'opinion' )
+  {
+    $thanksMessage.textContent = "Agradecemos sua opinião"
+    $thanksAux.textContent = "Ela será levada à sério e responderemos se for necessário"
   }
 
   emit('thanksBefore')

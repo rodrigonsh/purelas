@@ -18,6 +18,12 @@
       ".write": true
     },
 
+    "errors":
+    {
+      ".read": false,
+      ".write": true
+    },
+
     "geoReports":
     {
       ".indexOn": "g",

@@ -16,6 +16,6 @@ var connectedRef = db.ref(".info/connected");
 UID = null
 
 connectedRef.on("value", function(snap) {
-  if (snap.val() === true) setTimeout(function(){ emit("online") }, 500)
-  else setTimeout(function(){ emit("offline") }, 500)
+  if ( snap.val() === true ) setTimeout( function(){ emit("online") }, 500 )
+  else setTimeout( function(){ emit("offline") }, 500 )
 });
