@@ -34,6 +34,7 @@ form
     display: flex;
     align-items: center;
     padding: 0px;
+    margin-bottom: $space;
 
     img
     {
@@ -77,6 +78,31 @@ form
     text-align: center;
     text-transform: uppercase;
 
+  }
+
+  .btn-radio
+  {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: $space;
+
+    button
+    {
+      background: #eaeaea;
+      padding: 15px 0px;
+    }
+
+    button[on]
+    {
+      background: #d4d4d4;
+    }
+
+  }
+
+  input:focus
+  {
+    outline: none;
+    box-shadow: none;
   }
 
 }

@@ -37,28 +37,26 @@
 
   </head>
 
-<body>
+<body onload="onLoad()">
 
   <div id="shell">
 
-    <div id="splash">
-      <div class='deco'>
+    <div id="splash" class="deco">
 
-        <img src="img/logo-big.svg" />
+      <img src="img/logo-big.svg" />
 
-        <footer>
-          "No connection" icon made by
-          <a href="http://www.freepik.com" title="Freepik">Freepik</a>
-          from
-          <a href="https://www.flaticon.com/" title="Flaticon">
-            www.flaticon.com
-          </a> is licensed by
-          <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">
-            CC 3.0 BY
-          </a>
-        </footer>
+      <footer>
+        "No connection" icon made by
+        <a href="http://www.freepik.com" title="Freepik">Freepik</a>
+        from
+        <a href="https://www.flaticon.com/" title="Flaticon">
+          www.flaticon.com
+        </a> is licensed by
+        <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">
+          CC 3.0 BY
+        </a>
+      </footer>
 
-      </div>
     </div>
 
     <div id="app">
@@ -221,9 +219,9 @@
 
     <div class='cont txt-center'>
 
-      <p><strong>
-        Ocorreu um erro!
-      </strong></p>
+      <p><strong>Ocorreu um erro!</strong></p>
+
+      <error-msg></error-msg>
 
       <p class='wait'>
         Aguarde... estamos enviando um relatório do erro para os desenvolvedores
@@ -298,14 +296,14 @@
 <div id='mapPage' class='page' data-page='map'>
 
   <header>
-    <button data-action='menu'><img src="img/menu.svg" /></button>
+    <button data-action='menu'><img data-action='menu' src="img/menu.svg" /></button>
     <h1>PURELAS</h1>
     <button data-page='notifications'><img src="img/notification.svg" /></button>
   </header>
 
   <div class='tabs'>
     <button data-page='map' active><img src="img/map.svg" /></button>
-    <button class="wip" data-page='route'><img src="img/route.svg" /></button>
+    <button data-page='route'><img src="img/route.svg" /></button>
     <button data-page='reports'><img src="img/messages.svg" /></button>
   </div>
 
@@ -649,7 +647,7 @@
     <h2>Relato</h2>
   </header>
 
-  <div class='scrolls'>
+  <div class='scrolls grows'>
 
     <div id="report-view-map"></div>
 
@@ -664,28 +662,28 @@
       <h5>Que foi o agressor?</h5>
       <p id='agressor'></p>
 
-      <small>
-        Relato publicado dia
-        <span id='published_at'></span>
-      </small>
-
     </div>
 
   </div>
+
+  <small class="inset">
+    Relato publicado dia
+    <span id='published_at'></span>
+  </small>
 
 </div>
 
 <div id='reportsPage' class='page nodata show-cat' data-page='reports'>
 
   <header>
-    <button data-action='menu'><img src="img/menu.svg" /></button>
+    <button data-action='menu'><img data-action='menu' src="img/menu.svg" /></button>
     <h1>PURELAS</h1>
     <button data-page='notifications'><img src="img/notification.svg" /></button>
   </header>
 
   <div class='tabs'>
     <button data-page='map' ><img src="img/map.svg" /></button>
-    <button class='wip' data-page='route'><img src="img/route.svg" /></button>
+    <button data-page='route'><img src="img/route.svg" /></button>
     <button data-page='reports' active><img src="img/messages.svg" /></button>
   </div>
 
@@ -723,34 +721,67 @@
 <div id='routePage' class='page' data-page='route'>
 
   <header>
-    <button data-action='menu'><img src="img/menu.svg" /></button>
+    <button data-action='menu'><img data-action='menu' src="img/menu.svg" /></button>
     <h1>PURELAS</h1>
     <button data-page='notifications'><img src="img/notification.svg" /></button>
   </header>
 
   <div class='tabs'>
     <button data-page='map'><img src="img/map.svg" /></button>
-    <button class='wip' data-page='route' active><img src="img/route.svg" /></button>
+    <button data-page='route' active><img src="img/route.svg" /></button>
     <button data-page='reports'><img src="img/messages.svg" /></button>
   </div>
 
-  <div class='tab-title'>Minha Rota</div>
+  <form class='inset scrolls grows' id="routeEndPoints">
 
-  <form class='inset' id="routeEndPoints">
+    <div class='tab-title'>Minha Rota</div>
 
-    <label class='input'>
-      <img src="img/origin.svg" />
-      <input name="origem" placeholder="Endereço de Partida" />
-    </label>
+    <div class='wait'>
+      Contactando serviço de rotas...
+    </div>
 
-    <label class='input'>
-      <img src="img/destination.svg" />
-      <input name="destino" placeholder="Destino" />
-    </label>
+    <div class='error'>
+      Ocorreu um erro!
+      <strong></strong>
+    </div>
+
+    <div class='interaction'>
+
+      <label class='input'>
+        <img src="img/origin.svg" />
+        <input name="origem" required placeholder="Endereço de Partida" />
+      </label>
+
+      <label class='input'>
+        <img src="img/destination.svg" />
+        <input name="destino" required placeholder="Destino" />
+      </label>
+
+      <div class='btn-radio'>
+
+        <button type="button" on data-mode='WALKING' >
+          <img src="img/directions_walk.svg" />
+        </button>
+
+        <button type="button" data-mode='BICYCLING' >
+          <img src="img/directions_bike.svg" />
+        </button>
+
+        <button type="button" data-mode='DRIVING' >
+          <img src="img/directions_car.svg" />
+        </button>
+
+        <button type="button" data-mode='TRANSIT' >
+          <img src="img/directions_bus.svg" />
+        </button>
+
+      </div>
+
+      <button>Mapear Rota</button>
+
+    </div>
 
   </form>
-
-  <div id='route' class='grows'></div>
 
 </div>
 
@@ -800,7 +831,15 @@
 
     <form method="post">
 
-      <div class='inset'>
+      <p class='wait'>
+        Salvando...
+      </p>
+
+      <p class="error">
+        Deu merda!
+      </p>
+
+      <div class='inset interaction'>
 
         <label for='userName'>Nome</label>
         <input id="userName" required />
@@ -818,7 +857,7 @@
 
       <hr />
 
-      <div class="inset">
+      <div class="inset interaction">
 
         <!-- https://www.tcm.go.gov.br/site/wp-content/uploads/2017/07/Tabela_de_Escolaridade.pdf-->
         <label for='userEd'>Escolaridade</label>

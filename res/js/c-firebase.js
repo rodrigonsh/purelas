@@ -12,10 +12,27 @@ firebase.initializeApp(config);
 var db = firebase.database()
 var auth = firebase.auth()
 var connectedRef = db.ref(".info/connected");
+var firebaseOnline = false;
 
 UID = null
 
 connectedRef.on("value", function(snap) {
-  if ( snap.val() === true ) setTimeout( function(){ emit("online") }, 500 )
-  else setTimeout( function(){ emit("offline") }, 500 )
+
+  if ( snap.val() === true )
+  {
+    firebaseOnline = true
+    emit("online")
+  }
+
+  else
+  {
+    firebaseOnline = false
+    emit("offline")
+  }
+
 });
+
+addEventListener('queueChanged', function()
+{
+  if( firebaseOnline ) emit('processQueue')
+})

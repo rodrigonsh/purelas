@@ -15,7 +15,10 @@ addEventListener('mapBefore', function(){
 
 addEventListener('gotPosition', function(ev)
 {
-  map.setCenter( currentLatLng )
+  if (map)
+  {
+    map.setCenter( currentLatLng )
+  }
 })
 
 addEventListener('reportsChanged', function(ev)

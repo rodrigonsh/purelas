@@ -18,6 +18,9 @@
     },
     "cordova-plugin-keyboard": {
       "PACKAGE_NAME": "br.purelas.app"
+    },
+    "cordova-plugin-splashscreen": {
+      "PACKAGE_NAME": "br.purelas.app"
     }
   },
   "dependent_plugins": {}

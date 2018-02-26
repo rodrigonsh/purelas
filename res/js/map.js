@@ -2,11 +2,15 @@
 var mapAPIKey = "AIzaSyAgQ3Td8h6homy1Hf2MIT9DUR9882g-42Q"
 
 var map = null
-var route = null
+var routeMap = null
 var reportEditMap = null
 var reportViewMap = null
 var mapsReady = false
 var renderMap = null
+
+var directionsDisplay;
+var directionsService;
+
 
 function getCircle()
 {
@@ -29,6 +33,11 @@ function initMap()
     zoom: 14,
     disableDefaultUI: true,
   });
+
+  directionsService = new google.maps.DirectionsService()
+  directionsDisplay = new google.maps.DirectionsRenderer()
+
+  directionsDisplay.setMap( map );
 
   map.data.setStyle(function(feature)
   {

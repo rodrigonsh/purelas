@@ -20,8 +20,8 @@ $opinionForm.addEventListener('submit', function(ev)
   console.log( 'borasalvar?', opinion )
 
   db.ref('opinions').child( new Date().valueOf() ).set( opinion )
-    .then( function(){ emit('thanks', 'opinion') } )
-    .catch( function(msg){ emit("err", {kind:"opinion", err:msg} ) } )
+    .then( function(){ return Promise.resolve( () => emit('thanks', 'opinion') ) } )
+    .catch( function(msg){ emit("error", {kind:"opinion", err:msg} ) } )
 
 })
 

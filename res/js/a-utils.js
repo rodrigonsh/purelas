@@ -16,7 +16,7 @@ function emit( evName, data )
   var e = new Event(evName, {bubbles: true})
   e.data = data
 
-  setTimeout(function(){ document.dispatchEvent( e ) },200)
+  document.dispatchEvent( e )
 
 }
 

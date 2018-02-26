@@ -14,6 +14,8 @@ if ( currentGeoQuery == null )
   currentGeoQuery = { center: [0,0], radius: 50 }
 }
 
+emit('reportsChanged')
+
 var reportsGeoQuery = reportsGeoFire.query( currentGeoQuery );
 
 // Attach event callbacks to the query

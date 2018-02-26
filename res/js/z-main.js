@@ -1,19 +1,19 @@
-setTimeout(function(){
-  $("#splash").addClass('hiding');
-}, 1500)
-
-setTimeout(function(){
-  $("#splash").addClass('hidden');
-}, 2500)
 
 var $navigator = document.getElementById('navigator');
 
 
-$("[data-action='menu']").on('tap', function(ev){
+$("[data-action=menu]").on('tap', function(ev){
 
   ev.stopPropagation()
 
-  $app.classList.toggle('menu-open')
+  if ($app.hasAttribute('menu-open'))
+  {
+    console.log('lets close')
+    $app.removeAttribute('menu-open')
+  } else {
+    console.log('lets open')
+    $app.setAttribute('menu-open', true)
+  }
 
 });
 
@@ -137,7 +137,7 @@ $("[data-page]").on('tap', function(ev)
     emit( pageName+"Before" )
   }
 
-  $app.classList.remove('menu-open')
+  $app.removeAttribute('menu-open')
 
 
 });
@@ -170,7 +170,11 @@ function onBackButton(ev){
   ev.stopPropagation()
   ev.preventDefault()
 
-  $app.classList.remove('menu-open')
+  if ( $app.hasAttribute('menu-open') )
+  {
+    $app.removeAttribute('menu-open')
+    return
+  }
 
   if ( pages.length > 1 )
   {
@@ -226,3 +230,39 @@ else
 {
   setPage('map')
 }
+
+setTimeout(function(){
+  $("#splash").addClass('hiding');
+}, 1500)
+
+setTimeout(function(){
+  $("#splash").addClass('hidden');
+}, 2500)
+
+
+function onLoad()
+{
+
+  console.log('onLoad')
+
+}
+
+
+document.addEventListener('deviceready', function()
+{
+
+  console.log('deviceready')
+  navigator.splashscreen.hide()
+
+  watchPosition = navigator.geolocation.watchPosition(
+    gotPosition,
+    noPosition,
+    { timeout: 30000 })
+
+})
+
+setTimeout(function()
+{
+  var e = new Event('deviceready')
+  document.dispatchEvent(e)
+}, 10000)

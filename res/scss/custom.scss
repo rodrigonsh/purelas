@@ -2,17 +2,25 @@
 #routeEndPoints
 {
   background: white;
-  padding-bottom: 18px;
+  padding-bottom: $space;
+
+  .error
+  {
+    color: red;
+    padding: 20px;
+    text-align: center;
+  }
 
   input
   {
-    padding: 12px 0px;
+    padding: 12px 0px 10px;
     box-sizing: border-box;
+    font-size: 15px ;
   }
 
   label.input:first-child
   {
-    margin-bottom: 12px;
+    margin-bottom: $space;
   }
 
   label.input:last-child
@@ -37,7 +45,7 @@
 
 .offline #map
 {
-  background-image: url(img/no-internet.svg);
+  background-image: url(img/no-firebase.svg);
   background-size: 50%;
 }
 
@@ -87,7 +95,7 @@
   bottom: 30px;
   right: 100px;
   left: $space;
-  font-size: 23px;
+  font-size: 18px;
   line-height: 22px;
   color: gray;
 

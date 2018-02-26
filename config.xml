@@ -25,6 +25,13 @@
         <icon density="mdpi" src="res/android/icon-48-mdpi.png" />
         <icon density="hdpi" src="res/android/icon-72-hdpi.png" />
         <icon density="xhdpi" src="res/android/icon-96-xhdpi.png" />
+        <splash density="port-hdpi" src="res/screen/android/splash-port-hdpi.png" />
+        <splash density="port-ldpi" src="res/screen/android/splash-port-ldpi.png" />
+        <splash density="port-mdpi" src="res/screen/android/splash-port-mdpi.png" />
+        <splash density="port-xhdpi" src="res/screen/android/splash-port-xhdpi.png" />
+        <preference name="AutoHideSplashScreen" value="true" />
+        <preference name="SplashScreenDelay" value="10000" />
+        <preference name="SplashScreenSpinnerColor" value="#ffffff" />
     </platform>
     <platform name="ios">
         <allow-intent href="itms:*" />
@@ -33,5 +40,6 @@
     <plugin name="cordova-plugin-geolocation" spec="^4.0.1" />
     <plugin name="cordova-plugin-statusbar" spec="^2.4.1" />
     <plugin name="cordova-plugin-keyboard" spec="^1.2.0" />
+    <plugin name="cordova-plugin-splashscreen" spec="^5.0.2" />
     <engine name="android" spec="^7.0.0" />
 </widget>

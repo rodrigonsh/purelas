@@ -20,12 +20,14 @@ body
 {
   padding: 0px;
   margin: 0px;
-  font-family: 'Roboto-Regular';
+  font-family: 'Roboto-Regular', sans-serif;
 
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  background-color: #fff;
 
   height: 100vh;
 
@@ -71,7 +73,7 @@ body
 }
 
 
-#app.menu-open
+#app[menu-open]
 {
   transform: translateX(0px);
 }

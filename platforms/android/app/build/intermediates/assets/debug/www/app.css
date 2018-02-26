@@ -240,8 +240,7 @@ button:hover {
   }
 }
 
-#splash,
-#splash .deco {
+#splash {
   position: fixed;
   top: 0px;
   left: 0px;
@@ -268,37 +267,25 @@ button:hover {
   background: white;
 }
 
-#splash img,
-#splash .deco img {
+#splash img {
   display: block;
 }
 
-#splash footer,
-#splash .deco footer {
+#splash footer {
   position: absolute;
   bottom: 0px;
   left: 0px;
   right: 0px;
   padding: 18px;
   font-size: 12px;
+  font-family: sans-serif;
   color: white;
   text-align: center;
 }
 
-#splash footer a,
-#splash .deco footer a {
+#splash footer a {
   color: white;
   font-weight: bold;
-}
-
-#splash .deco {
-  opacity: 0.05;
-  -webkit-transition: opacity 0.6s;
-  transition: opacity 0.6s;
-}
-
-#splash.show .deco {
-  opacity: 1;
 }
 
 #splash.hiding {
@@ -553,6 +540,10 @@ button:hover {
   z-index: 1000;
 }
 
+#navigator[data-page='route-map'] #routeMapPage {
+  z-index: 1000;
+}
+
 header {
   height: 56px;
   background: #924f97;
@@ -761,6 +752,7 @@ form label.input {
       -ms-flex-align: center;
           align-items: center;
   padding: 0px;
+  margin-bottom: 18px;
 }
 
 form label.input img {
@@ -798,6 +790,32 @@ form button {
   letter-spacing: 3.20px;
   text-align: center;
   text-transform: uppercase;
+}
+
+form .btn-radio {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  margin-bottom: 18px;
+}
+
+form .btn-radio button {
+  background: #eaeaea;
+  padding: 15px 0px;
+}
+
+form .btn-radio button[on] {
+  background: #d4d4d4;
+}
+
+form input:focus {
+  outline: none;
+  -webkit-box-shadow: none;
+          box-shadow: none;
 }
 
 preference {
@@ -1136,14 +1154,21 @@ toast[hidden] {
   padding-bottom: 18px;
 }
 
+#routeEndPoints .error {
+  color: red;
+  padding: 20px;
+  text-align: center;
+}
+
 #routeEndPoints input {
-  padding: 12px 0px;
+  padding: 12px 0px 10px;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
+  font-size: 15px;
 }
 
 #routeEndPoints label.input:first-child {
-  margin-bottom: 12px;
+  margin-bottom: 18px;
 }
 
 #routeEndPoints label.input:last-child {
@@ -1162,7 +1187,7 @@ toast[hidden] {
 }
 
 .offline #map {
-  background-image: url(img/no-internet.svg);
+  background-image: url(img/no-firebase.svg);
   background-size: 50%;
 }
 
@@ -1207,7 +1232,7 @@ toast[hidden] {
   bottom: 30px;
   right: 100px;
   left: 18px;
-  font-size: 23px;
+  font-size: 18px;
   line-height: 22px;
   color: gray;
 }
@@ -1255,7 +1280,7 @@ toast[hidden] {
 body {
   padding: 0px;
   margin: 0px;
-  font-family: 'Roboto-Regular';
+  font-family: 'Roboto-Regular', sans-serif;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1269,6 +1294,7 @@ body {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  background-color: #fff;
   height: 100vh;
 }
 
@@ -1314,7 +1340,7 @@ body {
   transition: transform 0s, -webkit-transform 0s;
 }
 
-#app.menu-open {
+#app[menu-open] {
   -webkit-transform: translateX(0px);
           transform: translateX(0px);
 }

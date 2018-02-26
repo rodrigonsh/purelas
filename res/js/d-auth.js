@@ -10,7 +10,7 @@ if ( userData == null )
     name: "Seu nome",
     registered_at: null,
     logged_at: new Date().valueOf(),
-    
+
   }
 }
 
@@ -57,6 +57,8 @@ auth.onAuthStateChanged( function (user)
 
     UID = user.uid
 
+    if ( firebaseOnline ) emit("processQueue")
+
     db.ref("users/"+UID).on('value', function(s){
 
       userData = s.val()
@@ -67,7 +69,11 @@ auth.onAuthStateChanged( function (user)
     emit('updateLoginInfo')
 
     if( newUser ) emit('userNew')
-    if ( afterAuth != null ) emit( afterAuth+'Before' )
+    if ( afterAuth != null )
+    {
+      emit( afterAuth+'Before' )
+      afterAuth = null
+    }
 
     newUser = false;
 
@@ -78,16 +84,17 @@ auth.onAuthStateChanged( function (user)
 })
 
 
+
+function shouldUpdateUserData()
+{
+  return db.ref("users/"+UID).set( userData )
+}
+
 addEventListener('userDataSave', function()
 {
 
   localStorage.setItem( 'userData', JSON.stringify(userData) )
-
-  currentUser.updateProfile( { displayName: userData.name } )
-  db.ref("users/"+UID)
-    .set( userData )
-    .then( function(ev){ emit('thanks', 'user') } )
-    .catch( function(err){ emit('err', {kind:'user', err:err}) } )
+  enqueue('userData')
 
 })
 
@@ -97,6 +104,17 @@ addEventListener('updateLoginInfo', function()
   db.ref("users/"+UID)
     .child('logged_at')
     .set( new Date().valueOf() )
-    .catch( function(err){ emit('err', {kind:'user', err:err}) } )
+    .catch( function(err){ emit('error', {kind:'user', err:err}) } )
+
+})
+
+addEventListener('userDataSend', function()
+{
+
+  if ( UID == null) return;
+
+  currentUser.updateProfile( { displayName: userData.name } )
+  .then( shouldUpdateUserData )
+  .catch( function(err){ emit('error', { kind:'user', err: err }) } )
 
 })

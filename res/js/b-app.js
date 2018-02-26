@@ -1,4 +1,4 @@
-var $app = $('#app')[0]
+var $app = q('#app')
 
 addEventListener('online', function()
 {
@@ -20,5 +20,3 @@ addEventListener('userSet', function()
   }
 
 })
-
-$("#splash").addClass('show');

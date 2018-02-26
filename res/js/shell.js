@@ -37,7 +37,7 @@ shell.addEventListener('touchmove', function(ev)
     )
 
   offset = -244
-  if ( $app.classList.contains('menu-open') )
+  if ( $app.hasAttribute('menu-open') )
   {
 
     offset = 0;
@@ -75,13 +75,18 @@ shell.addEventListener('touchend', function(ev)
   var touchStartX = null
   var touchStartY = null
 
+  if( 'action' in ev.target.dataset && ev.target.dataset.action == 'menu')
+  {
+    return
+  }
+
   if ( touchDiffX > 60 )
   {
-    $app.classList.add('menu-open')
+    $app.setAttribute('menu-open', true)
   }
   else
   {
-    $app.classList.remove('menu-open')
+    $app.removeAttribute('menu-open')
   }
 
   $app.style.transform = null
@@ -99,5 +104,5 @@ function toast(msg)
   setTimeout( function()
   {
     q("toast").setAttribute('hidden', 'hidden')
-  }, 5000)
+  }, 3000)
 }
