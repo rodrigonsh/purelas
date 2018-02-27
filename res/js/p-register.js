@@ -1,5 +1,6 @@
 $registerForm = q("#registerPage form")
 
+
 addEventListener('registerAfter',  function()
 {
   $registerForm.querySelector('[type=email]').value = ""
@@ -44,6 +45,25 @@ addEventListener('registerBefore', function(){
 
   if ( UID == null )
   {
+
+    var http = new XMLHttpRequest()
+    http.onreadystatechange = function()
+    {
+    	if( http.readyState != 4 ) return
+
+      var txt = http.responseText
+      while( txt.indexOf("\n") > -1 )
+      {
+        txt = txt.replace("\n", "<br/>")
+      }
+
+      q("#termsModal p").innerHTML = txt
+    }
+
+    http.open('get', 'politica-de-privacidade.txt')
+    http.send()
+
+
     setPage('register')
   }
 

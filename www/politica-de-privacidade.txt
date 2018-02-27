@@ -1,0 +1,93 @@
+Política de Privacidade
+
+
+Esta política de privacidade foi compilada para atender melhor aqueles que estão preocupados com a forma como suas "Informações Pessoais Identificáveis" (PII) estão sendo usadas on-line. A PII, conforme descrito na lei de privacidade e na segurança da informação dos EUA, é uma informação que pode ser usada por conta própria ou com outras informações para identificar, contatar ou localizar uma única pessoa, ou para identificar um indivíduo em contexto. Leia atentamente a nossa política de privacidade para obter uma compreensão clara de como coletamos, usamos, protegemos ou manipulamos suas Informações de Identificação Pessoal de acordo com nosso site.
+
+Quais informações pessoais coletamos das pessoas que visitam nosso blog, site ou aplicativo?
+
+Ao solicitar ou registrar-se no nosso site, conforme o caso, você pode ser solicitado a inserir seu nome, endereço de e-mail, Coordenados GPS ou outros detalhes para ajudá-lo com sua experiência.
+
+Quando coletamos informações?
+
+Nós coletamos informações de você quando você se registra em nosso site ou insere informações em nosso site.
+
+
+Como usamos sua informação?
+
+Podemos usar as informações que coletamos de você quando você se registra, faz uma compra, inscreva-se na nossa newsletter, responde a uma pesquisa ou comunicação de marketing, navega no site ou usa outros recursos do site das seguintes maneiras:
+
+      • Para personalizar sua experiência e permitir-nos entregar o tipo de conteúdo e ofertas de produtos em que você está mais interessado.
+      • Para melhorar o nosso site, a fim de melhor atendê-lo.
+
+Como protegemos os seus dados?
+
+Não usamos varredura de vulnerabilidade e / ou digitalização para padrões de PCI.
+Nós fornecemos apenas artigos e informações. Nós nunca pedimos números de cartão de crédito.
+Não usamos o Malware Scanning.
+
+Suas informações pessoais estão contidas por trás das redes seguras e só são acessíveis por um número limitado de pessoas que têm direitos de acesso especiais a esses sistemas e são obrigados a manter a informação confidencial. Além disso, todas as informações confidenciais / de crédito que você fornece são criptografadas através da tecnologia Secure Socket Layer (SSL).
+
+Implementamos uma variedade de medidas de segurança quando um usuário entra, envia ou acessa suas informações para manter a segurança de suas informações pessoais.
+
+Todas as transações são processadas através de um provedor de gateway e não são armazenadas ou processadas em nossos servidores.
+
+Usamos "cookies"?
+
+Nós não usamos cookies para fins de rastreamento
+
+Você pode escolher que o seu computador o avise sempre que um cookie estiver sendo enviado, ou você pode optar por desligar todos os cookies. Você faz isso através das configurações do seu navegador. Uma vez que o navegador é um pouco diferente, veja o menu de ajuda do seu navegador para aprender a maneira correta de modificar seus cookies.
+
+Se você desligar os cookies, alguns dos recursos que tornam a experiência do seu site mais eficientes podem não funcionar corretamente. Isso torna a experiência do seu site mais eficiente e pode não funcionar corretamente.
+
+Divulgação de terceiros
+
+Não vendemos, trocamos ou transferimos para terceiros as suas Informações Pessoais Identificáveis.
+
+Ligações de terceiros
+
+Ocasionalmente, a nosso critério, podemos incluir ou oferecer produtos ou serviços de terceiros em nosso site. Esses sites de terceiros possuem políticas de privacidade independentes e independentes. Portanto, não temos responsabilidade nem responsabilidade pelo conteúdo e atividades desses sites vinculados. No entanto, buscamos proteger a integridade do nosso site e receber comentários sobre esses sites.
+
+Google
+
+Os requisitos de publicidade do Google podem ser resumidos pelos Princípios de Publicidade do Google. Eles são criados para fornecer uma experiência positiva para os usuários. https://support.google.com/adwordspolicy/answer/1316548?hl=pt-BR
+
+Não habilitamos o Google AdSense em nosso site, mas podemos fazê-lo no futuro.
+
+Lei de Proteção de Privacidade Online da Califórnia
+
+CalOPPA é a primeira lei estadual no país a exigir sites comerciais e serviços on-line para publicar uma política de privacidade. O alcance da lei se estende muito além da Califórnia para exigir qualquer pessoa ou empresa nos Estados Unidos (e, possivelmente, o mundo) que opera sites que coletam informações pessoalmente identificáveis ​​dos consumidores da Califórnia para publicar uma política de privacidade conspícua em seu site, indicando exatamente a informação que está sendo coletada e aqueles indivíduos ou empresas com quem está sendo compartilhado. - Veja mais em: http://consumercal.org/california-online-privacy-protection-act-caloppa/#sthash.0FdRbT51.dpuf
+
+De acordo com a CalOPPA, concordamos com o seguinte:
+Os usuários podem visitar nosso site anonimamente.
+Uma vez que essa política de privacidade seja criada, adicionaremos um link na nossa página inicial ou, no mínimo, na primeira página significativa depois de entrar no nosso site.
+Nosso link de Política de Privacidade inclui a palavra "Privacidade" e pode ser facilmente encontrado na página especificada acima.
+
+Você será notificado de quaisquer alterações na Política de Privacidade:
+      • Na nossa Página de Política de Privacidade
+Pode alterar suas informações pessoais:
+      • Ao fazer login na sua conta
+
+Como nosso site usa Do not Track sinais?
+Nós honramos Do not Track sinais e Não rastreie, crie cookies ou use publicidade quando um mecanismo de navegador não acompanhar (DNT) estiver no lugar.
+
+O nosso site permite o acompanhamento comportamental de terceiros?
+Também é importante notar que não permitimos o acompanhamento comportamental de terceiros
+
+COPPA (Children Online Privacy Protection Act)
+
+Quando se trata de coleta de informações pessoais de crianças menores de 13 anos, o Children's Online Privacy Protection Act (COPPA) coloca os pais em controle. A Federal Trade Commission, agência de proteção ao consumidor dos Estados Unidos, aplica a Regra COPPA, que especifica o que os operadores de sites e serviços on-line devem fazer para proteger a privacidade e a segurança das crianças em linha.
+
+Nós não comercializamos especificamente crianças menores de 13 anos.
+Permitimos que terceiros, incluindo redes publicitárias ou plug-ins, coletem PII de menores de 13 anos?
+
+Práticas de informação justas
+
+Os Princípios Justos de Práticas de Informação formam a espinha dorsal da lei de privacidade nos Estados Unidos e os conceitos que eles incluíram desempenharam um papel importante no desenvolvimento de leis de proteção de dados em todo o mundo. Compreender os Princípios da Prática de Informação Justa e como eles devem ser implementados é fundamental para cumprir as várias leis de privacidade que protegem a informação pessoal.
+
+Para estar de acordo com as Práticas Justas de Informação, tomaremos a seguinte ação responsiva, se ocorrer uma violação de dados:
+Nós o notificaremos por email
+      • Dentro de 7 dias úteis
+Notificaremos os usuários através de notificação no local
+      • Dentro de 7 dias úteis
+
+Também concordamos com o Princípio de Reparação Individual que exige que os indivíduos tenham o direito de buscar legalmente direitos exigíveis contra coletores de dados e processadores que não aderem à lei. Este princípio exige não só que os indivíduos tenham direitos exigíveis contra os usuários de dados, mas também que os indivíduos recorrem a tribunais ou agências governamentais para investigar e / ou processar a não conformidade por processadores de dados.

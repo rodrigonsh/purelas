@@ -460,13 +460,27 @@ function gotPosition(pos)
 
 function noPosition()
 {
+
   toast('Erro ao obter sua localização, por favor ative seu GPS')
+
+  navigator.geolocation.clearWatch( watchPosition )
+
+  setTimeout( initGPS, 10000 )
+
 }
 
-var watchPosition = navigator.geolocation.watchPosition(
-  gotPosition,
-  noPosition,
-  { timeout: 30000 })
+function initGPS()
+{
+  watchPosition = navigator.geolocation.watchPosition(
+    gotPosition,
+    noPosition,
+    { timeout: 30000 })
+}
+
+
+var watchPosition = null
+
+initGPS()
 
 
 var userReport = JSON.parse( localStorage.getItem('userReport') )
@@ -1816,10 +1830,14 @@ function onLoad()
 
 }
 
+var ignited = false
 
 document.addEventListener('deviceready', function()
 {
 
+  if ( ignited ) return
+
+  ignited = true
   console.log('deviceready')
   navigator.splashscreen.hide()
 
