@@ -23,10 +23,24 @@ function gotPosition(pos)
 
 function noPosition()
 {
+
   toast('Erro ao obter sua localização, por favor ative seu GPS')
+
+  navigator.geolocation.clearWatch( watchPosition )
+
+  setTimeout( initGPS, 10000 )
+
 }
 
-var watchPosition = navigator.geolocation.watchPosition(
-  gotPosition,
-  noPosition,
-  { timeout: 30000 })
+function initGPS()
+{
+  watchPosition = avigator.geolocation.watchPosition(
+    gotPosition,
+    noPosition,
+    { timeout: 30000 })
+}
+
+
+var watchPosition = null
+
+initGPS()

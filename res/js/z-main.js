@@ -247,10 +247,14 @@ function onLoad()
 
 }
 
+var ignited = false
 
 document.addEventListener('deviceready', function()
 {
 
+  if ( ignited ) return
+
+  ignited = true
   console.log('deviceready')
   navigator.splashscreen.hide()
 
