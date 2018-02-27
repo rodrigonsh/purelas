@@ -34,7 +34,7 @@ function noPosition()
 
 function initGPS()
 {
-  watchPosition = avigator.geolocation.watchPosition(
+  watchPosition = navigator.geolocation.watchPosition(
     gotPosition,
     noPosition,
     { timeout: 30000 })
