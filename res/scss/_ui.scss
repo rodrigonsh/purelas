@@ -44,7 +44,8 @@
 .scrolls
 {
   flex-shrink: 1;
-  overflow: auto;
+  overflow-x: hidden;
+  overflow-y: scroll;
 }
 
 .breathes

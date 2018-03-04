@@ -8,6 +8,7 @@ var touchDiffY = null
 
 shell.addEventListener('touchstart', function(ev)
 {
+  console.log('shell touchstart')
   touchStartX = ev.touches[0].clientX
   touchStartY = ev.touches[0].clientY
 })

@@ -111,7 +111,8 @@ h1.breathes {
 .scrolls {
   -ms-flex-negative: 1;
       flex-shrink: 1;
-  overflow: auto;
+  overflow-x: hidden;
+  overflow-y: scroll;
 }
 
 .breathes {

@@ -535,6 +535,16 @@ var errMessages =
   "auth/web-storage-unsupported": "WebStorage não suportado ou não habilitado"
 }
 
+addEventListener("termsShow", function()
+{
+
+  var $termsModal = q("#termsModal")
+  $termsModal.addEventListener("touchmove", function(ev){
+    ev.stopPropagation()
+  })
+
+})
+
 
 var mapAPIKey = "AIzaSyAgQ3Td8h6homy1Hf2MIT9DUR9882g-42Q"
 
@@ -1130,18 +1140,6 @@ $reportViewMap.addEventListener('touchmove', function(ev){
 
 addEventListener('reportsView', function(ev)
 {
-
-  if( mapsReady && reportViewMap == null )
-  {
-    emit('reportViewMapRender')
-  }
-
-  if( !mapsReady && reportViewMap == null )
-  {
-    // enqueue rendering
-    renderMap = 'reportViewMap'
-  }
-
   var target = ev.data
   console.log(target.nodeName)
 
@@ -1155,6 +1153,19 @@ addEventListener('reportsView', function(ev)
   ts = parseInt( target.getAttribute('id') )
 
   currentReport = reports[ts]
+
+  if( mapsReady && reportViewMap == null )
+  {
+    emit('reportViewMapRender')
+  }
+
+  if( !mapsReady && reportViewMap == null )
+  {
+    // enqueue rendering
+    renderMap = 'reportViewMap'
+  }
+
+
 
   $viewReportAddress.textContent = currentReport.address
   $viewReportText.textContent = currentReport.report
@@ -1501,6 +1512,7 @@ var touchDiffY = null
 
 shell.addEventListener('touchstart', function(ev)
 {
+  console.log('shell touchstart')
   touchStartX = ev.touches[0].clientX
   touchStartY = ev.touches[0].clientY
 })
@@ -1634,6 +1646,8 @@ $("[data-modal]").on('tap', function(ev){
 
   $(".modal[data-modal="+target.dataset.modal+"]").addClass('show')
   $app.classList.toggle('modal-over')
+
+  emit(target.dataset.modal+"Show")
 
 });
 

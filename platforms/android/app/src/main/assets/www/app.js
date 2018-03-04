@@ -535,6 +535,16 @@ var errMessages =
   "auth/web-storage-unsupported": "WebStorage não suportado ou não habilitado"
 }
 
+addEventListener("termsShow", function()
+{
+
+  var $termsModal = q("#termsModal")
+  $termsModal.addEventListener("touchmove", function(ev){
+    ev.stopPropagation()
+  })
+
+})
+
 
 var mapAPIKey = "AIzaSyAgQ3Td8h6homy1Hf2MIT9DUR9882g-42Q"
 
@@ -873,6 +883,7 @@ addEventListener('rateBefore', function(){
 
 $registerForm = q("#registerPage form")
 
+
 addEventListener('registerAfter',  function()
 {
   $registerForm.querySelector('[type=email]').value = ""
@@ -917,6 +928,25 @@ addEventListener('registerBefore', function(){
 
   if ( UID == null )
   {
+
+    var http = new XMLHttpRequest()
+    http.onreadystatechange = function()
+    {
+    	if( http.readyState != 4 ) return
+
+      var txt = http.responseText
+      while( txt.indexOf("\n") > -1 )
+      {
+        txt = txt.replace("\n", "<br/>")
+      }
+
+      q("#termsModal p").innerHTML = txt
+    }
+
+    http.open('get', 'politica-de-privacidade.txt')
+    http.send()
+
+
     setPage('register')
   }
 
@@ -1481,6 +1511,7 @@ var touchDiffY = null
 
 shell.addEventListener('touchstart', function(ev)
 {
+  console.log('shell touchstart')
   touchStartX = ev.touches[0].clientX
   touchStartY = ev.touches[0].clientY
 })
@@ -1614,6 +1645,8 @@ $("[data-modal]").on('tap', function(ev){
 
   $(".modal[data-modal="+target.dataset.modal+"]").addClass('show')
   $app.classList.toggle('modal-over')
+
+  emit(target.dataset.modal+"Show")
 
 });
 

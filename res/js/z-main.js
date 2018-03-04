@@ -32,6 +32,8 @@ $("[data-modal]").on('tap', function(ev){
   $(".modal[data-modal="+target.dataset.modal+"]").addClass('show')
   $app.classList.toggle('modal-over')
 
+  emit(target.dataset.modal+"Show")
+
 });
 
 $("[data-action='closeModal']").on('tap', function(ev){
