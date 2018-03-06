@@ -12,6 +12,25 @@
       }
     },
 
+    "admins":
+    {
+      ".read": true,
+      "$uid":
+      {
+        ".write": "auth !== null && auth.uid == 'Lzqu1m6O83XfMdQl3wbrRX4zEBh1'"
+      }
+    },
+
+    "messages":
+    {
+      ".read": false,
+      "$uid":
+      {
+        ".read": "auth !== null && ( auth.uid == $uid || root.child('admins').child(auth.uid).val() == true )",
+        ".write": "auth !== null && ( auth.uid == $uid || root.child('admins').child(auth.uid).val() == true )"
+      }
+    },
+
     "opinions":
     {
       ".read": false,

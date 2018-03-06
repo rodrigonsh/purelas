@@ -94,6 +94,10 @@
         <span class='i'><img src='img/rate.svg' /></span>
         Dê sua opinião
       </li>
+      <li data-page='contact'>
+        <span class='i'><img src='img/send.svg' /></span>
+        Fale conosco
+      </li>
       <!--li data-page='rate'>
         <span class='i'><img src='img/.svg' /></span>
         Avalie o app
@@ -110,7 +114,7 @@
   </nav>
 
   <footer>
-    Versão 1.0.0
+    Versão 1.0.2
   </footer>
 
 </div>
@@ -206,6 +210,27 @@
   </div>
 
   <!--button data-page="area-new" class='fab'>+</button-->
+
+</div>
+
+<div id='contactPage' data-page='contact' auth class='page'>
+
+  <header>
+    <button data-action='back'><img src="img/back.svg" /></button>
+    <h2>Fale conosco</h2>
+  </header>
+
+  <div  id="contactMessages" class='grows scrolls inset'></div>
+
+  <form class="hbox" action="#">
+
+    <input class='grows'></input>
+
+    <button type="submit">
+      <img src="img/send.svg" />
+    </button>
+
+  </form>
 
 </div>
 
