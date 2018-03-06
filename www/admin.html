@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+  <head>
+    <!--
+    Customize this policy to fit your own app's needs. For more guidance, see:
+        https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+    Some notes:
+        * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+        * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+        * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+            * Enable inline JS: add 'unsafe-inline' to default-src
+    -->
+    <!--meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;"-->
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <link rel="stylesheet" type="text/css" href="app.css">
+    <title>purelas - admin</title>
+
+  </head>
+
+<body onload="onLoad()">
+
+  <div id="shell">
+
+    <div id="splash" class="deco">
+
+      <img src="img/logo-big.svg" />
+
+      <footer>
+        "No connection" icon made by
+        <a href="http://www.freepik.com" title="Freepik">Freepik</a>
+        from
+        <a href="https://www.flaticon.com/" title="Flaticon">
+          www.flaticon.com
+        </a> is licensed by
+        <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">
+          CC 3.0 BY
+        </a>
+      </footer>
+
+    </div>
+
+    <div id="app">
+
+<div id='menu' class='deco'>
+
+  <header>
+    <p>Visitante</p>
+    <small>Usuário Anônimo</small>
+  </header>
+
+  <nav>
+    <ul>
+      <li class='login' data-page='dashboard'>
+        <span class='i'><img src='img/home.svg' /></span>
+        Visão Geral
+      </li>
+      <li class='login' data-page='users'>
+        <span class='i'><img src='img/user.svg' /></span>
+        Usuários
+      </li>
+      <li  class='login' data-page='messages'>
+        <span class='i'><img src='img/messages.svg' /></span>
+        Mensagens
+      </li>
+      <li data-page='support'>
+        <span class='i'><img src='img/send.svg' /></span>
+        Suporte Técnico
+      </li>
+      <!--li data-page='rate'>
+        <span class='i'><img src='img/.svg' /></span>
+        Avalie o app
+      </li-->
+      <!--li data-page='preferences'>
+        <span class='i'><img src='img/preferences.svg' /></span>
+        Configurações
+      </li-->
+      <li class='login' data-action='logout'>
+        <span class='i'><img src='img/logout.svg' /></span>
+        Sair
+      </li>
+    </ul>
+  </nav>
+
+  <footer>
+    Versão 1.0.2
+  </footer>
+
+</div>
+
+<div id='navigator' data-page="welcome">
+
+<div id='areaSelectPage' class='page' data-page='area-select'>
+
+  <header>
+    <button data-action='back'><img src="img/back.svg" /></button>
+    <h2>Filtro por região</h2>
+  </header>
+
+  <div class="grows scrolls">
+
+    <card>
+    <preference>
+      <label>Centro, Campo Grande, MS</label>
+      <check on />
+    </preference>
+    </card>
+
+    <card>
+    <preference>
+      <label>Guanandi, Campo Grande, MS</label>
+      <check />
+    </preference>
+    </card>
+
+    <card>
+    <preference>
+      <label>Vila Tiradentes, Campo Grande, MS</label>
+      <check />
+    </preference>
+    </card>
+
+    <card>
+    <preference>
+      <label>Coronel Antônio, Campo Grande, MS</label>
+      <check />
+    </preference>
+    </card>
+
+    <card>
+    <preference>
+      <label>Bairro Santo Antônio, Campo Grande, MS</label>
+      <check />
+    </preference>
+    </card>
+
+    <card>
+    <preference>
+      <label>Mata do Jacinto, Campo Grande, MS</label>
+      <check />
+    </preference>
+    </card>
+
+    <card>
+    <preference>
+      <label>Cidade Jardim, Campo Grande, MS</label>
+      <check />
+    </preference>
+    </card>
+
+    <card>
+    <preference>
+      <label>Centro, Dourados, MS</label>
+      <check />
+    </preference>
+    </card>
+
+    <card>
+    <preference>
+      <label>Vila Santa Olinda, Dourados, MS</label>
+      <check />
+    </preference>
+    </card>
+
+    <card>
+    <preference>
+      <label>Guanandi, Campo Grande, MS</label>
+      <check />
+    </preference>
+    </card>
+
+    <card>
+    <preference>
+      <label>Tatuapé, Nioaque, MS</label>
+      <check />
+    </preference>
+    </card>
+
+  </div>
+
+  <!--button data-page="area-new" class='fab'>+</button-->
+
+</div>
+
+<div id="errorPage" class="page deco" data-page='error'>
+
+  <img class='breathes' src="img/logo-medium.svg" />
+
+  <span class='grows'></span>
+
+  <div class='special scrolls'>
+
+    <div class='cont txt-center'>
+
+      <p><strong>Ocorreu um erro!</strong></p>
+
+      <error-msg></error-msg>
+
+      <p class='wait'>
+        Aguarde... estamos enviando um relatório do erro para os desenvolvedores
+      </p>
+
+      <p class='success'>
+        Nós enviamos um relatório de erro para nossa equipe.
+        Se o erro for sério lançaremos uma nova versão corrigida em breve
+      </p>
+
+      <p class='error'>
+        Não foi possível enviar o relatório para os desenvolvedores, se o erro
+        persistir por favor entre em contato com a equipe de desenvolvimento do
+        app e informe os dados a seguir
+      </p>
+
+      <p class="error">Tipo de erro: <error-type><error-type></p>
+      <p class="error">Mensagem de erro: <error-msg><error-msg></p>
+
+      <span class='space'></span>
+
+      <button data-page='map'>
+        <span>OK...</span>
+        <img src="img/next.svg" />
+      </button>
+
+
+    </div>
+
+
+
+
+  </div>
+
+</div>
+
+<div id='loginPage' class='page deco justify-center' data-page='login'>
+
+  <header>
+    <button data-action='menu'><img src="img/menu.svg" /></button>
+    <h1>PURELAS</h1>
+    <span style="width:56px;"></span>
+  </header>
+
+  <div class='grows'>
+
+    <img class='breathes center' src="img/logo-medium.svg" />
+
+    <form action="#" class='inset'>
+
+      <div class='wait breathes'>
+        Aguarde...
+      </div>
+
+      <div class='error breathes'>
+        Erro ao autenticar usuário
+      </div>
+
+      <div class='interaction'>
+        <input required type='email' placeholder="Email" />
+        <input required type='password' placeholder='Senha' />
+        <button type="submit">Entrar</button>
+        <button data-modal='terms' data-page='register' type="button">Nova Conta</button>
+      </div>
+
+    </form>
+
+  </div>
+
+</div>
+
+<div id='mapPage' class='page' data-page='map'>
+
+  <header>
+    <button data-action='menu'><img data-action='menu' src="img/menu.svg" /></button>
+    <h1>PURELAS</h1>
+    <button data-page='notifications'><img src="img/notification.svg" /></button>
+  </header>
+
+  <div class='tabs'>
+    <button data-page='map' active><img src="img/map.svg" /></button>
+    <button data-page='route'><img src="img/route.svg" /></button>
+    <button data-page='reports'><img src="img/messages.svg" /></button>
+  </div>
+
+  <div class='tab-title'>Mapa dos Relatos</div>
+
+  <div id='map' class='grows'></div>
+
+  <button data-page="report-edit" class='fab'><img src="img/messages.svg" /></button>
+
+</div>
+
+<div id='notificationsPage' data-page='notifications' class='page'>
+
+  <header>
+    <button data-action='back'><img src="img/back.svg" /></button>
+    <h2>Notificações</h2>
+  </header>
+
+  <div class='scrolls'>
+
+    <!--card>
+
+      <p>
+        Lorem ipsumdolor sit amet, consectetueradipiscing elit, sed diam
+        nonummy nibh euismod
+      </p>
+
+      <small>
+        <img src='img/clock.svg' />
+        Há 3 dias
+      </small>
+
+    </card-->
+
+    <card>
+      <p>Nenhuma notificação para exibir</p>
+    </card>
+
+  </div>
+
+</div>
+
+<div id="onboardingPage" class="page deco" data-page='onboarding'>
+
+  <img class='breathes' src="img/logo-medium.svg" />
+
+  <span class='grows'></span>
+
+
+  <div class='special right'>
+
+    <div class='menina'>
+      <img src="img/menina-esquerda.svg" />
+    </div>
+
+    <div class='cont'>
+
+      <p><strong>
+        Você sofreu algum abuso?
+      </strong></p>
+
+      <p>
+        Envie seu caso anonimamente, não informe dados pessoais como
+        nomes, emails ou telefones
+      </p>
+
+      <span class='space'></span>
+
+      <button data-page='report-edit'>
+        <span>OK</span>
+        <img src="img/next.svg" />
+      </button>
+
+
+    </div>
+
+
+
+
+  </div>
+
+</div>
+
+<div id='opinionPage' data-page='opinion' class='page'>
+
+  <header>
+    <button data-action='back'><img src="img/back.svg" /></button>
+    <h2>Dê sua opinião</h2>
+  </header>
+
+  <div class='scrolls inset'>
+
+    <form action="#">
+
+      <label>Escreva com suas palavras</label>
+      <textarea required rows="10"></textarea>
+
+      <button type="submit">Enviar</button>
+
+      <p class='disclaimer'>
+        Seus dados e sua opinião não serão públicos para sua
+        segurança.
+      </p>
+
+    </form>
+
+  </div>
+
+</div>
+
+<div id='partnersPage' data-page='partners' class='page'>
+
+  <header>
+    <button data-action='back'><img src="img/back.svg" /></button>
+    <h2>Apoio e Patrocínio</h2>
+  </header>
+
+  <div class='scrolls'>
+
+    <card hero>
+      <img src='img/partner-avon.png' />
+    </card>
+
+    <card hero>
+      <img src='img/partner-marykay.png' />
+    </card>
+
+    <card hero>
+      <img src='img/partner-boticario.png' />
+    </card>
+
+  </div>
+
+</div>
+
+<div id='phonesPage' data-page='phones' class='page'>
+
+  <header>
+    <button data-action='back'><img src="img/back.svg" /></button>
+    <h2>Telefones úteis</h2>
+  </header>
+
+  <div class='scrolls'>
+
+    <card hero>
+      <p>Casa da Mulher Brasileira</p>
+      <h3>(67) 3314-7550</h3>
+      <address>
+        R. Brasília, Lote A, Quadra 2, s/n - Jardim Ima,Campo Grande - MS
+      </address>
+    </card>
+
+    <card hero>
+      <p>Delegacia da Mulher</p>
+      <h3>(67) 3314-7547</h3>
+      <address>
+        R. Brasília, s/n - Jardim Ima, Campo Grande - MS
+      </address>
+    </card>
+
+    <card hero>
+      <p>Conselho Tutelar</p>
+      <h3>(67) 3314-6371</h3>
+      <address>
+        R. São João Bôsco, 49
+      </address>
+    </card>
+
+  </div>
+
+</div>
+
+<div id='preferencesPage' data-page='preferences' class='page'>
+
+  <header>
+    <button data-action='back'><img src="img/back.svg" /></button>
+    <h2>Configurações</h2>
+  </header>
+
+  <div class='scrolls'>
+
+    <card>
+
+      <preference>
+        <label>Sinal de alerta</label>
+        <switch on></switch>
+      </preference>
+
+      <small>
+        Lorem ipsum dolor sit amet, consectetuer adipiscing elit,sed diam
+        ut laoreet dolore magna aliquam erat volutpat.
+      </small>
+
+    </card>
+
+    <card>
+
+      <preference>
+        <label>Ativar localização GPS</label>
+        <switch on></switch>
+      </preference>
+
+    </card>
+
+    <card>
+
+      <preference>
+        <label>Receber notificações</label>
+        <switch></switch>
+      </preference>
+
+    </card>
+
+    <card>
+
+      <preference>
+        <label>Ativar alto contraste</label>
+        <switch></switch>
+      </preference>
+
+    </card>
+
+  </div>
+
+</div>
+
+<div id='ratePage' data-page='rate' class='page'>
+
+  <header>
+    <button data-action='back'><img src="img/back.svg" /></button>
+    <h2>Avalie o app</h2>
+  </header>
+
+  <div class='scrolls inset'>
+
+    Contacta playstore para iniciar avaliação
+
+  </div>
+
+</div>
+
+<div id='registerPage' class='page deco justify-center' data-page='register'>
+
+  <header>
+    <button data-action='menu'><img src="img/menu.svg" /></button>
+    <h1>PURELAS</h1>
+    <span style="width:56px;"></span>
+  </header>
+
+  <form action="#" class='inset grows'>
+
+    <div class='wait breathes'>
+      Aguarde...
+    </div>
+
+    <div class='error breathes'>
+      Erro ao cadastrar usuário
+    </div>
+
+    <div class='interaction'>
+
+      <h1>Nova Conta</h1>
+
+      <input required type='email' placeholder="Email" />
+      <input required type='password' placeholder='Senha' />
+      <input required type='password' placeholder='Confirme a senha' />
+
+
+      <button type="submit">Registrar</button>
+
+      <button data-page='login' type="button">Voltar</button>
+
+      <small class='txt-center'>
+        <a href="#" data-modal='terms'>
+          Ao registrar uma nova conta você aceita os
+          <strong>Termos de uso do serviço</strong> e nossa
+          <strong>política de privacidade</strong>
+        </a>
+      </small>
+
+    </div>
+
+  </form>
+
+</div>
+
+<div id='reportEditPage' data-page='report-edit' auth class='page'>
+
+  <header>
+    <button data-action='back'><img src="img/back.svg" /></button>
+    <h2>Meu Relato</h2>
+    <button data-action='save'><img src="img/tick.svg" /></button>
+  </header>
+
+  <div class='inset scrolls'>
+
+    <form>
+
+      <label>Tipo de Relato</label>
+      <select name="type">
+        <option value='nd'>Selecione</option>
+        <option value='estupro'>Estupro</option>
+        <option value='assedio'>Assédio Sexual</option>
+        <option value='lesao'>Lesão Corporal</option>
+        <option value='destruicao'>Destruição de Bens e Documentos</option>
+        <option value='ameaca'>Ameaça</option>
+        <option value='assedio-moral'>Assédio Moral</option>
+        <option value='calunia'>Calúnia, Difamação, Injúria</option>
+        <option value='racismo'>Racismo e Injúria Racial</option>
+        <option value='lesbofobia'>Lesbofobia</option>
+        <option value='homofobia'>Homofobia</option>
+        <option value='aborto'>Aborto provocado por outra pessoa</option>
+        <option value='encoxada'>Encoxadas</option>
+        <option value='exploracao-sexual'>Exploração Sexual</option>
+        <option value='carcere'>Cárcere Privado</option>
+        <option value='trafico-mulheres'>Tráfico de Mulheres</option>
+        <option value='trabalho-escravo'>Trabalho escravo</option>
+        <option value='outro'>Outro</option>
+      </select>
+
+      <label>Onde aconteceu o abuso?</label>
+      <input name='geocode' placeholder="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pesquise pelo endereço" />
+      <div id="report-edit-map" class='map'></div>
+
+      <label>Como aconteceu o abuso?</label>
+      <textarea name='report' rows='10'></textarea>
+
+      <label>Quem é o agressor?</label>
+      <textarea name='agressor' rows='10'></textarea>
+
+      <button>Enviar</button>
+
+      <p class='disclaimer'>
+        Seu relato será publicado anônimamente para sua segurança.
+        Agradecemos sua colaboração
+      </p>
+
+    </form>
+
+  </div>
+
+</div>
+
+<div id='viewReportPage' data-page='report-view' class='page'>
+
+  <header>
+    <button data-action='back'><img src="img/back.svg" /></button>
+    <h2>Relato</h2>
+  </header>
+
+  <div class='scrolls grows'>
+
+    <div id="report-view-map"></div>
+
+    <div class='inset'>
+
+      <h5>Onde aconteceu?</h5>
+      <p id='address'></p>
+
+      <h5>Como aconteceu?</h5>
+      <p id='report'></p>
+
+      <h5>Que foi o agressor?</h5>
+      <p id='agressor'></p>
+
+    </div>
+
+  </div>
+
+  <small class="inset">
+    Relato publicado dia
+    <span id='published_at'></span>
+  </small>
+
+</div>
+
+<div id='reportsPage' class='page nodata show-cat' data-page='reports'>
+
+  <header>
+    <button data-action='menu'><img data-action='menu' src="img/menu.svg" /></button>
+    <h1>PURELAS</h1>
+    <button data-page='notifications'><img src="img/notification.svg" /></button>
+  </header>
+
+  <div class='tabs'>
+    <button data-page='map' ><img src="img/map.svg" /></button>
+    <button data-page='route'><img src="img/route.svg" /></button>
+    <button data-page='reports' active><img src="img/messages.svg" /></button>
+  </div>
+
+  <div class="grows scrolls">
+
+    <div class='tab-title'>Relatos</div>
+
+    <p class='wip' id="area" data-page="area-select">
+      Centro, Campo Grande, MS
+      <span class='down-arrow'></span>
+    </p>
+
+    <div class='empty'>
+
+      Nenhum relato num raio de 50Km
+      <small>Continuamos procurando...</small>
+
+    </div>
+
+    <span class='cat'>
+      <span>Gostaria de enviar um relato anônimo?</span>
+      <img src='img/cat.svg' />
+    </span>
+
+
+    <div class='inset' data-action='view'>
+    </div>
+
+  </div>
+
+  <button data-page="report-edit" class='fab'><img src='img/messages.svg' /></button>
+
+</div>
+
+<div id='routePage' class='page' data-page='route'>
+
+  <header>
+    <button data-action='menu'><img data-action='menu' src="img/menu.svg" /></button>
+    <h1>PURELAS</h1>
+    <button data-page='notifications'><img src="img/notification.svg" /></button>
+  </header>
+
+  <div class='tabs'>
+    <button data-page='map'><img src="img/map.svg" /></button>
+    <button data-page='route' active><img src="img/route.svg" /></button>
+    <button data-page='reports'><img src="img/messages.svg" /></button>
+  </div>
+
+  <form class='inset scrolls grows' id="routeEndPoints">
+
+    <div class='tab-title'>Minha Rota</div>
+
+    <div class='wait'>
+      Contactando serviço de rotas...
+    </div>
+
+    <div class='error'>
+      Ocorreu um erro!
+      <strong></strong>
+    </div>
+
+    <div class='interaction'>
+
+      <label class='input'>
+        <img src="img/origin.svg" />
+        <input name="origem" required placeholder="Endereço de Partida" />
+      </label>
+
+      <label class='input'>
+        <img src="img/destination.svg" />
+        <input name="destino" required placeholder="Destino" />
+      </label>
+
+      <div class='btn-radio'>
+
+        <button type="button" on data-mode='WALKING' >
+          <img src="img/directions_walk.svg" />
+        </button>
+
+        <button type="button" data-mode='BICYCLING' >
+          <img src="img/directions_bike.svg" />
+        </button>
+
+        <button type="button" data-mode='DRIVING' >
+          <img src="img/directions_car.svg" />
+        </button>
+
+        <button type="button" data-mode='TRANSIT' >
+          <img src="img/directions_bus.svg" />
+        </button>
+
+      </div>
+
+      <button>Mapear Rota</button>
+
+    </div>
+
+  </form>
+
+</div>
+
+<div id='supportPage' data-page='support' auth class='page'>
+
+  <header>
+    <button data-action='back'><img src="img/back.svg" /></button>
+    <h2>Suporte Técnico</h2>
+  </header>
+
+  <card hero>
+    <h2>Desenvolvimento de App</h2>
+    <h3>Rodrigo Nishino</h3>
+    <p>email: rodrigo.nsh@gmail.com</p>
+    <p>phone: +55 67 99947-5854</p>
+  </card>
+
+</div>
+
+<div id="thanksPage" class="page deco" data-page='thanks'>
+
+  <img class='breathes' src="img/logo-medium.svg" />
+
+  <span class='grows'></span>
+
+  <div class='special left'>
+
+    <div class='cont'>
+
+      <p><strong>
+        Somos gratas por você
+        compartilhar sua história
+      </strong></p>
+
+      <p class='aux'></p>
+
+      <span class='space'></span>
+
+      <button data-page='map'>
+        <span>Início</span>
+        <img src="img/next.svg" />
+      </button>
+
+    </div>
+
+    <div class='menina'>
+      <img src="img/menina-direita.svg" />
+    </div>
+
+  </div>
+
+</div>
+
+<div id='userPage' data-page='user' auth class='page'>
+
+  <header>
+    <button data-action='back'><img src="img/back.svg" /></button>
+    <h2>Meus Dados</h2>
+    <button data-action='save'><img src="img/tick.svg" /></button>
+  </header>
+
+  <div class='scrolls'>
+
+    <form method="post">
+
+      <p class='wait'>
+        Salvando...
+      </p>
+
+      <p class="error">
+        Deu merda!
+      </p>
+
+      <div class='inset interaction'>
+
+        <label for='userName'>Nome</label>
+        <input id="userName" required />
+
+        <label for='userEmail'>Email</label>
+        <input id="userEmail" type='email' required />
+
+        <label>Senha</label>
+        <input type="password" name="senha1" value='ignore' />
+
+        <label>Nova Senha</label>
+        <input type="password" name="senha2" value='ignore' />
+
+      </div>
+
+      <hr />
+
+      <div class="inset interaction">
+
+        <!-- https://www.tcm.go.gov.br/site/wp-content/uploads/2017/07/Tabela_de_Escolaridade.pdf-->
+        <label for='userEd'>Escolaridade</label>
+        <select id='userEd'>
+          <option value="">Escolha uma opção</option>
+          <option value='1'>Fundamental - Incompleto</option>
+          <option value='2'>Fundamental - Completo</option>
+          <option value='3'>Médio - Incompleto</option>
+          <option value='4'>Médio - Completo</option>
+          <option value='5'>Superior - Incompleto</option>
+          <option value='6'>Superior - Completo</option>
+        </select>
+
+        <label for='userSex'>Sexo</label>
+        <select id='userSex'>
+          <option value="">Escolha uma opção</option>
+          <option value="m">Mulher</option>
+          <option value="h">Homem</option>
+        </select>
+
+        <label for='userFmlCmp'>Composição Familiar</label>
+        <select id='userFmlCmp'>
+          <option value=''>Escolha uma opção</option>
+          <option value='unipessoal'>Moro só</option>
+          <option value='nao-parentes'>2+ sem parentesco</option>
+          <option value='parentes'>2+ com parentesco</option>
+        </select>
+
+        <label for='userFmlRnd'>Renda Familiar</label>
+        <select id='userFmlRnd'>
+          <option value=''>Escolha uma opção</option>
+          <option value="E">Até 2 salários mínimos</option>
+          <option value="D">2 a 4 salários mínimos</option>
+          <option value="C">4 a 10 salários mínimos</option>
+          <option value="B">10 a 20 salários mínimos</option>
+          <option value="A">Acima de 20 salários mínimos</option>
+        </select>
+
+        <button class='block'>
+          Enviar
+        </button>
+
+        <p class='disclaimer'>
+          Seus dados não serão públicos para sua segurança e
+          agradecemos sua colaboração
+        </p>
+
+      </div>
+
+    </form>
+
+  </div>
+
+</div>
+
+<div id="welcomePage" class="page show deco" data-page='welcome'>
+
+  <img class='breathes' src="img/logo-medium.svg" />
+
+  <span class='grows'></span>
+
+  <div class='special left'>
+
+    <div class='cont scrolls'>
+
+      <p><strong>
+        Bem Vind@!
+      </strong></p>
+
+      <p>
+        Mapeamos casos de violência contra mulheres através de dados
+        anônimos coletados no app e dados de outras instituições
+        apoiadoras
+      </p>
+
+      <span class='space'></span>
+
+      <button data-page='map'>
+        <span>Iniciar</span>
+        <img src="img/next.svg" />
+      </button>
+
+
+    </div>
+
+    <div class='menina'>
+      <img src="img/menina-direita-2.svg" />
+    </div>
+
+
+  </div>
+
+</div>
+
+
+
+      </div>
+
+      </div>
+
+<div id='termsModal' data-modal='terms' class='modal'>
+
+  <h2>Termos de Serviço e Política de Privacidade</h2>
+
+  <div class="scrolls grows">
+
+    <p></p>
+
+  </div>
+
+  <button data-action='closeModal'>Concordar</button>
+
+</div>
+
+
+  <toast hidden>
+    <span>Esta é uma mensagem!</span>
+    <!--button>Ok</buton-->
+  </toast>
+
+
+</div>
+
+<script type="text/javascript" src="cordova.js"></script>
+<script type="text/javascript" src="app.js"></script>
+
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAgQ3Td8h6homy1Hf2MIT9DUR9882g-42Q&libraries=visualization&callback=initMap"></script>
+
+</body>
+</html>

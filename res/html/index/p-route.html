@@ -1,0 +1,66 @@
+<div id='routePage' class='page' data-page='route'>
+
+  <header>
+    <button data-action='menu'><img data-action='menu' src="img/menu.svg" /></button>
+    <h1>PURELAS</h1>
+    <button data-page='notifications'><img src="img/notification.svg" /></button>
+  </header>
+
+  <div class='tabs'>
+    <button data-page='map'><img src="img/map.svg" /></button>
+    <button data-page='route' active><img src="img/route.svg" /></button>
+    <button data-page='reports'><img src="img/messages.svg" /></button>
+  </div>
+
+  <form class='inset scrolls grows' id="routeEndPoints">
+
+    <div class='tab-title'>Minha Rota</div>
+
+    <div class='wait'>
+      Contactando serviço de rotas...
+    </div>
+
+    <div class='error'>
+      Ocorreu um erro!
+      <strong></strong>
+    </div>
+
+    <div class='interaction'>
+
+      <label class='input'>
+        <img src="img/origin.svg" />
+        <input name="origem" required placeholder="Endereço de Partida" />
+      </label>
+
+      <label class='input'>
+        <img src="img/destination.svg" />
+        <input name="destino" required placeholder="Destino" />
+      </label>
+
+      <div class='btn-radio'>
+
+        <button type="button" on data-mode='WALKING' >
+          <img src="img/directions_walk.svg" />
+        </button>
+
+        <button type="button" data-mode='BICYCLING' >
+          <img src="img/directions_bike.svg" />
+        </button>
+
+        <button type="button" data-mode='DRIVING' >
+          <img src="img/directions_car.svg" />
+        </button>
+
+        <button type="button" data-mode='TRANSIT' >
+          <img src="img/directions_bus.svg" />
+        </button>
+
+      </div>
+
+      <button>Mapear Rota</button>
+
+    </div>
+
+  </form>
+
+</div>

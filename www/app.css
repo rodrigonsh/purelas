@@ -340,8 +340,8 @@ button:hover {
 
 @media (min-width: 600px) {
   #shell {
-    width: 400px;
-    height: calc( 100vh - 64px);
+    width: calc( 100vw - 128px);
+    height: calc( 100vh - 128px);
     margin: auto;
     -webkit-box-shadow: 0px 0px 30px;
             box-shadow: 0px 0px 30px;
@@ -443,6 +443,12 @@ button:hover {
   display: flex;
 }
 
+@media (min-width: 600px) {
+  #menu {
+    width: 380px;
+  }
+}
+
 #navigator {
   width: 100vw;
   height: 100vh;
@@ -451,8 +457,8 @@ button:hover {
 
 @media (min-width: 600px) {
   #navigator {
-    width: 400px;
-    height: calc( 100vh - 64px);
+    width: calc( 100vw - 128px);
+    height: calc( 100vh - 128px);
   }
 }
 
@@ -614,6 +620,12 @@ header button:focus {
   background: rgba(255, 255, 255, 0.1);
 }
 
+@media (min-width: 600px) {
+  header button[data-action=menu] {
+    visibility: hidden;
+  }
+}
+
 header h1 {
   font-family: "Roboto-Black";
   font-size: 9.75pt;
@@ -720,6 +732,10 @@ card[hero] address {
   border-bottom: 0px;
   -webkit-box-shadow: 0px 5px 18px rgba(0, 0, 0, 0.02);
           box-shadow: 0px 5px 18px rgba(0, 0, 0, 0.02);
+}
+
+.inset card:first-child {
+  margin-top: 18px;
 }
 
 card address {
@@ -1372,8 +1388,10 @@ body {
 
 @media (min-width: 600px) {
   #app {
-    width: 645px;
-    height: calc( 100vh - 64px);
+    width: calc( 100vw - 128px);
+    height: calc( 100vh - 128px);
+    -webkit-transform: translateX(0px);
+            transform: translateX(0px);
   }
 }
 

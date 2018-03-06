@@ -24,6 +24,14 @@ header
     background: rgba(255,255,255,0.1);
   }
 
+  button[data-action=menu]
+  {
+    @media (min-width: 600px)
+    {
+      visibility: hidden;
+    }
+  }
+
   h1
   {
     font-family: "Roboto-Black";

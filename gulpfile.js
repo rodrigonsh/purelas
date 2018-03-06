@@ -16,7 +16,8 @@ var sassOptions = {
 };
 
 // Definimos o diretorio dos arquivos para evitar repetição futuramente
-var html_files = "./res/html/*.html";
+var index_html_files = "./res/html/index/*.html";
+var admin_html_files = "./res/html/admin/*.html";
 var js_files = "./res/js/*.js";
 var scss_files = "./res/scss/*.scss";
 var scss_index =  "./res/scss/app.scss";
@@ -24,8 +25,12 @@ var scss_index =  "./res/scss/app.scss";
 
 gulp.task('html', function() {
 
-	gulp.src(html_files)
+	gulp.src(index_html_files)
 	.pipe(concat('index.html'))
+	.pipe(gulp.dest('./www/'));
+
+	gulp.src(admin_html_files)
+	.pipe(concat('admin.html'))
 	.pipe(gulp.dest('./www/'));
 
 });
@@ -75,7 +80,8 @@ gulp.task('serve', function(done) {
 
 gulp.task('default', ['html', 'styles', 'js', 'serve'], function() {
 
-  gulp.watch(html_files, ['html', browserSync.reload] );
+  gulp.watch(index_html_files, ['html', browserSync.reload] );
+  gulp.watch(admin_html_files, ['html', browserSync.reload] );
 
   gulp.watch(js_files, ['js', browserSync.reload] );
 

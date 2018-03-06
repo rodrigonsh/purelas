@@ -8,5 +8,5 @@ $error_txt: white;
 
 $space: 18px;
 
-$desktopShellWidth: 400px;
-$desktopShellHeight: calc( 100vh - 64px );
+$desktopShellWidth: calc( 100vw - 128px );
+$desktopShellHeight: calc( 100vh - 128px );
