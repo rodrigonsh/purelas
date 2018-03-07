@@ -1,7 +1,7 @@
 {
   "name": "purelas",
   "displayName": "Purelas",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Assistente feminino",
   "main": "index.js",
   "scripts": {

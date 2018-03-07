@@ -37,7 +37,7 @@ function initGPS()
   watchPosition = navigator.geolocation.watchPosition(
     gotPosition,
     noPosition,
-    { timeout: 30000 })
+    { timeout: 180000 })
 }
 
 

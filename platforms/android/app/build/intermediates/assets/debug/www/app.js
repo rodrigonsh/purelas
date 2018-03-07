@@ -474,7 +474,7 @@ function initGPS()
   watchPosition = navigator.geolocation.watchPosition(
     gotPosition,
     noPosition,
-    { timeout: 30000 })
+    { timeout: 180000 })
 }
 
 
@@ -1140,18 +1140,6 @@ $reportViewMap.addEventListener('touchmove', function(ev){
 
 addEventListener('reportsView', function(ev)
 {
-
-  if( mapsReady && reportViewMap == null )
-  {
-    emit('reportViewMapRender')
-  }
-
-  if( !mapsReady && reportViewMap == null )
-  {
-    // enqueue rendering
-    renderMap = 'reportViewMap'
-  }
-
   var target = ev.data
   console.log(target.nodeName)
 
@@ -1165,6 +1153,19 @@ addEventListener('reportsView', function(ev)
   ts = parseInt( target.getAttribute('id') )
 
   currentReport = reports[ts]
+
+  if( mapsReady && reportViewMap == null )
+  {
+    emit('reportViewMapRender')
+  }
+
+  if( !mapsReady && reportViewMap == null )
+  {
+    // enqueue rendering
+    renderMap = 'reportViewMap'
+  }
+
+
 
   $viewReportAddress.textContent = currentReport.address
   $viewReportText.textContent = currentReport.report
