@@ -1,0 +1,56 @@
+<div id='reportEditPage' data-page='report-edit' auth class='page'>
+
+  <header>
+    <button data-action='back'><img src="img/back.svg" /></button>
+    <h2>Meu Relato</h2>
+    <button data-action='save'><img src="img/tick.svg" /></button>
+  </header>
+
+  <div class='inset scrolls'>
+
+    <form>
+
+      <label>Tipo de Relato</label>
+      <select name="type">
+        <option value='nd'>Selecione</option>
+        <option value='estupro'>Estupro</option>
+        <option value='assedio'>Assédio Sexual</option>
+        <option value='lesao'>Lesão Corporal</option>
+        <option value='destruicao'>Destruição de Bens e Documentos</option>
+        <option value='ameaca'>Ameaça</option>
+        <option value='assedio-moral'>Assédio Moral</option>
+        <option value='calunia'>Calúnia, Difamação, Injúria</option>
+        <option value='racismo'>Racismo e Injúria Racial</option>
+        <option value='lesbofobia'>Lesbofobia</option>
+        <option value='homofobia'>Homofobia</option>
+        <option value='aborto'>Aborto provocado por outra pessoa</option>
+        <option value='encoxada'>Encoxadas</option>
+        <option value='exploracao-sexual'>Exploração Sexual</option>
+        <option value='carcere'>Cárcere Privado</option>
+        <option value='trafico-mulheres'>Tráfico de Mulheres</option>
+        <option value='trabalho-escravo'>Trabalho escravo</option>
+        <option value='outro'>Outro</option>
+      </select>
+
+      <label>Onde aconteceu o abuso?</label>
+      <input name='geocode' placeholder="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pesquise pelo endereço" />
+      <div id="report-edit-map" class='map'></div>
+
+      <label>Como aconteceu o abuso?</label>
+      <textarea name='report' rows='10'></textarea>
+
+      <label>Quem é o agressor?</label>
+      <textarea name='agressor' rows='10'></textarea>
+
+      <button>Enviar</button>
+
+      <p class='disclaimer'>
+        Seu relato será publicado anônimamente para sua segurança.
+        Agradecemos sua colaboração
+      </p>
+
+    </form>
+
+  </div>
+
+</div>

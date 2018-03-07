@@ -62,8 +62,9 @@ body
 
   @media (min-width: 600px)
   {
-    width: 645px;
+    width: $desktopShellWidth;
     height: $desktopShellHeight;
+    transform: translateX(0px);
   }
 }
 

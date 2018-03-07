@@ -112,7 +112,7 @@ h1.breathes {
   -ms-flex-negative: 1;
       flex-shrink: 1;
   overflow-x: hidden;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .breathes {
@@ -127,6 +127,36 @@ h1.breathes {
 
 .inset {
   padding: 0px 18px;
+}
+
+.hbox {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+form.hbox {
+  background: #ad80a0;
+  padding: 20px;
+}
+
+.hbox button {
+  padding: 8px;
+  -webkit-box-flex: 0;
+      -ms-flex-positive: 0;
+          flex-grow: 0;
+  width: auto;
+}
+
+.hbox input {
+  margin: 0px;
 }
 
 button:focus {
@@ -310,8 +340,8 @@ button:hover {
 
 @media (min-width: 600px) {
   #shell {
-    width: 400px;
-    height: calc( 100vh - 64px);
+    width: calc( 100vw - 128px);
+    height: calc( 100vh - 128px);
     margin: auto;
     -webkit-box-shadow: 0px 0px 30px;
             box-shadow: 0px 0px 30px;
@@ -413,6 +443,12 @@ button:hover {
   display: flex;
 }
 
+@media (min-width: 600px) {
+  #menu {
+    width: 380px;
+  }
+}
+
 #navigator {
   width: 100vw;
   height: 100vh;
@@ -421,8 +457,8 @@ button:hover {
 
 @media (min-width: 600px) {
   #navigator {
-    width: 400px;
-    height: calc( 100vh - 64px);
+    width: calc( 100vw - 128px);
+    height: calc( 100vh - 128px);
   }
 }
 
@@ -545,6 +581,10 @@ button:hover {
   z-index: 1000;
 }
 
+#navigator[data-page='contact'] #contactPage {
+  z-index: 1000;
+}
+
 header {
   height: 56px;
   background: #924f97;
@@ -578,6 +618,12 @@ header button {
 
 header button:focus {
   background: rgba(255, 255, 255, 0.1);
+}
+
+@media (min-width: 600px) {
+  header button[data-action=menu] {
+    visibility: hidden;
+  }
 }
 
 header h1 {
@@ -686,6 +732,10 @@ card[hero] address {
   border-bottom: 0px;
   -webkit-box-shadow: 0px 5px 18px rgba(0, 0, 0, 0.02);
           box-shadow: 0px 5px 18px rgba(0, 0, 0, 0.02);
+}
+
+.inset card:first-child {
+  margin-top: 18px;
 }
 
 card address {
@@ -1278,6 +1328,15 @@ toast[hidden] {
   margin-bottom: 18px;
 }
 
+#contactMessages card[mine] {
+  color: white;
+  background-color: #924f97;
+}
+
+#contactMessages card[mine] p {
+  color: inherit;
+}
+
 body {
   padding: 0px;
   margin: 0px;
@@ -1329,8 +1388,10 @@ body {
 
 @media (min-width: 600px) {
   #app {
-    width: 645px;
-    height: calc( 100vh - 64px);
+    width: calc( 100vw - 128px);
+    height: calc( 100vh - 128px);
+    -webkit-transform: translateX(0px);
+            transform: translateX(0px);
   }
 }
 

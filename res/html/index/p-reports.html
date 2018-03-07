@@ -1,0 +1,44 @@
+<div id='reportsPage' class='page nodata show-cat' data-page='reports'>
+
+  <header>
+    <button data-action='menu'><img data-action='menu' src="img/menu.svg" /></button>
+    <h1>PURELAS</h1>
+    <button data-page='notifications'><img src="img/notification.svg" /></button>
+  </header>
+
+  <div class='tabs'>
+    <button data-page='map' ><img src="img/map.svg" /></button>
+    <button data-page='route'><img src="img/route.svg" /></button>
+    <button data-page='reports' active><img src="img/messages.svg" /></button>
+  </div>
+
+  <div class="grows scrolls">
+
+    <div class='tab-title'>Relatos</div>
+
+    <p class='wip' id="area" data-page="area-select">
+      Centro, Campo Grande, MS
+      <span class='down-arrow'></span>
+    </p>
+
+    <div class='empty'>
+
+      Nenhum relato num raio de 50Km
+      <small>Continuamos procurando...</small>
+
+    </div>
+
+    <span class='cat'>
+      <span>Gostaria de enviar um relato anônimo?</span>
+      <img src='img/cat.svg' />
+    </span>
+
+
+    <div class='inset' data-action='view'>
+    </div>
+
+  </div>
+
+  <button data-page="report-edit" class='fab'><img src='img/messages.svg' /></button>
+
+</div>

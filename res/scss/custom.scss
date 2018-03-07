@@ -142,3 +142,12 @@
   letter-spacing: 0.21px;
   margin-bottom: $space;
 }
+
+#contactMessages card[mine]
+{
+  color: white;
+  background-color: $app_primary_color;
+
+  p{ color: inherit }
+
+}

@@ -79,3 +79,11 @@
 
 #menu li.login{ display: none; }
 .logged #menu li.login{ display: flex; }
+
+@media (min-width: 600px)
+{
+  #menu
+  {
+    width: 380px;
+  }
+}

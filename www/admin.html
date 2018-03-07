@@ -33,7 +33,7 @@
     <meta name="msapplication-tap-highlight" content="no">
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
     <link rel="stylesheet" type="text/css" href="app.css">
-    <title>purelas</title>
+    <title>purelas - admin</title>
 
   </head>
 
@@ -70,33 +70,21 @@
 
   <nav>
     <ul>
-      <li data-page='map'>
+      <li class='login' data-page='dashboard'>
         <span class='i'><img src='img/home.svg' /></span>
-        Início
+        Visão Geral
       </li>
-      <li class='login' data-page='user'>
+      <li class='login' data-page='users'>
         <span class='i'><img src='img/user.svg' /></span>
-        Meus Dados
+        Usuários
       </li>
-      <li class='login' data-page='report-edit'>
+      <li  class='login' data-page='messages'>
         <span class='i'><img src='img/messages.svg' /></span>
-        Meu relato
+        Mensagens
       </li>
-      <li data-page='phones'>
-        <span class='i'><img src='img/phones.svg' /></span>
-        Telefones úteis
-      </li>
-      <li data-page='partners'>
-        <span class='i'><img src='img/partners.svg' /></span>
-        Apoio e Patrocínio
-      </li>
-      <li data-page='opinion'>
-        <span class='i'><img src='img/rate.svg' /></span>
-        Dê sua opinião
-      </li>
-      <li data-page='contact'>
+      <li data-page='support'>
         <span class='i'><img src='img/send.svg' /></span>
-        Fale conosco
+        Suporte Técnico
       </li>
       <!--li data-page='rate'>
         <span class='i'><img src='img/.svg' /></span>
@@ -210,27 +198,6 @@
   </div>
 
   <!--button data-page="area-new" class='fab'>+</button-->
-
-</div>
-
-<div id='contactPage' data-page='contact' auth class='page'>
-
-  <header>
-    <button data-action='back'><img src="img/back.svg" /></button>
-    <h2>Fale conosco</h2>
-  </header>
-
-  <div  id="contactMessages" class='grows scrolls inset'></div>
-
-  <form class="hbox" action="#">
-
-    <input class='grows'></input>
-
-    <button type="submit">
-      <img src="img/send.svg" />
-    </button>
-
-  </form>
 
 </div>
 
@@ -814,6 +781,22 @@
     </div>
 
   </form>
+
+</div>
+
+<div id='supportPage' data-page='support' auth class='page'>
+
+  <header>
+    <button data-action='back'><img src="img/back.svg" /></button>
+    <h2>Suporte Técnico</h2>
+  </header>
+
+  <card hero>
+    <h2>Desenvolvimento de App</h2>
+    <h3>Rodrigo Nishino</h3>
+    <p>email: rodrigo.nsh@gmail.com</p>
+    <p>phone: +55 67 99947-5854</p>
+  </card>
 
 </div>
 

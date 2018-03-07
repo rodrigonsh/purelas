@@ -51,6 +51,11 @@ card[hero]
   box-shadow: 0px 5px 18px rgba(0,0,0,0.02);
 }
 
+.inset card:first-child
+{
+  margin-top: $space;
+}
+
 card address
 {
   font-family: "Roboto-Black";
