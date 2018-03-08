@@ -41,6 +41,11 @@
   flex-grow: 1;
 }
 
+.shrinks
+{
+  flex-shrink: 1;
+}
+
 .scrolls
 {
   flex-shrink: 1;
@@ -63,6 +68,13 @@
 .inset
 {
   padding: 0px $space;
+}
+
+.vbox
+{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .hbox

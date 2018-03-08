@@ -5,6 +5,12 @@ card
   display: block;
 }
 
+card[active]
+{
+  font-weight: bold;
+  background-color: rgba(0,0,0,0.1);
+}
+
 card[hero]
 {
 

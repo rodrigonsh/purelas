@@ -18,7 +18,12 @@ var sassOptions = {
 // Definimos o diretorio dos arquivos para evitar repetição futuramente
 var index_html_files = "./res/html/index/*.html";
 var admin_html_files = "./res/html/admin/*.html";
-var js_files = "./res/js/*.js";
+
+var alpha_js_files = "./res/js/alpha/*.js";
+var app_js_files   = "./res/js/app/*.js";
+var admin_js_files = "./res/js/admin/*.js";
+var index_js_files = "./res/js/index/*.js";
+
 var scss_files = "./res/scss/*.scss";
 var scss_index =  "./res/scss/app.scss";
 
@@ -37,8 +42,23 @@ gulp.task('html', function() {
 
 gulp.task('js', function() {
 
-	gulp.src(js_files)
+  gulp.src(alpha_js_files)
+	.pipe(concat('alpha.js'))
+	//.pipe(minify({compress:}))
+	.pipe(gulp.dest('./www/'));
+
+  gulp.src(app_js_files)
 	.pipe(concat('app.js'))
+	//.pipe(minify({compress:}))
+	.pipe(gulp.dest('./www/'));
+
+  gulp.src(index_js_files)
+	.pipe(concat('index.js'))
+	//.pipe(minify({compress:}))
+	.pipe(gulp.dest('./www/'));
+
+  gulp.src(admin_js_files)
+	.pipe(concat('admin.js'))
 	//.pipe(minify({compress:}))
 	.pipe(gulp.dest('./www/'));
 
@@ -83,7 +103,10 @@ gulp.task('default', ['html', 'styles', 'js', 'serve'], function() {
   gulp.watch(index_html_files, ['html', browserSync.reload] );
   gulp.watch(admin_html_files, ['html', browserSync.reload] );
 
-  gulp.watch(js_files, ['js', browserSync.reload] );
+  gulp.watch(alpha_js_files, ['js', browserSync.reload] );
+  gulp.watch(app_js_files, ['js', browserSync.reload] );
+  gulp.watch(admin_js_files, ['js', browserSync.reload] );
+  gulp.watch(index_js_files, ['js', browserSync.reload] );
 
   gulp.watch(scss_files, ['styles', browserSync.reload] );
 

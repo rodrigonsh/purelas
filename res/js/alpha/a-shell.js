@@ -1,4 +1,4 @@
-var shell = document.getElementById('shell');
+var $shell = document.getElementById('shell');
 
 var touchStartX = null
 var touchStartY = null
@@ -6,14 +6,14 @@ var touchStartY = null
 var touchDiffX = null
 var touchDiffY = null
 
-shell.addEventListener('touchstart', function(ev)
+$shell.addEventListener('touchstart', function(ev)
 {
   console.log('shell touchstart')
   touchStartX = ev.touches[0].clientX
   touchStartY = ev.touches[0].clientY
 })
 
-shell.addEventListener('touchmove', function(ev)
+$shell.addEventListener('touchmove', function(ev)
 {
 
   touchDiffX = ev.touches[0].clientX - touchStartX
@@ -27,7 +27,7 @@ shell.addEventListener('touchmove', function(ev)
 
   ev.preventDefault()
 
-  shell.classList.add('drag')
+  $shell.classList.add('drag')
 
   //console.log(touchDiffX, touchDiffY)
 
@@ -92,7 +92,7 @@ shell.addEventListener('touchend', function(ev)
 
   $app.style.transform = null
 
-  shell.classList.remove('drag')
+  $shell.classList.remove('drag')
 
 })
 

@@ -146,8 +146,13 @@
 #contactMessages card[mine]
 {
   color: white;
-  background-color: $app_primary_color;
+  background-color: #763c8a;
 
   p{ color: inherit }
 
+}
+
+#contactsList
+{
+  flex: 1;
 }

@@ -64,7 +64,8 @@ $contactForm.addEventListener('submit', function(ev)
   var message =
   {
     text: $contactForm.querySelector('input').value.trim(),
-    user: UID
+    user: UID,
+    read: false
   }
 
   if ( message.text == "")

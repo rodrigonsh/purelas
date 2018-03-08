@@ -70,14 +70,14 @@
 
   <nav>
     <ul>
-      <li class='login' data-page='dashboard'>
+      <li class='login' data-page='overview'>
         <span class='i'><img src='img/home.svg' /></span>
         Visão Geral
       </li>
-      <li class='login' data-page='users'>
+      <!--li class='login' data-page='users'>
         <span class='i'><img src='img/user.svg' /></span>
         Usuários
-      </li>
+      </li-->
       <li  class='login' data-page='messages'>
         <span class='i'><img src='img/messages.svg' /></span>
         Mensagens
@@ -285,25 +285,43 @@
 
 </div>
 
-<div id='mapPage' class='page' data-page='map'>
+<div id='messagesPage' data-page='messages' auth class='page'>
 
   <header>
-    <button data-action='menu'><img data-action='menu' src="img/menu.svg" /></button>
-    <h1>PURELAS</h1>
-    <button data-page='notifications'><img src="img/notification.svg" /></button>
+    <button data-action='back'><img src="img/back.svg" /></button>
+    <h2>Mensagens</h2>
   </header>
 
-  <div class='tabs'>
-    <button data-page='map' active><img src="img/map.svg" /></button>
-    <button data-page='route'><img src="img/route.svg" /></button>
-    <button data-page='reports'><img src="img/messages.svg" /></button>
+  <div class='grows' id='messagesContainer'>
+
+    <div class='hbox'>
+
+      <ul class='scrolls grows' id='contactsList' >
+      </ul>
+
+      <div class='grows'>
+
+        <div>
+
+          <div  id="contactMessages" class='grows scrolls inset'></div>
+
+          <form class="hbox" action="#">
+
+            <input class='grows'></input>
+
+            <button type="submit">
+              <img src="img/send.svg" />
+            </button>
+
+          </form>
+
+        </div>
+
+      </div>
+
+    </div>
+
   </div>
-
-  <div class='tab-title'>Mapa dos Relatos</div>
-
-  <div id='map' class='grows'></div>
-
-  <button data-page="report-edit" class='fab'><img src="img/messages.svg" /></button>
 
 </div>
 
@@ -402,6 +420,25 @@
 
     </form>
 
+  </div>
+
+</div>
+
+<div id='overviewPage' class='page' admin data-page='overview'>
+
+  <header>
+    <button data-action='menu'><img data-action='menu' src="img/menu.svg" /></button>
+    <h1>PURELAS</h1>
+    <button data-page='notifications'><img src="img/notification.svg" /></button>
+  </header>
+
+  <div class='tab-title'>Mapa dos Relatos</div>
+  <div id='map' class='grows'></div>
+
+  <div class='inset'>
+    <card>
+      Estatísticas aqui
+    </card>
   </div>
 
 </div>
@@ -997,7 +1034,9 @@
 </div>
 
 <script type="text/javascript" src="cordova.js"></script>
+<script type="text/javascript" src="alpha.js"></script>
 <script type="text/javascript" src="app.js"></script>
+<script type="text/javascript" src="admin.js"></script>
 
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAgQ3Td8h6homy1Hf2MIT9DUR9882g-42Q&libraries=visualization&callback=initMap"></script>
 

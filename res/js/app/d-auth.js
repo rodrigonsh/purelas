@@ -118,3 +118,9 @@ addEventListener('userDataSend', function()
   .catch( function(err){ emit('error', { kind:'user', err: err }) } )
 
 })
+
+$("[data-action=logout]").on('tap', function(ev){
+
+  logout()
+
+});
