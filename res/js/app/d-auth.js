@@ -3,6 +3,9 @@ var userData = JSON.parse( localStorage.getItem('userData') );
 var currentUser = null;
 var afterAuth = null;
 
+var adminRef = null
+var admin = false
+
 if ( userData == null )
 {
   userData =
@@ -59,6 +62,9 @@ auth.onAuthStateChanged( function (user)
 
     if ( firebaseOnline ) emit("processQueue")
 
+    adminRef = db.ref('admins/'+UID)
+    adminRef.on('value', function(s){ admin = s.val(); emit('adminSet', admin) })
+
     db.ref("users/"+UID).on('value', function(s){
 
       userData = s.val()
@@ -71,8 +77,11 @@ auth.onAuthStateChanged( function (user)
     if( newUser ) emit('userNew')
     if ( afterAuth != null )
     {
-      emit( afterAuth+'Before' )
-      afterAuth = null
+      setTimeout(function()
+      {
+        emit( afterAuth+'Before' )
+        afterAuth = null
+      }, 2000)
     }
 
     newUser = false;

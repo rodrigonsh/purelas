@@ -21,6 +21,18 @@ addEventListener('userSet', function()
 
 })
 
+addEventListener('adminSet', function()
+{
+  if ( admin )
+  {
+    $app.classList.add('is_admin')
+  } else {
+    $app.classList.remove('is_admin')
+  }
+
+})
+
+
 $("[data-action=menu]").on('tap', function(ev){
 
   ev.stopPropagation()

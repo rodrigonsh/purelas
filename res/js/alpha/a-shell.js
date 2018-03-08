@@ -1,4 +1,14 @@
 var $shell = document.getElementById('shell');
+var shellHeight = 0;
+
+function recalc()
+{
+  shellHeight = $shell.offsetHeight;
+  emit("gotMeasures", shellHeight)
+}
+
+window.addEventListener('resize', recalc)
+setTimeout(recalc, 1000)
 
 var touchStartX = null
 var touchStartY = null

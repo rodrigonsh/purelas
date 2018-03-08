@@ -200,6 +200,8 @@ addEventListener('messagesReady', function(ev)
 
   }
 
+  $contactMessages.scrollTop = 9999999;
+
 })
 
 $contactForm.addEventListener('submit', function(ev)

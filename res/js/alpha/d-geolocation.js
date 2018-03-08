@@ -34,10 +34,11 @@ function noPosition()
 
 function initGPS()
 {
+  console.log('initGPS')
   watchPosition = navigator.geolocation.watchPosition(
     gotPosition,
     noPosition,
-    { timeout: 180000 })
+    { timeout: 20000 })
 }
 
 

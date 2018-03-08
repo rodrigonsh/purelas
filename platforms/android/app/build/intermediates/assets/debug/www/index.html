@@ -94,6 +94,10 @@
         <span class='i'><img src='img/rate.svg' /></span>
         Dê sua opinião
       </li>
+      <li class='login' data-page='contact'>
+        <span class='i'><img src='img/send.svg' /></span>
+        Fale conosco
+      </li>
       <!--li data-page='rate'>
         <span class='i'><img src='img/.svg' /></span>
         Avalie o app
@@ -102,6 +106,12 @@
         <span class='i'><img src='img/preferences.svg' /></span>
         Configurações
       </li-->
+      <li class='admin'>
+        <a href='admin.html'>
+          <span class='i'><img src='img/global.svg' /></span>
+          Admin
+        </a>
+      </li>
       <li class='login' data-action='logout'>
         <span class='i'><img src='img/logout.svg' /></span>
         Sair
@@ -110,7 +120,7 @@
   </nav>
 
   <footer>
-    Versão 1.0.1
+    Versão 1.0.3
   </footer>
 
 </div>
@@ -206,6 +216,27 @@
   </div>
 
   <!--button data-page="area-new" class='fab'>+</button-->
+
+</div>
+
+<div id='contactPage' data-page='contact' auth class='page'>
+
+  <header>
+    <button data-action='back'><img src="img/back.svg" /></button>
+    <h2>Fale conosco</h2>
+  </header>
+
+  <div  id="contactMessages" class='grows scrolls inset'></div>
+
+  <form class="hbox" action="#">
+
+    <input class='grows'></input>
+
+    <button type="submit">
+      <img src="img/send.svg" />
+    </button>
+
+  </form>
 
 </div>
 
@@ -989,7 +1020,9 @@
 </div>
 
 <script type="text/javascript" src="cordova.js"></script>
+<script type="text/javascript" src="alpha.js"></script>
 <script type="text/javascript" src="app.js"></script>
+<script type="text/javascript" src="index.js"></script>
 
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAgQ3Td8h6homy1Hf2MIT9DUR9882g-42Q&libraries=visualization&callback=initMap"></script>
 

@@ -74,7 +74,7 @@ addEventListener('messagesReady', function(ev)
 
       }
 
-      $contactMessages.scrollTop = 99999;
+      $contactMessages.scrollTop = 9999999;
 
 
     }

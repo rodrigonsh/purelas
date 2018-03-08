@@ -28,6 +28,9 @@
 .login{ display: none; }
 .logged .login{ display: block; }
 
+.admin{ display: none; }
+.is_admin .admin{ display: block; }
+
 .empty{ display: none; }
 .nodata .empty{ display: block; }
 

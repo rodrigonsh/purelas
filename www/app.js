@@ -53,7 +53,7 @@ var auth = firebase.auth()
 var connectedRef = db.ref(".info/connected");
 var firebaseOnline = false;
 
-UID = null
+var UID = null
 
 connectedRef.on("value", function(snap) {
 
@@ -80,6 +80,7 @@ moment.locale("pt");
 
 
 var $navigator = document.getElementById('navigator');
+var $menu = document.getElementById('menu');
 
 var pages = []
 var currentPage = q("#"+$navigator.dataset.page+"Page");
@@ -93,11 +94,22 @@ function setPage( pageName )
   if ( $navigator.dataset.page != pageName )
   {
 
+    nextPage = q(".page[data-page='"+pageName+"']")
+
+    if ( nextPage.hasAttribute('admin') && !admin )
+    {
+      console.error('this page requires admin')
+      afterAuth = pageName
+      setPage('login')
+      return
+    }
+
+    console.log('so far so good for', pageName)
+
     currentPage.classList.add('hiding')
 
     $navigator.dataset.page = pageName;
 
-    nextPage = q(".page[data-page='"+pageName+"']")
 
     nextPage.classList.add('showing')
     nextPage.classList.add('show')
@@ -135,6 +147,12 @@ $("[data-page]").on('tap', function(ev)
   }
 
   var next = q(".page[data-page='"+pageName+"']")
+
+  if ( next.hasAttribute('admin') && !admin )
+  {
+    afterAuth = pageName
+    setPage('login')
+  }
 
   if ( next.hasAttribute('auth') && UID == null )
   {
@@ -204,10 +222,18 @@ function onBackButton(ev){
 window.addEventListener('backbutton', onBackButton, false);
 document.addEventListener('backbutton', onBackButton, false);
 
+addEventListener('gotMeasures', function(ev)
+{
+  $menu.style.height = shellHeight+"px"
+})
+
 var newUser = null;
 var userData = JSON.parse( localStorage.getItem('userData') );
 var currentUser = null;
 var afterAuth = null;
+
+var adminRef = null
+var admin = false
 
 if ( userData == null )
 {
@@ -265,6 +291,9 @@ auth.onAuthStateChanged( function (user)
 
     if ( firebaseOnline ) emit("processQueue")
 
+    adminRef = db.ref('admins/'+UID)
+    adminRef.on('value', function(s){ admin = s.val(); emit('adminSet', admin) })
+
     db.ref("users/"+UID).on('value', function(s){
 
       userData = s.val()
@@ -277,8 +306,11 @@ auth.onAuthStateChanged( function (user)
     if( newUser ) emit('userNew')
     if ( afterAuth != null )
     {
-      emit( afterAuth+'Before' )
-      afterAuth = null
+      setTimeout(function()
+      {
+        emit( afterAuth+'Before' )
+        afterAuth = null
+      }, 2000)
     }
 
     newUser = false;
@@ -603,9 +635,10 @@ addEventListener('registerBefore', function(){
     http.send()
 
 
-    setPage('register')
   }
 
+  setPage('register')
+  
 })
 
 $thanksMessage = q("#thanksPage p strong")

@@ -70,7 +70,7 @@
 
   <nav>
     <ul>
-      <li class='login' data-page='overview'>
+      <li class='admin' data-page='overview'>
         <span class='i'><img src='img/home.svg' /></span>
         Visão Geral
       </li>
@@ -78,11 +78,11 @@
         <span class='i'><img src='img/user.svg' /></span>
         Usuários
       </li-->
-      <li  class='login' data-page='messages'>
+      <li class='admin' data-page='messages'>
         <span class='i'><img src='img/messages.svg' /></span>
         Mensagens
       </li>
-      <li data-page='support'>
+      <li class='admin' data-page='support'>
         <span class='i'><img src='img/send.svg' /></span>
         Suporte Técnico
       </li>
@@ -94,7 +94,13 @@
         <span class='i'><img src='img/preferences.svg' /></span>
         Configurações
       </li-->
-      <li class='login' data-action='logout'>
+      <li>
+        <a href="index.html">
+        <span class='i'><img src='img/home.svg' /></span>
+        Voltar para o App
+        </a>
+      </li>
+      <li class='admin' data-action='logout'>
         <span class='i'><img src='img/logout.svg' /></span>
         Sair
       </li>
@@ -102,7 +108,7 @@
   </nav>
 
   <footer>
-    Versão 1.0.2
+    Versão 1.0.3
   </footer>
 
 </div>
@@ -258,7 +264,7 @@
     <span style="width:56px;"></span>
   </header>
 
-  <div class='grows'>
+  <div class='grows scrolls'>
 
     <img class='breathes center' src="img/logo-medium.svg" />
 
@@ -285,7 +291,7 @@
 
 </div>
 
-<div id='messagesPage' data-page='messages' auth class='page'>
+<div id='messagesPage' data-page='messages' admin class='page'>
 
   <header>
     <button data-action='back'><img src="img/back.svg" /></button>
@@ -582,7 +588,7 @@
     <span style="width:56px;"></span>
   </header>
 
-  <form action="#" class='inset grows'>
+  <form action="#" class='inset grows scrolls'>
 
     <div class='wait breathes'>
       Aguarde...
@@ -821,7 +827,7 @@
 
 </div>
 
-<div id='supportPage' data-page='support' auth class='page'>
+<div id='supportPage' data-page='support' admin class='page'>
 
   <header>
     <button data-action='back'><img src="img/back.svg" /></button>

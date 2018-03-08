@@ -88,6 +88,14 @@ h1.breathes {
   display: block;
 }
 
+.admin {
+  display: none;
+}
+
+.is_admin .admin {
+  display: block;
+}
+
 .empty {
   display: none;
 }
@@ -108,11 +116,16 @@ h1.breathes {
           flex-grow: 1;
 }
 
+.shrinks {
+  -ms-flex-negative: 1;
+      flex-shrink: 1;
+}
+
 .scrolls {
   -ms-flex-negative: 1;
       flex-shrink: 1;
   overflow-x: hidden;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .breathes {
@@ -127,6 +140,49 @@ h1.breathes {
 
 .inset {
   padding: 0px 18px;
+}
+
+.vbox {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+.hbox {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+form.hbox {
+  background: #ad80a0;
+  padding: 20px;
+}
+
+.hbox button {
+  padding: 8px;
+  -webkit-box-flex: 0;
+      -ms-flex-positive: 0;
+          flex-grow: 0;
+  width: auto;
+}
+
+.hbox input {
+  margin: 0px;
 }
 
 button:focus {
@@ -310,8 +366,8 @@ button:hover {
 
 @media (min-width: 600px) {
   #shell {
-    width: 400px;
-    height: calc( 100vh - 64px);
+    width: calc( 100vw - 128px);
+    height: calc( 100vh - 128px);
     margin: auto;
     -webkit-box-shadow: 0px 0px 30px;
             box-shadow: 0px 0px 30px;
@@ -382,9 +438,18 @@ button:hover {
           align-items: center;
 }
 
+#menu ul li.admin {
+  display: none;
+}
+
 #menu ul li:hover {
   background-color: rgba(255, 255, 255, 0.2);
   cursor: pointer;
+}
+
+#menu a {
+  color: inherit;
+  text-decoration: none;
 }
 
 #menu .i {
@@ -403,6 +468,16 @@ button:hover {
   font-size: 6.75pt;
 }
 
+.is_admin #menu li.admin {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.is_admin #menu li.admin a * {
+  vertical-align: middle;
+}
+
 #menu li.login {
   display: none;
 }
@@ -413,6 +488,12 @@ button:hover {
   display: flex;
 }
 
+@media (min-width: 600px) {
+  #menu {
+    width: 300px;
+  }
+}
+
 #navigator {
   width: 100vw;
   height: 100vh;
@@ -421,8 +502,8 @@ button:hover {
 
 @media (min-width: 600px) {
   #navigator {
-    width: 400px;
-    height: calc( 100vh - 64px);
+    width: calc( 100vw - 128px);
+    height: calc( 100vh - 128px);
   }
 }
 
@@ -545,6 +626,18 @@ button:hover {
   z-index: 1000;
 }
 
+#navigator[data-page='contact'] #contactPage {
+  z-index: 1000;
+}
+
+#navigator[data-page='messages'] #messagesPage {
+  z-index: 1000;
+}
+
+#navigator[data-page='overview'] #overviewPage {
+  z-index: 1000;
+}
+
 header {
   height: 56px;
   background: #924f97;
@@ -578,6 +671,12 @@ header button {
 
 header button:focus {
   background: rgba(255, 255, 255, 0.1);
+}
+
+@media (min-width: 600px) {
+  header button[data-action=menu] {
+    visibility: hidden;
+  }
 }
 
 header h1 {
@@ -648,6 +747,11 @@ card {
   display: block;
 }
 
+card[active] {
+  font-weight: bold;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
 card[hero] {
   padding: 50px;
   text-align: center;
@@ -686,6 +790,10 @@ card[hero] address {
   border-bottom: 0px;
   -webkit-box-shadow: 0px 5px 18px rgba(0, 0, 0, 0.02);
           box-shadow: 0px 5px 18px rgba(0, 0, 0, 0.02);
+}
+
+.inset card:first-child {
+  margin-top: 18px;
 }
 
 card address {
@@ -1150,6 +1258,11 @@ toast[hidden] {
   bottom: -90px;
 }
 
+ul {
+  margin: 0px;
+  padding: 0px;
+}
+
 #routeEndPoints {
   background: white;
   padding-bottom: 18px;
@@ -1278,6 +1391,22 @@ toast[hidden] {
   margin-bottom: 18px;
 }
 
+#contactMessages card[mine] {
+  color: #924f97;
+  background-color: #dfd7e2;
+  text-align: right;
+}
+
+#contactMessages card[mine] p {
+  color: inherit;
+}
+
+#contactsList {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
 body {
   padding: 0px;
   margin: 0px;
@@ -1329,8 +1458,10 @@ body {
 
 @media (min-width: 600px) {
   #app {
-    width: 645px;
-    height: calc( 100vh - 64px);
+    width: calc( 100vw - 128px);
+    height: calc( 100vh - 128px);
+    -webkit-transform: translateX(0px);
+            transform: translateX(0px);
   }
 }
 

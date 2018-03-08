@@ -49,12 +49,23 @@
       align-items: center
     }
 
+    li.admin
+    {
+      display: none;
+    }
+
     li:hover
     {
       background-color: rgba(255, 255, 255, 0.2);
       cursor: pointer;
     }
 
+  }
+
+  a
+  {
+    color: inherit;
+    text-decoration: none;
   }
 
   .i
@@ -76,6 +87,13 @@
   }
 
 }
+
+.is_admin #menu li.admin
+{
+  display: flex;
+}
+
+.is_admin #menu li.admin a *{ vertical-align: middle;}
 
 #menu li.login{ display: none; }
 .logged #menu li.login{ display: flex; }

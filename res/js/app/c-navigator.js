@@ -1,5 +1,6 @@
 
 var $navigator = document.getElementById('navigator');
+var $menu = document.getElementById('menu');
 
 var pages = []
 var currentPage = q("#"+$navigator.dataset.page+"Page");
@@ -13,11 +14,22 @@ function setPage( pageName )
   if ( $navigator.dataset.page != pageName )
   {
 
+    nextPage = q(".page[data-page='"+pageName+"']")
+
+    if ( nextPage.hasAttribute('admin') && !admin )
+    {
+      console.error('this page requires admin')
+      afterAuth = pageName
+      setPage('login')
+      return
+    }
+
+    console.log('so far so good for', pageName)
+
     currentPage.classList.add('hiding')
 
     $navigator.dataset.page = pageName;
 
-    nextPage = q(".page[data-page='"+pageName+"']")
 
     nextPage.classList.add('showing')
     nextPage.classList.add('show')
@@ -55,6 +67,12 @@ $("[data-page]").on('tap', function(ev)
   }
 
   var next = q(".page[data-page='"+pageName+"']")
+
+  if ( next.hasAttribute('admin') && !admin )
+  {
+    afterAuth = pageName
+    setPage('login')
+  }
 
   if ( next.hasAttribute('auth') && UID == null )
   {
@@ -123,3 +141,8 @@ function onBackButton(ev){
 
 window.addEventListener('backbutton', onBackButton, false);
 document.addEventListener('backbutton', onBackButton, false);
+
+addEventListener('gotMeasures', function(ev)
+{
+  $menu.style.height = shellHeight+"px"
+})

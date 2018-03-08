@@ -1,4 +1,4 @@
-#Sat Mar 03 20:39:02 AMT 2018
+#Thu Mar 08 16:20:21 AMT 2018
 base.0=/home/rodrigo/purelas/platforms/android/app/build/intermediates/transforms/dexMerger/debug/0
 renamed.0=classes.dex
 file.0=/home/rodrigo/purelas/platforms/android/app/build/intermediates/transforms/dexMerger/debug/0/classes.dex

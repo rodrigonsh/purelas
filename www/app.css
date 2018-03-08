@@ -88,6 +88,14 @@ h1.breathes {
   display: block;
 }
 
+.admin {
+  display: none;
+}
+
+.is_admin .admin {
+  display: block;
+}
+
 .empty {
   display: none;
 }
@@ -430,9 +438,18 @@ button:hover {
           align-items: center;
 }
 
+#menu ul li.admin {
+  display: none;
+}
+
 #menu ul li:hover {
   background-color: rgba(255, 255, 255, 0.2);
   cursor: pointer;
+}
+
+#menu a {
+  color: inherit;
+  text-decoration: none;
 }
 
 #menu .i {
@@ -449,6 +466,16 @@ button:hover {
   text-align: center;
   padding: 20px;
   font-size: 6.75pt;
+}
+
+.is_admin #menu li.admin {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.is_admin #menu li.admin a * {
+  vertical-align: middle;
 }
 
 #menu li.login {
@@ -1365,8 +1392,9 @@ ul {
 }
 
 #contactMessages card[mine] {
-  color: white;
-  background-color: #763c8a;
+  color: #924f97;
+  background-color: #dfd7e2;
+  text-align: right;
 }
 
 #contactMessages card[mine] p {

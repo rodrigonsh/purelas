@@ -14,7 +14,7 @@ var auth = firebase.auth()
 var connectedRef = db.ref(".info/connected");
 var firebaseOnline = false;
 
-UID = null
+var UID = null
 
 connectedRef.on("value", function(snap) {
 

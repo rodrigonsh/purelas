@@ -64,7 +64,8 @@ addEventListener('registerBefore', function(){
     http.send()
 
 
-    setPage('register')
   }
 
+  setPage('register')
+  
 })

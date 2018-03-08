@@ -1,6 +1,5 @@
 var reportsGeoFireRef = db.ref('geoReports')
 var reportsRef = db.ref('reports')
-var messagesRef = db.ref('messages')
 
 var reportsGeoFire = new GeoFire(reportsGeoFireRef);
 var geoInfos = JSON.parse(localStorage.getItem('geoInfos'))
@@ -12,12 +11,37 @@ if ( geoInfos == null ) geoInfos = {}
 if ( reports == null ) reports = {}
 if ( currentGeoQuery == null )
 {
-  currentGeoQuery = { center: [0,0], radius: 5000 }
+  currentGeoQuery = { center: [0,0], radius: 0 }
 }
 
 emit('reportsChanged')
 
 var reportsGeoQuery = reportsGeoFire.query( currentGeoQuery );
+
+addEventListener('adminSet', function(ev)
+{
+
+  console.log('adminSet', admin)
+
+  if (admin)
+  {
+    console.log( 'adminSet: currentPage: ', currentPage )
+    reportsGeoQuery.updateCriteria({ radius: 5000 })
+
+
+    if( currentPage.dataset.page == 'login' )
+    {
+      console.log('oie ae')
+      setPage('overview')
+    }
+    else( console.log('entonce?') )
+  }
+
+})
+
+
+
+
 
 // Attach event callbacks to the query
 
@@ -25,7 +49,7 @@ var onKeyEnteredRegistration = reportsGeoQuery.on("key_entered", function(key, l
 
   console.log(key, "entered the query. Hi!", distance);
 
-  messagesRef.child( key )
+  db.ref( 'messages/'+key )
     .on('child_added', function(s)
     {
 
@@ -109,6 +133,9 @@ var onKeyMovedRegistration = reportsGeoQuery.on("key_moved", function(key, locat
 
 addEventListener('gotPosition', function(ev)
 {
+
+  if( !admin ) return;
+
   console.log('atualizando criterio geoQuery')
 
   currentGeoQuery.center = currentPosition

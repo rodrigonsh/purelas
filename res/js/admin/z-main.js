@@ -7,7 +7,7 @@ if ( localStorage.getItem('welcome') == null )
 }
 else
 {
-  emit('messagesBefore')
+  emit('overviewBefore')
 }
 
 setTimeout(function(){
